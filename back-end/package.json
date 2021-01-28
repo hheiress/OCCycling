@@ -1,0 +1,23 @@
+{
+  "name": "back-end-occycling",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "migrate": "node migrations/init_db.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "JA",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "node-pg-migrate": "^5.9.0",
+    "pg": "^8.5.1",
+    "pool": "^0.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
