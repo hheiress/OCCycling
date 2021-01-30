@@ -1,8 +1,8 @@
-const {userRepo} =require("../repositories");
+const {usersRepo} =require("../repositories");
 const ctrl = require("express").Router();
 
 ctrl.get ("/", function (req, res) {
-    userRepo
+    usersRepo
         .find()
         .then((results) => res.json(results))
         .catch((err) => {
@@ -12,7 +12,14 @@ ctrl.get ("/", function (req, res) {
 });
 
 ctrl.post("/", function (req, res) {
-    //... post a user into the users table
+    console.log("control user")
+    usersRepo
+    .create(req, res) 
+    .then(() => res.send("User inserted!"))
+    .catch((err) => {
+        console.error(err.stack);
+        res.status(500).send("Internal Server Error")
+    });
 });
 
 ctrl.put("/", function (req, res) {

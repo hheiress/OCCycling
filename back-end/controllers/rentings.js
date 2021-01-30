@@ -1,8 +1,8 @@
-const repo = require("../repositories/rentings.js");
+const {rentingsRepo} = require("../repositories");
 const ctrl = require("express").Router();
 
 ctrl.get ("/", function (req, res) {
-    repo
+    rentingsRepo
         .find()
         .then((results) => res.json(results))
         .catch((err) => {
@@ -12,7 +12,13 @@ ctrl.get ("/", function (req, res) {
 });
 
 ctrl.post("/", function (req, res) {
-    //... post a renting into the rentings table
+    rentingsRepo
+    .create(req, res)
+    .then(() => res.send("Renting Inserted!"))
+    .catch((err) => {
+        console.error(err.stack);
+        res.status(500).send("Internal Server Error")
+    });
 });
 
 ctrl.put("/", function (req, res) {

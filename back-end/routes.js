@@ -6,6 +6,7 @@ const {
     rentingCtrl,
     stationCtrl,
 } = require("./controllers");
+
 //ENDPOINTS
 
 router

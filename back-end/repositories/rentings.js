@@ -1,26 +1,27 @@
-const { Pool } = require("pg");
-
-const pool = new Pool({
-    user: "pepe",
-    host: "localhost",
-    database: "occycling",
-    password: "pepe1234",
-    port: 5432,
-});
+const pool = require("../db.js");
 
 const find = () => {
-    return pool.query("SELECT * FROM rentings").then((results) => (results.rows))
+    return pool.query("SELECT r.id, b.model_name, u.name, status, renting_date, s.station_name, time_left, b.conditions FROM rentings r JOIN bikes b ON b.id=r.bike_id JOIN users u ON u.id=r.user_id JOIN station s ON s.id=r.station_id;").then((results) => (results.rows))
 }
 
-const create = (renting) => {
-    // ... create a renting in db
-}
+function create  (req, res)  {
+    const {bike_id, user_id, status, renting_date, station_id, time_left, conditions_id} = req.body;
 
-const update = (renting) => {
+    if(!bike_id || !user_id || !status || !renting_date || !station_id || !time_left || !conditions_id) {
+        return res
+        .status(400)
+        .send("Please insert a bike id, user id, status, renting date, station id, time left, conditions");
+    } return pool
+            .query('INSERT INTO rentings (bike_id, user_id, status, renting_date, station_id, time_left, conditions_id) VALUES ($1, $2, $3, $4, $5, $6, $7)', [bike_id, user_id, status, renting_date, station_id, time_left, conditions_id])
+            .then(() => res.send('Renting created'))
+    }
+
+
+function update  (renting) {
     // ... update a renting in db
 }
 
-const remove = (id) => {
+function remove  (id) {
     // ... remove a renting in db
 }
 

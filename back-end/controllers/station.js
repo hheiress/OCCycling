@@ -1,8 +1,8 @@
-const repo = require("../repositories/station.js");
+const {stationsRepo} = require("../repositories");
 const ctrl = require("express").Router();
 
 ctrl.get ("/", function (req, res) {
-    repo
+    stationsRepo
         .find()
         .then((results) => res.json(results))
         .catch((err) => {
@@ -12,7 +12,13 @@ ctrl.get ("/", function (req, res) {
 });
 
 ctrl.post("/", function (req, res) {
-    //... post a station into the stations table
+    stationsRepo
+    .create(req, res)
+    .then(() => res.send("Station inserted"))
+    .catch((err) => {
+        console.error(err.stack);
+        res.status(500).send("Internal Server Error")
+    })
 });
 
 ctrl.put("/", function (req, res) {

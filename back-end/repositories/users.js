@@ -1,28 +1,27 @@
-const { Pool } = require("pg");
-
-const pool = new Pool({
-    user: "pepe",
-    host: "localhost",
-    database: "occycling",
-    password: "pepe1234",
-    port: 5432,
-});
+const pool = require("../db.js");
 
 
-//Anny aqui puedes usar cualquiera de las dos formas, nombrar una function o una callback function
 function find ()  {
     return pool.query("SELECT * FROM users").then((results) => (results.rows))
 }
 
-const create = (user) => {
-    // ... create user in db
+function create (req, res) {
+    const {name, last_name, passport, adress, gender, date_birth, nationality, email, phone_number} = req.body;
+    
+    if (!name || !last_name || !passport || !adress || !gender || !date_birth || !nationality || !email || !phone_number) {
+        return res
+        .status(400)
+        .send("Please insert a name, last name, passport, adress, gender, date birth, nationality, email, phone number");
+    } return pool
+                .query('INSERT INTO users (name, last_name, passport, adress, gender, date_birth, nationality, email, phone_number) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)', [name, last_name, passport, adress, gender, date_birth, nationality, email, phone_number])
+                .then(() => res.send(`User created`))
 }
 
-const update = (user) => {
+function update  (user)  {
     // ... update user in db
 }
 
-const remove = (id) => {
+function remove  (id)  {
     // ... remove user in db
 }
 

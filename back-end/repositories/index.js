@@ -1,3 +1,7 @@
 module.exports = {
-    userRepo: require("./users.js")
+    usersRepo: require("./users.js"),
+    bikesRepo: require("./bikes.js"),
+    rentingsRepo: require("./rentings.js"),
+    stationsRepo: require("./station.js"),
+
 };
