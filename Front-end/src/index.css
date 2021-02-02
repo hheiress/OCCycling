@@ -1,0 +1,252 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.container {
+  width: 375px;
+  height: 800px;
+}
+.logo {
+  display:flex;
+  flex-direction: row;
+  
+}
+.logo-img {
+  width:110px;
+  height:80px;
+}
+.navbar{
+  display:flex;
+  text-align: right;
+  position: absolute;
+  font-size: 16px;
+  background-color:#0D4C51 ;
+  width:100%;
+
+}
+.menu{
+ display:flex;
+ justify-content: space-around;
+}
+.menu a{
+  color:white;
+  text-decoration: none;
+  text-align: center;
+  line-height: 30px;
+  margin-right: 30px;
+}
+
+.header-name{
+  color:white;
+  padding:10px;
+}
+
+.btn-nav{
+  background-color: transparent;
+  border:none;
+  color:white;
+}
+
+.btn-nav:active{
+  color:#F7B500;
+}
+
+.wrapper{	
+  display: flex;
+  flex-direction: column;
+  position:static;
+  padding-top:200px;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px 20px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1);  
+  
+}
+
+.form-signin-heading, .checkbox {
+	  margin-bottom: 30px;
+} 
+
+	.checkbox {
+	  font-weight: normal;
+	}
+
+	.form-control {
+	  position: relative;
+	  font-size: 16px;
+	  height: auto;
+	  padding: 10px;
+	}
+.btn-primary{
+  float:right;
+  margin:10px;
+}
+.search-fbox{
+  margin:0;
+  padding:0;
+}
+	input[type="password"] {
+	  margin-bottom: 20px;
+	  border-top-left-radius: 0;
+	  border-top-right-radius: 0;
+	} 
+
+.volunteerpanel {
+  padding: 20px 20px 20px;
+}
+
+.input {
+  margin: 10px 10px 10px 10px;
+}
+
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #F7B500;
+  border-right: none;
+  padding: 15px;
+  height: 37px;
+  border-radius: 23px;
+  outline: none;
+  color: #9DBFAF;
+  margin:10px;
+}
+
+.searchTerm:focus{
+  color: #F7B500;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #F7B500;
+  background: #F7B500;
+  text-align: center;
+  color: #fff;
+  border-radius:15px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Resize the wrap to see the search bar change!
+.wrap{
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+
+.select {
+  margin-bottom: 20px;
+}
+
+.login-input {
+  margin-bottom: 20px;
+}
+
+.volunteer-available-bikes {
+  font-size: 20px;
+}
+
+.rentings-residents {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  margin-bottom: 20px;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.residents-wrapper {
+  padding: 15px 55px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  overflow: auto;
+  border: 1px solid rgba(0,0,0,0.1);  
+  
+}
+
+.rentings-wrapper {
+  padding: 15px 55px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  overflow: auto;
+  border: 1px solid rgba(0,0,0,0.1);  
+  padding:40px;
+}
+
+.rentings-history {
+  width: 430px;
+}
+
+.form-control{
+  border-radius:23px;
+  border-color: #F7B500;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: small;
+  margin:30px 30px 30px 0px;
+}
+table tr:hover {
+  background-color: #ddd;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 4px;
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  font-weight: 800;
+}
+
+.select{
+  width:100%;
+  border-radius: 23px;
+  border-color: #F7B500;
+  padding:10px;
+  outline:none;
+}
+.clock {
+  width: 256px;
+  height: 116px;
+}
+
+.bicycles-wrapper {
+  padding: 15px 22px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  overflow: auto;
+  border: 1px solid rgba(0,0,0,0.1);
+}
