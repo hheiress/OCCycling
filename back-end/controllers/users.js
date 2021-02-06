@@ -12,9 +12,8 @@ ctrl.get ("/", function (req, res) {
 });
 
 ctrl.post("/", function (req, res) {
-    console.log("control user")
     usersRepo
-    .create(req, res) 
+    .create(req, res)
     .then(() => res.send("User inserted!"))
     .catch((err) => {
         console.error(err.stack);
@@ -22,8 +21,8 @@ ctrl.post("/", function (req, res) {
     });
 });
 
-ctrl.put("/", function (req, res) {
-    //... put a user into the users table
+ctrl.put("/:userId", function (req, res) {
+    
 });
 
 ctrl.delete("/", function (req, res) {
