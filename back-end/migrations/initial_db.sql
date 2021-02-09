@@ -8,7 +8,8 @@ CREATE TABLE users (
   date_birth	DATE NOT NULL,
   nationality	TEXT NOT NULL,
   email			TEXT NOT NULL,
-  phone_number	INT NOT NULL
+  phone_number	INT NOT NULL,
+  status		TEXT NOT NULL
 );
 
 CREATE TABLE station (
@@ -35,10 +36,14 @@ CREATE TABLE rentings (
   conditions_id		INT REFERENCES bikes(id)
  );
 
-INSERT INTO users (name, last_name, passport, address, gender, date_birth, nationality, email, phone_number) VALUES ('Ehsan', 'Abdul', 'H235690L', 'Street Tree 23', 'Male', '1970-06-20', 'Syrian', 'ehsan90@gmail.com', 44590832);
-INSERT INTO users (name, last_name, passport, address, gender, date_birth, nationality, email, phone_number) VALUES ('Abel', 'Honks', 'G567623P', 'Street Table 44', 'Male', '1980-10-08', 'Liberia', 'abel_lib@yahoo.com', 33456712);
-INSERT INTO users (name, last_name, passport, address, gender, date_birth, nationality, email, phone_number) VALUES ('Miray', 'Demir', 'TK239445J', 'AV. Rome 56', 'Female', '1994-05-13', 'Turkey', 'miraydream@yahoo.com', 77234509);
-INSERT INTO users (name, last_name, passport, address, gender, date_birth, nationality, email, phone_number) VALUES ('Alberto', 'Lopez', 'V228946K', 'Street Rose', 'Male', '1989-02-23', 'Venezuela', 'lopez10@gmail.com', 32568901);
+INSERT INTO users (name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status) 
+VALUES ('Ehsan', 'Abdul', 'H235690L', 'Street Tree 23', 'Male', '1970-06-20', 'Syrian', 'ehsan90@gmail.com', 44590832, 'Active');
+INSERT INTO users (name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status) 
+VALUES ('Abel', 'Honks', 'G567623P', 'Street Table 44', 'Male', '1980-10-08', 'Liberia', 'abel_lib@yahoo.com', 33456712, 'Active');
+INSERT INTO users (name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status) 
+VALUES ('Miray', 'Demir', 'TK239445J', 'AV. Rome 56', 'Female', '1994-05-13', 'Turkey', 'miraydream@yahoo.com', 77234509, 'Active');
+INSERT INTO users (name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status) 
+VALUES ('Alberto', 'Lopez', 'V228946K', 'Street Rose', 'Male', '1989-02-23', 'Venezuela', 'lopez10@gmail.com', 32568901, 'Banned');
 
 INSERT INTO bikes (model_name, entry_date, conditions) VALUES ('Decathlon', '2018-03-10', 'Change brakes');
 INSERT INTO bikes (model_name, entry_date, conditions) VALUES ('Trek', '2020-03-20', 'New');

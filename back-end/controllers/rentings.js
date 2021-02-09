@@ -1,23 +1,22 @@
 const {rentingsRepo} = require("../repositories");
 const ctrl = require("express").Router();
 
-ctrl.get ("/", function (req, res) {
+ctrl.get ("/", function (req, res, next) {
     rentingsRepo
         .find()
         .then((results) => res.json(results))
         .catch((err) => {
-            console.error(err.message)
-            res.status(500).send("Internal Server Error")
+            console.error(err.stack)
+            next( new Error("Internal Server Error"))
         });
 });
 
-ctrl.post("/", function (req, res) {
+ctrl.post("/", function (req, res, next) {
     rentingsRepo
     .create(req, res)
-    .then(() => res.send("Renting Inserted!"))
     .catch((err) => {
-        console.error(err.stack);
-        res.status(500).send("Internal Server Error")
+        console.error(err.stack)
+            next( new Error("Internal Server Error"))
     });
 });
 
