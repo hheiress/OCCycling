@@ -1,24 +1,22 @@
 const { bikesRepo } = require("../repositories");
 const ctrl = require("express").Router();
 
-ctrl.get ("/", function (req, res) {
+ctrl.get ("/", function (req, res, next) {
     bikesRepo
         .find()
         .then((results) => res.json(results))
         .catch((err) => {
-            console.error(err.message)
-            res.status(500).send("Internal Server Error")
+            console.error(err.stack)
+            next( new Error("Internal Server Error"))
         });
 });
 
-ctrl.post("/", function (req, res) {
-    console.log("control user bike")
+ctrl.post("/", function (req, res, next) {
     bikesRepo
     .create(req, res)
-    .then(() => res.send("Bike Inserted!"))
     .catch((err) => {
         console.error(err.stack);
-        res.status(500).send("Internal Server Error")
+        next( new Error("Internal Server Error"))
     });
 });
 

@@ -5,14 +5,14 @@ const find = () => {
 }
 
 function create  (req, res)  {
-    const {bike_id, user_id, status, renting_date, station_id, starting_time, conditions_id} = req.body;
+    const {bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id} = req.body;
 
-    if(!bike_id || !user_id || !status || !renting_date || !station_id || !starting_time || !conditions_id) {
+    if(!bike_id || !user_id || !last_name || !status || !renting_date || !station_id || !starting_time || !conditions_id) {
         return res
         .status(400)
         .send("Please insert a bike id, user id, status, renting date, station id, starting time, conditions");
     } return pool
-            .query('INSERT INTO rentings (bike_id, user_id, status, renting_date, station_id, starting_time, conditions_id) VALUES ($1, $2, $3, $4, $5, $6, $7)', [bike_id, user_id, status, renting_date, station_id, starting_time, conditions_id])
+            .query('INSERT INTO rentings (bike_id, user_id,last_name, status, renting_date, station_id, starting_time, conditions_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', [bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id])
             .then(() => res.send('Renting created'))
     }
 
