@@ -1,7 +1,7 @@
-const { bikesRepo } = require("../repositories");
+const bikesRepo = require("../repositories/bikes");
 const ctrl = require("express").Router();
 
-ctrl.get ("/", function (req, res) {
+ctrl.get("/", function(req, res) {
     bikesRepo
         .find()
         .then((results) => res.json(results))
@@ -11,23 +11,31 @@ ctrl.get ("/", function (req, res) {
         });
 });
 
-ctrl.post("/", function (req, res) {
+ctrl.post("/", function(req, res) {
     console.log("control user bike")
     bikesRepo
-    .create(req, res)
-    .then(() => res.send("Bike Inserted!"))
-    .catch((err) => {
-        console.error(err.stack);
-        res.status(500).send("Internal Server Error")
-    });
+        .create(req, res)
+        .catch((err) => {
+            console.error(err.stack);
+            res.status(500).send("Internal Server Error")
+        });
 });
 
-ctrl.put("/", function (req, res) {
-    //... put a bike into the bikes table
+ctrl.put("/:id", function(req, res) {
+    bikesRepo
+        .update(req, res)
+        .catch((err) => {
+            console.error(err.message);
+            res.status(500).send("Internal Server Error")
+        })
 });
 
-ctrl.delete("/", function (req, res) {
-    //... delete a bike into the bikes table
+ctrl.delete("/:id", function(req, res) {
+    bikesRepo
+        .remove(req, res)
+        .catch((err) => {
+            console.log(err.message);
+            res.status(500).send("Internal Server Error")
+        })
 });
-
 module.exports = ctrl;

@@ -1,7 +1,7 @@
-const {stationsRepo} = require("../repositories");
+const stationsRepo = require("../repositories/station");
 const ctrl = require("express").Router();
 
-ctrl.get ("/", function (req, res) {
+ctrl.get("/", function(req, res) {
     stationsRepo
         .find()
         .then((results) => res.json(results))
@@ -11,22 +11,31 @@ ctrl.get ("/", function (req, res) {
         });
 });
 
-ctrl.post("/", function (req, res) {
+ctrl.post("/", function(req, res) {
     stationsRepo
-    .create(req, res)
-    .then(() => res.send("Station inserted"))
-    .catch((err) => {
-        console.error(err.stack);
-        res.status(500).send("Internal Server Error")
-    })
+        .create(req, res)
+        .catch((err) => {
+            console.error(err.stack);
+            res.status(500).send("Internal Server Error")
+        })
 });
 
-ctrl.put("/", function (req, res) {
-    //... put a station into the stations table
+ctrl.put("/:id", function(req, res) {
+    stationsRepo
+        .update(req, res)
+        .catch((err) => {
+            console.error(err.message);
+            res.status(500).send("Internal Server Error")
+        })
 });
 
-ctrl.delete("/", function (req, res) {
-    //... delete a station into the stations table
+ctrl.delete("/:id", function(req, res) {
+    stationsRepo
+        .remove(req, res)
+        .catch((err) => {
+            console.log(err.message);
+            res.status(500).send("Internal Server Error")
+        })
 });
 
 module.exports = ctrl;
