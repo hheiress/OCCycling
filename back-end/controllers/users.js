@@ -1,5 +1,6 @@
-const {usersRepo} =require("../repositories");
+const {usersRepo} = require("../repositories");
 const ctrl = require("express").Router();
+
 
 ctrl.get ("/", function (req, res, next) {
     usersRepo
@@ -7,7 +8,7 @@ ctrl.get ("/", function (req, res, next) {
         .then((results) => res.json(results))
         .catch((err) => {
             console.error(err.stack)
-            next( new Error("Internal Server Error"))
+            next(Error)
         });
 });
 
@@ -16,16 +17,26 @@ ctrl.post("/", function (req, res, next) {
     .create(req, res)
     .catch((err) => {
         console.error(err.stack)
-        next( new Error("Internal Server Error"))
+        next(Error)
     });
 });
 
-ctrl.put("/:userId", function (req, res) {
-    
-});
+ctrl.put("/:id", function(req, res, next) {
+    usersRepo
+        .update(req, res)
+        .catch((err) => {
+            console.error(err.stack);
+            next(Error)
+        });
+    });
 
-ctrl.delete("/", function (req, res) {
-    //... delete a user into the users table
+ctrl.delete("/:id", function(req, res, next) {
+    usersRepo
+        .remove(req, res)
+        .catch((err) => {
+            console.log(err.stack);
+            next(Error)
+        });
 });
 
 module.exports = ctrl;
