@@ -1,5 +1,6 @@
-const {rentingsRepo} = require("../repositories");
+const rentingsRepo = require("../repositories/rentings");
 const ctrl = require("express").Router();
+
 
 ctrl.get ("/", function (req, res, next) {
     rentingsRepo
@@ -11,6 +12,7 @@ ctrl.get ("/", function (req, res, next) {
         });
 });
 
+
 ctrl.post("/", function (req, res, next) {
     rentingsRepo
     .create(req, res)
@@ -20,12 +22,22 @@ ctrl.post("/", function (req, res, next) {
     });
 });
 
-ctrl.put("/", function (req, res) {
-    //... put a renting into the rentings table
+ctrl.put("/:id", function(req, res) {
+    rentingsRepo
+        .update(req, res)
+        .catch((err) => {
+            console.error(err.message);
+            res.status(500).send("Internal Server Error");
+        })
 });
 
-ctrl.delete("/", function (req, res) {
-    //... delete a renting into the rentings table
+ctrl.delete("/:id", function(req, res) {
+    rentingsRepo
+        .remove(req, res)
+        .catch((err) => {
+            console.log(err.message);
+            res.status(500).send("Internal Server Error")
+        })
 });
 
 module.exports = ctrl;
