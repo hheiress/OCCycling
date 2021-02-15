@@ -10,12 +10,11 @@ const create = (req, res) => {
     if (!station_name) {
         return res
             .status(400)
-            .send("Please Insert a Station")
-    }
-    return pool
-        .query("INSERT INTO station (station_name) VALUES ($1)", [station_name])
-        .then(() => res.send('Station created'))
-
+            .send ("Please Insert a Station")
+        } return pool
+                .query("INSERT INTO station (station_name) VALUES ($1)", [station_name])
+                .then(()=> res.send('Station created'))
+   
 }
 
 function update(req, res) {

@@ -1,25 +1,17 @@
 const usersRepo = require("../repositories/users");
 const ctrl = require("express").Router();
 
-ctrl.get("/", function(req, res) {
+
+ctrl.get ("/", function (req, res, next) {
     usersRepo
         .find()
         .then((results) => res.json(results))
         .catch((err) => {
-            console.error(err.message)
-            res.status(500).send("Internal Server Error")
+            console.error(err.stack)
+            next( new Error("Internal Server Error"))
         });
 });
 
-ctrl.post("/", function(req, res) {
-    console.log("control user")
-    usersRepo
-        .create(req, res)
-        .catch((err) => {
-            console.error(err.stack);
-            res.status(500).send("Internal Server Error")
-        });
-});
 
 ctrl.put("/:id", function(req, res) {
     usersRepo
@@ -28,7 +20,16 @@ ctrl.put("/:id", function(req, res) {
             console.error(err.message);
             res.status(500).send("Internal Server Error")
         })
+
+ctrl.post("/", function (req, res, next) {
+    usersRepo
+    .create(req, res)
+    .catch((err) => {
+        console.error(err.stack)
+        next( new Error("Internal Server Error"))
+    });
 });
+
 
 ctrl.delete("/:id", function(req, res) {
     usersRepo
