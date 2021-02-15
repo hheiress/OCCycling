@@ -57,6 +57,9 @@ useEffect(()=>{
                            </tbody>
                         </table>
                     </div>
+                    <Link to={'/addnewbicycle'}>
+                            <button className="mt-5 btn btn-primary w-100" type="submit">Add New Bicycle</button>
+                        </Link>
                 </div>
   </div>
 </>)
