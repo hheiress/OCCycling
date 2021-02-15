@@ -1,5 +1,6 @@
-const { bikesRepo } = require("../repositories");
+const {bikesRepo} = require("../repositories");
 const ctrl = require("express").Router();
+
 
 ctrl.get ("/", function (req, res, next) {
     bikesRepo
@@ -7,7 +8,7 @@ ctrl.get ("/", function (req, res, next) {
         .then((results) => res.json(results))
         .catch((err) => {
             console.error(err.stack)
-            next( new Error("Internal Server Error"))
+            next(Error)
         });
 });
 
@@ -15,17 +16,26 @@ ctrl.post("/", function (req, res, next) {
     bikesRepo
     .create(req, res)
     .catch((err) => {
-        console.error(err.stack);
-        next( new Error("Internal Server Error"))
+        console.error(err.stack)
+        next(Error)
     });
 });
 
-ctrl.put("/", function (req, res) {
-    //... put a bike into the bikes table
+ctrl.put("/:id", function(req, res, next) {
+    bikesRepo
+        .update(req, res)
+        .catch((err) => {
+            console.error(err.stack)
+            next(Error)
+        })
 });
 
-ctrl.delete("/", function (req, res) {
-    //... delete a bike into the bikes table
+ctrl.delete("/:id", function(req, res, next) {
+    bikesRepo
+        .remove(req, res)
+        .catch((err) => {
+            console.error(err.stack)
+            next(Error)
+        })
 });
-
 module.exports = ctrl;

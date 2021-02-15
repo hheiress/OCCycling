@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const routes = require("./routes.js");
+
 const bcrypt= require("bcrypt"); // add 13/02
 
 const PORT = process.env.PORT || 3000;
@@ -27,9 +28,10 @@ app.use((err, req, res, next) => {
     res.send({
         error:{
             status: err.status || 500,
-            message: err.message
+            message: "Internal server error"
         }
     });
 });
 
 app.listen(PORT, () => console.log(`Server is listening on port ${PORT}. Ready to accept requests!`))
+

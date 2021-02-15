@@ -5,9 +5,9 @@ const find = () => {
 }
 
 const create = (req, res) => {
-   const station_name = req.body.station_name;
+    const station_name = req.body.station_name;
 
-    if(!station_name) {
+    if (!station_name) {
         return res
             .status(400)
             .send ("Please Insert a Station")
@@ -17,12 +17,29 @@ const create = (req, res) => {
    
 }
 
-function update (station)  {
-    // ... update a station in db
+function update(req, res) {
+    const { station_name } = req.body;
+    const { id } = req.params;
+    if (!station_name) {
+        return res
+            .status(400)
+            .send("Please update a station_name");
+    }
+    return pool
+        .query("UPDATE station SET station_name = $2 WHERE id = $1", [id, station_name])
+        .then(() => res.send('Station Modified'))
 }
 
-function remove (id)  {
-    // ... remove a station in db
+function remove(req, res) {
+    const { id } = req.params;
+    if (!id) {
+        return res
+            .status(400)
+            .send("Please insert a id");
+    }
+    return pool
+        .query("DELETE FROM station WHERE id = $1", [id])
+        .then(() => res.send('Station Eliminated'))
 }
 
 module.exports = {
