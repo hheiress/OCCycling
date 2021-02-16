@@ -10,7 +10,7 @@ import VolunteerPanel from '../VolunteerPanel';
 const formReducer = (state, event) => {
   if (event.reset) {
     return {
-      filename: '',
+      bike_photo: '',
       station: '',
       model_name: '',
       conditions: '',
@@ -82,10 +82,10 @@ function AddNewBicycle() {
               <div className="margin-form">
                 <button type="button" onClick={imageUpload} className="photo-btn">Photo</button>
                 <Form.File
-                  id="bicyclephoto"
-                  name="filename"
+                  id="bikephoto"
+                  name="bike_photo"
                   onChange={handleChange}
-                  value={formData.filename || ''}
+                  value={formData.bike_photo || ''}
                   ref={hiddenFileInput}
                   style={{ display: 'none' }}
 
