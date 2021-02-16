@@ -29,6 +29,9 @@ useEffect(()=>{
             <div className="wrapper">
                 <div className="residents-wrapper">
                     <h2 className="text-center">Bicycles</h2>
+                    <Link to={'/addnewbicycle'}>
+                            <button className="mt-5 btn btn-primary w-100" type="submit">Add New Bicycle</button>
+                        </Link>
                     <SearchBicycle search={search} />
                     {/* <div class="input-group rounded">
                         <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
@@ -57,9 +60,7 @@ useEffect(()=>{
                            </tbody>
                         </table>
                     </div>
-                    <Link to={'/addnewbicycle'}>
-                            <button className="mt-5 btn btn-primary w-100" type="submit">Add New Bicycle</button>
-                        </Link>
+                    
                 </div>
   </div>
 </>)
