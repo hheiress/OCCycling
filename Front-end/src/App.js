@@ -16,11 +16,13 @@ import AddTime from './components/AddTime';
 import AllBicycles from './components/Bicycles/Bicycles';
 import AddNewBicycle from './components/Bicycles/AddNewBicycle';
 import CreateNewRenter from './components/Residents/CreateNewRenter';
+import Login from './Login';
 
 function App() {
   return (
     <Router>
       <Switch>
+      <Route exact path="/login" component={Login}/>
         {/* Volunteers */}
         <Route exact path="/rentbicycle" component={RentBicycle} />
         <Route exact path="/findbike" component={FindBike} />
