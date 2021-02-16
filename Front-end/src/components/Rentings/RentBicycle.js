@@ -13,7 +13,9 @@ function RentBicycle() {
                 setBikes(data);
             })
     }, []);
-
+    const filteredBicycles = bikes.filter(
+        item => item.status === null
+      );
     return (
         <div>
             <VolunteerPanel />
@@ -26,9 +28,9 @@ function RentBicycle() {
                     <div>
                         <h4 className="bicycle-rent">Choose Bicycle</h4>
                         <select className="select">
-                            {bikes.map((item, index) => (
+                            {filteredBicycles.map((item, index) => (
                                 <option key={index}>{item.model_name}</option>))}
-                        </select>;
+                        </select>
                         <Link to={'/addtime'}>
                             <button className="mt-5 btn btn-primary w-100" type="submit">Assign Time</button>
                         </Link>
