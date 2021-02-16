@@ -2,22 +2,22 @@ import React, { useEffect, useReducer, useState } from 'react'
 import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import VolunteerPanel from './VolunteerPanel';
+import VolunteerPanel from '../VolunteerPanel';
 
 
 
 const formReducer = (state, event) => {
   if (event.reset) {
     return {
-      filename: '',
+      user_photo: '',
       gender: '',
       name: '',
-      lastname: '',
+      last_name: '',
       passport: '',
       address: '',
-      dateofbirth: '',
+      date_birth: '',
       email: '',
-      phonenumber: '',
+      phone_number: '',
     }
   }
   return {
@@ -71,16 +71,16 @@ function CreateNewRenter() {
 
           <p><b>ADD NEW RENTER</b></p>
 
-          <Form onSubmit={handleSubmit}>
+          <Form className="form-align" onSubmit={handleSubmit}>
 
 
             <div className="margin-form">
               <button type="button" onClick={imageUpload} className="photo-btn">Photo</button>
               <Form.File
-                id="bicyclephoto"
-                name="filename"
+                id="userphoto"
+                name="user_photo"
                 onChange={handleChange}
-                value={formData.filename || ''}
+                value={formData.user_photo || ''}
                 ref={hiddenFileInput}
                 style={{ display: 'none' }}
 
@@ -89,12 +89,12 @@ function CreateNewRenter() {
 
             <div className="wrap-names-renter">
 
-              <div className="margin-form">
+              <div className="margin-form-name">
                 <Form.Control name="name" autocomplete="off" onChange={handleChange} value={formData.name || ''} placeholder="Name" />
               </div>
 
-              <div className="margin-form">
-                <Form.Control name="lastname" autocomplete="off" onChange={handleChange} value={formData.lastname || ''} placeholder="Last Name" />
+              <div className="margin-form-name">
+                <Form.Control name="last_name" autocomplete="off" onChange={handleChange} value={formData.last_name || ''} placeholder="Last Name" />
               </div>
 
             </div>
@@ -122,7 +122,7 @@ function CreateNewRenter() {
 
             <div className="margin-form condition">
               <p>DATE OF BIRTH</p>
-              <Form.Control type="date" name="dateofbirth" autocomplete="off" onChange={handleChange} value={formData.dateofbirth || ''} placeholder="Date of Birth" />
+              <Form.Control type="date" name="date_birth" autocomplete="off" onChange={handleChange} value={formData.date_birth || ''} placeholder="Date of Birth" />
             </div>
 
             <div className="margin-form">
@@ -130,7 +130,7 @@ function CreateNewRenter() {
             </div>
 
             <div className="margin-form">
-              <Form.Control type="tel" name="phonenumber" autocomplete="off" onChange={handleChange} value={formData.phonenumber || ''} placeholder="Phone Number" />
+              <Form.Control type="tel" name="phone_number" autocomplete="off" onChange={handleChange} value={formData.phone_number || ''} placeholder="Phone Number" />
             </div>
 
             <div className="margin-form-button">
