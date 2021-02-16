@@ -251,7 +251,7 @@ th {
   border: 1px solid rgba(0,0,0,0.1);
 }
 
-/* form */
+/* add forms */
 .return-form p {
 
   padding-left: 2rem;
@@ -288,7 +288,20 @@ th {
 
 .margin-form {
   margin-bottom: 11px;
-  margin-left: 11px;
+  padding:5px;
+  width: 100%;
+  ;
+  
+}
+
+
+
+.margin-form-name {
+  
+  margin-bottom: 11px;
+  padding:5px;
+  width: 100%;
+  ;
   
 }
 
@@ -308,9 +321,6 @@ th {
   border: 1.25px solid #F7B500;
   background-color: #F7B500;
 
-}
-.margin-form-button {
-  width: 185px;
 }
 
 .newrenter-form-wrapper {
@@ -332,5 +342,13 @@ th {
 .wrap-names-renter {
   display: flex;
   flex-direction: row;
+  
  
 }
+
+.form-align {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+

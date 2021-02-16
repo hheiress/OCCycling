@@ -14,8 +14,8 @@ import Rentings from './components/Rentings/Rentings';
 import FindBike from './components/FindBike';
 import AddTime from './components/AddTime';
 import AllBicycles from './components/Bicycles/Bicycles';
-import AddNewBicycle from './components/AddNewBicycle';
-import CreateNewRenter from './components/CreateNewRenter';
+import AddNewBicycle from './components/Bicycles/AddNewBicycle';
+import CreateNewRenter from './components/Residents/CreateNewRenter';
 
 function App() {
   return (
@@ -29,7 +29,8 @@ function App() {
         <Route exact path="/residents" component={Residents} />
         <Route exact path="/bicycles" component={AllBicycles} />
         <Route exact path="/addnewbicycle" component={AddNewBicycle} />
-        <Route exact path="/createnewrenter" component={CreateNewRenter} />
+        <Route exact path= "/createnewrenter" component={CreateNewRenter} />
+        
         <VolunteerPanel />
       </Switch>
     </Router>
