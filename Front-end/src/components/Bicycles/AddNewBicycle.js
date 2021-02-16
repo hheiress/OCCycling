@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useState } from 'react'
 import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import VolunteerPanel from './VolunteerPanel';
+import VolunteerPanel from '../VolunteerPanel';
 
 
 
@@ -34,8 +34,11 @@ function AddNewBicycle() {
         setStation(data);
       })
   }, []);
+  const date = Date()
 
   const handleSubmit = event => {
+
+    
     
 
     fetch("http://localhost:3000/bikes", {
@@ -60,7 +63,7 @@ function AddNewBicycle() {
   return (
 
     <div>
-      <VolunteerPanel />
+    <VolunteerPanel />
 
       <div className="wrapper">
         <div className="return-form">
@@ -74,7 +77,7 @@ function AddNewBicycle() {
 
           <p><b>ADD NEW BICYCLE</b></p>
 
-          <Form onSubmit={handleSubmit}>
+          <Form className="form-align" onSubmit={handleSubmit}>
 
               <div className="margin-form">
                 <button type="button" onClick={imageUpload} className="photo-btn">Photo</button>

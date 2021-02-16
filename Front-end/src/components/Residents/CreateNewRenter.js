@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useState } from 'react'
 import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import VolunteerPanel from './VolunteerPanel';
+import VolunteerPanel from '../VolunteerPanel';
 
 
 
@@ -71,7 +71,7 @@ function CreateNewRenter() {
 
           <p><b>ADD NEW RENTER</b></p>
 
-          <Form onSubmit={handleSubmit}>
+          <Form className="form-align" onSubmit={handleSubmit}>
 
 
             <div className="margin-form">
@@ -89,11 +89,11 @@ function CreateNewRenter() {
 
             <div className="wrap-names-renter">
 
-              <div className="margin-form">
+              <div className="margin-form-name">
                 <Form.Control name="name" autocomplete="off" onChange={handleChange} value={formData.name || ''} placeholder="Name" />
               </div>
 
-              <div className="margin-form">
+              <div className="margin-form-name">
                 <Form.Control name="lastname" autocomplete="off" onChange={handleChange} value={formData.lastname || ''} placeholder="Last Name" />
               </div>
 
