@@ -11,6 +11,34 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.homepage-block{
+  display: block;
+
+}
+.homepage-name{
+  color:white;
+  margin:20px;
+}
+.homepage-text{
+  color:white;
+  margin:20px;
+  font-style: italic;
+}
+.img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 170px;
+  max-width: 270px;
+}
+
+.project-name{
+  color:#0D4C51;
+  margin:10px
+}
+.projectname-span{
+  font-weight:700;
+}
 
 .container {
   width: 375px;
@@ -92,7 +120,7 @@ code {
 	  padding: 10px;
 	}
 .btn-primary{
-  
+  border-radius: 23px;
   margin:10px;
 }
 .search-fbox{
