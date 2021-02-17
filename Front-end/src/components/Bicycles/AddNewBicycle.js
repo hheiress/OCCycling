@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useState } from 'react'
 import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import VolunteerPanel from './VolunteerPanel';
+import VolunteerPanel from '../VolunteerPanel';
 
 
 
@@ -10,7 +10,7 @@ import VolunteerPanel from './VolunteerPanel';
 const formReducer = (state, event) => {
   if (event.reset) {
     return {
-      filename: '',
+      bike_photo: '',
       station: '',
       model_name: '',
       conditions: '',
@@ -34,8 +34,11 @@ function AddNewBicycle() {
         setStation(data);
       })
   }, []);
+  const date = Date()
 
   const handleSubmit = event => {
+
+    
     
 
     fetch("http://localhost:3000/bikes", {
@@ -60,7 +63,7 @@ function AddNewBicycle() {
   return (
 
     <div>
-      <VolunteerPanel />
+    <VolunteerPanel />
 
       <div className="wrapper">
         <div className="return-form">
@@ -74,15 +77,15 @@ function AddNewBicycle() {
 
           <p><b>ADD NEW BICYCLE</b></p>
 
-          <Form onSubmit={handleSubmit}>
+          <Form className="form-align" onSubmit={handleSubmit}>
 
               <div className="margin-form">
                 <button type="button" onClick={imageUpload} className="photo-btn">Photo</button>
                 <Form.File
-                  id="bicyclephoto"
-                  name="filename"
+                  id="bikephoto"
+                  name="bike_photo"
                   onChange={handleChange}
-                  value={formData.filename || ''}
+                  value={formData.bike_photo || ''}
                   ref={hiddenFileInput}
                   style={{ display: 'none' }}
 

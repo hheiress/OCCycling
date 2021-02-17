@@ -28,6 +28,9 @@ const AllRenters = props => {
       <div className="wrapper">
         <div className="residents-wrapper">
           <h2 className="text-center">Residents</h2>
+          <Link to={'/createnewrenter'}>
+            <button className="mt-5 btn btn-primary w-100" type="submit">Create New Renter</button>
+          </Link>
           <Search search={search} />
           <div className="table">
             <table className="table">
@@ -36,7 +39,7 @@ const AllRenters = props => {
                   <th>First name</th>
                   <th>Last name</th>
                   <th>Passport</th>
-                  <th>Adress</th>
+                  <th>Address</th>
                   <th>Gender</th>
                   <th>Date of birthday</th>
                   <th>Nationality</th>
@@ -51,7 +54,7 @@ const AllRenters = props => {
                     <td>{item.name}</td>
                     <td>{item.last_name}</td>
                     <td>{item.passport}</td>
-                    <td>{item.adress}</td>
+                    <td>{item.address}</td>
                     <td>{item.gender}</td>
                     <td>{item.date_birth}</td>
                     <td>{item.nationality}</td>
@@ -63,9 +66,7 @@ const AllRenters = props => {
             </table>
           </div>
 
-          <Link to={'/createnewrenter'}>
-            <button className="mt-5 btn btn-primary w-100" type="submit">Create New Renter</button>
-          </Link>
+          
 
         </div>
       </div>

@@ -11,6 +11,34 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.homepage-block{
+  display: block;
+
+}
+.homepage-name{
+  color:white;
+  margin:20px;
+}
+.homepage-text{
+  color:white;
+  margin:20px;
+  font-style: italic;
+}
+.img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 170px;
+  max-width: 270px;
+}
+
+.project-name{
+  color:#0D4C51;
+  margin:10px
+}
+.projectname-span{
+  font-weight:700;
+}
 
 .container {
   width: 375px;
@@ -70,7 +98,7 @@ code {
 
 .form-signin {
   max-width: 330px;
-  padding: 15px 20px 45px;
+  padding: 40px;
   margin: 0 auto;
   background-color: #fff;
   border: 1px solid rgba(0,0,0,0.1);  
@@ -92,19 +120,21 @@ code {
 	  padding: 10px;
 	}
 .btn-primary{
-  float:right;
+  border-radius: 23px;
   margin:10px;
 }
 .search-fbox{
   margin:0;
   padding:0;
 }
-	input[type="password"] {
-	  margin-bottom: 20px;
-	  border-top-left-radius: 0;
-	  border-top-right-radius: 0;
-	} 
+input[type="password"] {
+  margin-bottom: 20px;
+}
 
+.login{
+  background-color: #0D4C51;
+  padding:150px;
+}
 .volunteerpanel {
   padding: 20px 20px 20px;
 }
@@ -251,7 +281,7 @@ th {
   border: 1px solid rgba(0,0,0,0.1);
 }
 
-/* form */
+/* add forms */
 .return-form p {
 
   padding-left: 2rem;
@@ -288,7 +318,20 @@ th {
 
 .margin-form {
   margin-bottom: 11px;
-  margin-left: 11px;
+  padding:5px;
+  width: 100%;
+  ;
+  
+}
+
+
+
+.margin-form-name {
+  
+  margin-bottom: 11px;
+  padding:5px;
+  width: 100%;
+  ;
   
 }
 
@@ -308,9 +351,6 @@ th {
   border: 1.25px solid #F7B500;
   background-color: #F7B500;
 
-}
-.margin-form-button {
-  width: 185px;
 }
 
 .newrenter-form-wrapper {
@@ -332,5 +372,13 @@ th {
 .wrap-names-renter {
   display: flex;
   flex-direction: row;
+  
  
 }
+
+.form-align {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
