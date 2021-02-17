@@ -4,9 +4,6 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import VolunteerPanel from '../VolunteerPanel';
 
-
-
-
 const formReducer = (state, event) => {
   if (event.reset) {
     return {
@@ -14,6 +11,7 @@ const formReducer = (state, event) => {
       station: '',
       model_name: '',
       conditions: '',
+      entry_date: '',
     }
   }
   return {
@@ -26,6 +24,7 @@ function AddNewBicycle() {
   const [formData, setFormData] = useReducer(formReducer, {});
   const [submitting, setSubmitting] = useState(false);
   const [station, setStation] = useState([]);
+
   useEffect(() => {
     fetch("http://localhost:3000/station")
       .then((res) => res.json())
@@ -34,20 +33,36 @@ function AddNewBicycle() {
         setStation(data);
       })
   }, []);
-  const date = Date()
 
   const handleSubmit = event => {
-
     
+    const today = new Date().toISOString().slice(0, 10)
     
-
+    const object = { 
+     "model_name": formData.model_name,
+     "entry_date": today, 
+     "conditions": formData.conditions 
+    }
+    
+    event.preventDefault();
+    setSubmitting(true);
     fetch("http://localhost:3000/bikes", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(object),
+      
     })
+
+    setTimeout(() => {
+      alert("New Bicycle Added");
+      setSubmitting(false);
+      setFormData({
+        reset: true
+      });
+      
+    }, 3000);
   }
 
   const handleChange = event => {
@@ -59,11 +74,12 @@ function AddNewBicycle() {
   const hiddenFileInput = React.useRef(null);
   const imageUpload = event => {
     hiddenFileInput.current.click();
+
   };
   return (
 
     <div>
-    <VolunteerPanel />
+      <VolunteerPanel />
 
       <div className="wrapper">
         <div className="return-form">
@@ -77,40 +93,68 @@ function AddNewBicycle() {
 
           <p><b>ADD NEW BICYCLE</b></p>
 
-          <Form className="form-align" onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} className="form-align" >
 
-              <div className="margin-form">
-                <button type="button" onClick={imageUpload} className="photo-btn">Photo</button>
-                <Form.File
-                  id="bikephoto"
-                  name="bike_photo"
-                  onChange={handleChange}
-                  value={formData.bike_photo || ''}
-                  ref={hiddenFileInput}
-                  style={{ display: 'none' }}
+            <div className="margin-form">
+              <button 
+              type="button" 
+              onClick={imageUpload} 
+              className="photo-btn"
+              disabled={submitting}
+              >Photo</button>
+              
+              <Form.File
+                id="bikephoto"
+                name="bike_photo"
+                onChange={handleChange}
+                value={formData.bike_photo || ''}
+                ref={hiddenFileInput}
+                style={{ display: 'none' }}
+                disabled={submitting}
+                
 
-                />
-              </div>
-              <div className="margin-form">
+              />
+            </div>
+            <div className="margin-form">
 
-                <Form.Control type="text" name="model_name" autocomplete="off" onChange={handleChange} value={formData.model_name || ''} placeholder="Name" />
-              </div>
-              <div className="margin-form">
-                <Form.Control as="select" name="station" onChange={handleChange} value={formData.station || ''}>
+              <Form.Control 
+              type="text" 
+              name="model_name" 
+              autocomplete="off" 
+              onChange={handleChange} 
+              value={formData.model_name || ''} 
+              placeholder="Name"
+              disabled={submitting}
+              required  
 
-                  <option value="" disabled selected hidden>Station</option>
-                  {station.map((item) => (
-                    <option value={item.station_name}>{item.station_name}</option>
-                  ))}
+              />
+            </div>
+            <div className="margin-form">
+              <Form.Control as="select" name="station" onChange={handleChange} value={formData.station || ''} required>
 
-                </Form.Control>
-              </div>
-              <div className="margin-form condition">
-                <p>CONDITION</p>
+                <option value="" disabled selected hidden>Station</option>
+                {station.map((item) => (
+                  <option value={item.station_name}>{item.station_name}</option>
+                ))}
 
-                <Form.Control as="textarea" rows={5} autocomplete="off" name="conditions" onChange={handleChange} value={formData.conditions || ''} />
+              </Form.Control>
+            </div>
+            <div className="margin-form condition">
+              <p>CONDITION</p>
 
-              </div>
+              <Form.Control 
+              as="textarea" 
+              rows={5} 
+              autocomplete="off" 
+              name="conditions" 
+              onChange={handleChange} 
+              value={formData.conditions || ''}
+              disabled={submitting}
+              required
+
+              />
+
+            </div>
 
             <div className="margin-form-button">
               <Button className="submit-button" type="submit" disabled={submitting}>Done</Button>
