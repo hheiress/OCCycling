@@ -17,6 +17,7 @@ import AllBicycles from './components/Bicycles/Bicycles';
 import AddNewBicycle from './components/Bicycles/AddNewBicycle';
 import CreateNewRenter from './components/Residents/CreateNewRenter';
 import Login from './Login';
+import FormTest from './components/Bicycles/FormTest';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route exact path="/bicycles" component={AllBicycles} />
         <Route exact path="/addnewbicycle" component={AddNewBicycle} />
         <Route exact path= "/createnewrenter" component={CreateNewRenter} />
+        <Route exact path= "/formtest" component={FormTest} />
         
         <VolunteerPanel />
       </Switch>
