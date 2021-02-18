@@ -6,6 +6,7 @@ const {
     rentingCtrl,
     stationCtrl,
     jwtAuthCtrl,
+    dashboardCtrl,
 } = require("./controllers");
 
 
@@ -16,6 +17,7 @@ router
     .use("/bikes", bikeCtrl)
     .use("/rentings", rentingCtrl)
     .use("/station", stationCtrl)
-    .use("/auth", jwtAuthCtrl),
+    .use("/auth", jwtAuthCtrl)
+    .use("/dashboard", dashboardCtrl),
 
 module.exports = router;

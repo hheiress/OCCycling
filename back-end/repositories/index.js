@@ -4,4 +4,5 @@ module.exports = {
     rentingsRepo: require("./rentings.js"),
     stationsRepo: require("./station.js"),
     jwtAuthRepo: require("./jwtAuth"),
+    dashboardRepo: require("./dashboard"),
 };
