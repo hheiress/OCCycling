@@ -3,6 +3,7 @@ const bcrypt= require("bcrypt");
 const jwtGenerator = require("../utils/jwtGenerator.js");
 require('dotenv').config();
 
+// ==== Registrer user / encryp password ====
 
 async function register (req, res) {
     const {name, email, password} = req.body;
@@ -28,7 +29,7 @@ async function register (req, res) {
 
     // generatin jwt token
 
-    const token = jwtGenerator(newUser.rows[0].user_id);
+    const token = jwtGenerator(newUser.rows[0].id);
     
     res.json({token});
 };
@@ -54,14 +55,23 @@ async function login (req, res) {
 
     // Give them JWT token
 
-    const token = jwtGenerator(user.rows[0].user_id);
+    const token = jwtGenerator(user.rows[0].id);
     res.json({token})
 } 
 
+ function loginAuth (req, res) {
+    try {
+        res.json(true);
+} catch (err) {
+    console.log(err.message)
+    res.status(500).send("Internal Server Error")
+}
+ }
 module.exports = {
     
     register: register,
     login: login,
+    loginAuth: loginAuth,
     
 };
 

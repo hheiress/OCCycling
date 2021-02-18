@@ -4,4 +4,5 @@ bikeCtrl: require("./bikes"),
 rentingCtrl: require("./rentings"),
 stationCtrl: require("./station"),
 jwtAuthCtrl: require("./jwtAuth"),
+dashboardCtrl: require("./dashboard"),
 };
