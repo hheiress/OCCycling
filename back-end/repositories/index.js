@@ -3,5 +3,5 @@ module.exports = {
     bikesRepo: require("./bikes.js"),
     rentingsRepo: require("./rentings.js"),
     stationsRepo: require("./station.js"),
-
+    jwtAuthRepo: require("./jwtAuth"),
 };
