@@ -27,25 +27,31 @@ const formReducer = (state, event) => {
 }
 
 function CreateNewRenter() {
-  const [formData, setFormData] = useReducer(formReducer, {});
+  const [dataForm, setDataForm] = useReducer(formReducer, {});
   const [submitting, setSubmitting] = useState(false);
+  const [selectedFile, setSelectedFile] = useState("");
+  const [isFilePicked, setIsFilePicked] = useState(false);
+  const [photoThumbnail, setPhotoThumbnail] = useState ("Photo")
 
   const handleSubmit = event => {
 
     const object = {
-      "name": formData.name,
-      "last_name": formData.last_name,
-      "passport": formData.passport,
-      "address": formData.address,
-      "gender": formData.gender,
-      "date_birth": formData.date_birth,
-      "nationality": formData.nationality,
-      "email": formData.email,
-      "phone_number": formData.phone_number,
+      "name": dataForm.name,
+      "last_name": dataForm.last_name,
+      "passport": dataForm.passport,
+      "address": dataForm.address,
+      "gender": dataForm.gender,
+      "date_birth": dataForm.date_birth,
+      "nationality": dataForm.nationality,
+      "email": dataForm.email,
+      "phone_number": dataForm.phone_number,
       "status": "Active"
     }
 
-    if (formData.phone_number > 2147483647) {
+    const formData = new FormData();
+		formData.append('File', selectedFile);
+
+    if (dataForm.phone_number > 2147483647) {
       alert("***Phone Number must have 9 digits***");
       event.preventDefault();
 
@@ -64,10 +70,35 @@ function CreateNewRenter() {
 
       })
 
+      .then((response) => response.json())
+			.then((result) => {
+				console.log('Success:', result);
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			})
+
+       //FETCH TO UPLOAD THE USER PHOTO 
+    
+    /*fetch(
+			'https://localhost:...',
+			{
+				method: 'POST',
+				body: formData,
+			}
+		)
+			.then((response) => response.json())
+			.then((result) => {
+				console.log('Success:', result);
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});*/
+
       setTimeout(() => {
         alert("New User Added");
         setSubmitting(false);
-        setFormData({
+        setDataForm({
           reset: true
         });
 
@@ -76,10 +107,19 @@ function CreateNewRenter() {
   }
 
   const handleChange = event => {
-    setFormData({
+    setDataForm({
       name: event.target.name,
       value: event.target.value,
     });
+  }
+
+  const changeHandler = event => {
+    setSelectedFile(event.target.files[0]);
+		setIsFilePicked(true);
+
+    setPhotoThumbnail(<img className="photo-btn" src={URL.createObjectURL(event.target.files[0])}/>);
+    console.log(selectedFile);
+
   }
 
   const hiddenFileInput = React.useRef(null);
@@ -110,13 +150,13 @@ function CreateNewRenter() {
               <button
                 type="button"
                 onClick={imageUpload}
-                className="photo-btn">Photo</button>
+                className="photo-btn">{photoThumbnail}</button>
 
               <Form.File
                 id="userphoto"
                 name="user_photo"
-                onChange={handleChange}
-                value={formData.user_photo || ''}
+                onChange={changeHandler}
+                value={dataForm.user_photo || ''}
                 ref={hiddenFileInput}
                 style={{ display: 'none' }}
               />
@@ -129,7 +169,7 @@ function CreateNewRenter() {
                   name="name"
                   autocomplete="off"
                   onChange={handleChange}
-                  value={formData.name || ''}
+                  value={dataForm.name || ''}
                   placeholder="Name"
                   required
                 />
@@ -140,7 +180,7 @@ function CreateNewRenter() {
                   name="last_name"
                   autocomplete="off"
                   onChange={handleChange}
-                  value={formData.last_name || ''}
+                  value={dataForm.last_name || ''}
                   placeholder="Last Name"
                   required
                 />
@@ -153,7 +193,7 @@ function CreateNewRenter() {
                 name="passport"
                 autocomplete="off"
                 onChange={handleChange}
-                value={formData.passport || ''}
+                value={dataForm.passport || ''}
                 placeholder="Passport"
                 required
               />
@@ -164,7 +204,7 @@ function CreateNewRenter() {
                 name="address"
                 autocomplete="off"
                 onChange={handleChange}
-                value={formData.address || ''}
+                value={dataForm.address || ''}
                 placeholder="Address"
                 required
               />
@@ -177,7 +217,7 @@ function CreateNewRenter() {
                 className="select"
                 name="gender"
                 onChange={handleChange}
-                value={formData.gender || ''}
+                value={dataForm.gender || ''}
                 required >
 
                 <option value="" disabled selected hidden>Choose...</option>
@@ -196,7 +236,7 @@ function CreateNewRenter() {
                 name="date_birth"
                 autocomplete="off"
                 onChange={handleChange}
-                value={formData.date_birth || ''}
+                value={dataForm.date_birth || ''}
                 placeholder="Date of Birth"
                 required
               />
@@ -207,7 +247,7 @@ function CreateNewRenter() {
                 name="nationality"
                 autocomplete="off"
                 onChange={handleChange}
-                value={formData.nationality || ''}
+                value={dataForm.nationality || ''}
                 placeholder="Nationality"
                 required />
             </div>
@@ -218,7 +258,7 @@ function CreateNewRenter() {
                 name="email"
                 autocomplete="off"
                 onChange={handleChange}
-                value={formData.email || ''}
+                value={dataForm.email || ''}
                 placeholder="Email"
                 required />
             </div>
@@ -229,7 +269,7 @@ function CreateNewRenter() {
                 name="phone_number"
 
                 onChange={handleChange}
-                value={formData.phone_number || ''}
+                value={dataForm.phone_number || ''}
                 placeholder="Phone Number"
                 required />
             </div>
