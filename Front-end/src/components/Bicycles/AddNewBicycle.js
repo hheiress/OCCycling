@@ -12,7 +12,9 @@ const formReducer = (state, event) => {
       model_name: '',
       conditions: '',
       entry_date: '',
+      
     }
+    
   }
   return {
     ...state,
@@ -21,9 +23,12 @@ const formReducer = (state, event) => {
 }
 
 function AddNewBicycle() {
-  const [formData, setFormData] = useReducer(formReducer, {});
+  const [dataForm, setDataForm] = useReducer(formReducer, {});
   const [submitting, setSubmitting] = useState(false);
   const [station, setStation] = useState([]);
+  const [selectedFile, setSelectedFile] = useState("");
+	const [isFilePicked, setIsFilePicked] = useState(false);
+  const [photoThumbnail, setPhotoThumbnail] = useState ("Photo")
 
   useEffect(() => {
     fetch("http://localhost:3000/station")
@@ -39,10 +44,14 @@ function AddNewBicycle() {
     const today = new Date().toISOString().slice(0, 10)
     
     const object = { 
-     "model_name": formData.model_name,
+     "model_name": dataForm.model_name,
+     /*"station_name": dataForm.station,*/
      "entry_date": today, 
-     "conditions": formData.conditions 
+     "conditions": dataForm.conditions 
     }
+
+    const formData = new FormData();
+		formData.append('File', selectedFile);
     
     event.preventDefault();
     setSubmitting(true);
@@ -51,29 +60,67 @@ function AddNewBicycle() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(object),
-      
+      body: JSON.stringify(object), 
     })
 
+    .then((response) => response.json())
+			.then((result) => {
+				console.log('Success:', result);
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			})
+     
+    //FETCH TO UPLOAD THE BICYCLE PHOTO 
+    
+    /*fetch(
+			'https://localhost:...',
+			{
+				method: 'POST',
+				body: formData,
+			}
+		)
+			.then((response) => response.json())
+			.then((result) => {
+				console.log('Success:', result);
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});*/
+
     setTimeout(() => {
-      alert("New Bicycle Added");
+      
+      alert(selectedFile.type);
       setSubmitting(false);
-      setFormData({
+      setDataForm({
         reset: true
       });
+      setPhotoThumbnail("Photo");
+     
       
     }, 3000);
   }
 
   const handleChange = event => {
-    setFormData({
+    setDataForm({
       name: event.target.name,
       value: event.target.value,
     });
+   
+  }
+
+  const changeHandler = event => {
+    setSelectedFile(event.target.files[0]);
+		setIsFilePicked(true);
+
+    setPhotoThumbnail(<img className="photo-btn" src={URL.createObjectURL(event.target.files[0])}/>);
+    console.log(selectedFile);
+
   }
   const hiddenFileInput = React.useRef(null);
   const imageUpload = event => {
     hiddenFileInput.current.click();
+
 
   };
   return (
@@ -101,13 +148,13 @@ function AddNewBicycle() {
               onClick={imageUpload} 
               className="photo-btn"
               disabled={submitting}
-              >Photo</button>
+              >{photoThumbnail}</button>
               
               <Form.File
                 id="bikephoto"
                 name="bike_photo"
-                onChange={handleChange}
-                value={formData.bike_photo || ''}
+                onChange={changeHandler}
+                value={dataForm.bike_photo || ''}
                 ref={hiddenFileInput}
                 style={{ display: 'none' }}
                 disabled={submitting}
@@ -122,7 +169,7 @@ function AddNewBicycle() {
               name="model_name" 
               autocomplete="off" 
               onChange={handleChange} 
-              value={formData.model_name || ''} 
+              value={dataForm.model_name || ''} 
               placeholder="Name"
               disabled={submitting}
               required  
@@ -130,7 +177,7 @@ function AddNewBicycle() {
               />
             </div>
             <div className="margin-form">
-              <Form.Control as="select" name="station" onChange={handleChange} value={formData.station || ''} required>
+              <Form.Control as="select" name="station" onChange={handleChange} value={dataForm.station || ''} required>
 
                 <option value="" disabled selected hidden>Station</option>
                 {station.map((item) => (
@@ -148,7 +195,7 @@ function AddNewBicycle() {
               autocomplete="off" 
               name="conditions" 
               onChange={handleChange} 
-              value={formData.conditions || ''}
+              value={dataForm.conditions || ''}
               disabled={submitting}
               required
 
