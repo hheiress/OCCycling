@@ -13,7 +13,7 @@ async function register (req, res) {
         .query("SELECT * FROM ngo_users WHERE user_email = $1", [email])
     
             if (user.rows.length !== 0) {
-             return res.status(401).send("User already exist");
+             return res.status(401).json("User already exist");
          }
     // Bcrypt the user password
 

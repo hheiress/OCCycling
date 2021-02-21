@@ -5,28 +5,28 @@ function find () {
 }
 
 function create(req, res) {
-    const { model_name, entry_date, conditions } = req.body;
+    const { model_name, entry_date, conditions, station } = req.body;
 
-    if (!model_name || !entry_date || !conditions) {
+    if (!model_name || !entry_date || !conditions || !station) {
         return res
             .status(400)
-            .send("Please insert a model name, entry date, conditions");
+            .send("Please insert a model name, entry date, conditions, station");
     }
     return pool
-        .query('INSERT INTO bikes (model_name, entry_date, conditions) VALUES ($1, $2, $3)', [model_name, entry_date, conditions])
+        .query('INSERT INTO bikes (model_name, entry_date, conditions, station) VALUES ($1, $2, $3, $4)', [model_name, entry_date, conditions, station])
         .then(() => res.send('Bike created'))
 }
 
 function update(req, res) {
-    const { model_name, entry_date, conditions } = req.body;
+    const { model_name, entry_date, conditions, station } = req.body;
     const { id } = req.params;
-    if (!model_name || !entry_date || !conditions) {
+    if (!model_name || !entry_date || !conditions || !station) {
         return res
             .status(400)
-            .send("Please insert a model name, entry date, conditions");
+            .send("Please insert a model name, entry date, conditions, station");
     }
     return pool
-        .query("UPDATE bikes SET model_name  =$2, entry_date = $3, conditions = $4 where id = $1", [id, model_name, entry_date, conditions])
+        .query("UPDATE bikes SET model_name  =$2, entry_date = $3, conditions = $4, station = $5 WHERE id = $1", [id, model_name, entry_date, conditions, station])
         .then(() => res.send('Bike Modified'))
 }
 
