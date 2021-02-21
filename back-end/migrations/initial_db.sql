@@ -21,7 +21,8 @@ CREATE TABLE bikes (
   id       			SERIAL PRIMARY KEY,
   model_name    	TEXT NOT NULL,
   entry_date		DATE NOT NULL,
-  conditions		TEXT NOT NULL
+  conditions		TEXT NOT NULL,
+  station			TEXT NOT NULL 
  );
 
 CREATE TABLE rentings (
@@ -52,10 +53,10 @@ VALUES ('Miray', 'Demir', 'TK239445J', 'AV. Rome 56', 'Female', '1994-05-13', 'T
 INSERT INTO users (name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status) 
 VALUES ('Alberto', 'Lopez', 'V228946K', 'Street Rose', 'Male', '1989-02-23', 'Venezuela', 'lopez10@gmail.com', 32568901, 'Banned');
 
-INSERT INTO bikes (model_name, entry_date, conditions) VALUES ('Decathlon', '2018-03-10', 'Change brakes');
-INSERT INTO bikes (model_name, entry_date, conditions) VALUES ('Trek', '2020-03-20', 'New');
-INSERT INTO bikes (model_name, entry_date, conditions) VALUES ('Apache', '2015-10-16', 'flat tire');
-INSERT INTO bikes (model_name, entry_date, conditions) VALUES ('Vento', '2016-11-04', 'Good');
+INSERT INTO bikes (model_name, entry_date, conditions, station) VALUES ('Decathlon', '2018-03-10', 'Change brakes', 'Polikastro' );
+INSERT INTO bikes (model_name, entry_date, conditions, station) VALUES ('Trek', '2020-03-20', 'New', 'Camp' );
+INSERT INTO bikes (model_name, entry_date, conditions, station) VALUES ('Apache', '2015-10-16', 'flat tire', 'Polikastro' );
+INSERT INTO bikes (model_name, entry_date, conditions, station) VALUES ('Vento', '2016-11-04', 'Good', 'Camp');
 
 INSERT INTO station (station_name) VALUES ('Camp');
 INSERT INTO station (station_name) VALUES ('Polikastro');
