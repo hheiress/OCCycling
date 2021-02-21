@@ -36,6 +36,12 @@ code {
   color:#0D4C51;
   margin:10px
 }
+
+.dashboard{
+  color:#d3eef0;
+  margin:10px
+}
+
 .projectname-span{
   font-weight:700;
 }
@@ -131,10 +137,16 @@ input[type="password"] {
   margin-bottom: 20px;
 }
 
-.login{
+.login {
   background-color: #0D4C51;
   padding:150px;
 }
+
+.dashboard {
+  background-color: #0D4C51;
+  padding:150px;
+}
+
 .volunteerpanel {
   padding: 20px 20px 20px;
 }
