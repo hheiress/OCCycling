@@ -22,7 +22,7 @@ const formReducer = (state, event) => {
   }
 }
 
-function AddNewBicycle() {
+function UpdateBicycle() {
   const [dataForm, setDataForm] = useReducer(formReducer, {});
   const [submitting, setSubmitting] = useState(false);
   const [station, setStation] = useState([]);
@@ -216,4 +216,4 @@ function AddNewBicycle() {
   )
 }
 
-export default AddNewBicycle
+export default UpdateBicycle
