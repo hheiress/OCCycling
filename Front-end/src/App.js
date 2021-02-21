@@ -23,11 +23,9 @@ import AddTime from './components/AddTime';
 import AllBicycles from './components/Bicycles/Bicycles';
 import AddNewBicycle from './components/Bicycles/AddNewBicycle';
 import CreateNewRenter from './components/Residents/CreateNewRenter';
-<<<<<<< HEAD
 import Dashboard from './components/Dashboard'; /* Add 19/02 */
-=======
 import UpdateBicycle from './components/Bicycles/Update Bicycle';
->>>>>>> 0528cd006a3f8e1d5617ab58d65d6bbe05ffcbe8
+
 
 toast.configure()
 
