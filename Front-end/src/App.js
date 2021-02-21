@@ -23,7 +23,11 @@ import AddTime from './components/AddTime';
 import AllBicycles from './components/Bicycles/Bicycles';
 import AddNewBicycle from './components/Bicycles/AddNewBicycle';
 import CreateNewRenter from './components/Residents/CreateNewRenter';
+<<<<<<< HEAD
 import Dashboard from './components/Dashboard'; /* Add 19/02 */
+=======
+import UpdateBicycle from './components/Bicycles/Update Bicycle';
+>>>>>>> 0528cd006a3f8e1d5617ab58d65d6bbe05ffcbe8
 
 toast.configure()
 
@@ -89,6 +93,7 @@ function App() {
         <Route exact path="/residents" component={Residents} />
         <Route exact path="/bicycles" component={AllBicycles} />
         <Route exact path="/addnewbicycle" component={AddNewBicycle} />
+        <Route exact path="/updatebicycle" component={UpdateBicycle} />
         <Route exact path= "/createnewrenter" component={CreateNewRenter} />
         <Route exact path="/volunteerpanel" component={VolunteerPanel} />
         <HomePage/>
