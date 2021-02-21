@@ -36,6 +36,13 @@ CREATE TABLE rentings (
   conditions_id		INT REFERENCES bikes(id)
  );
 
+ CREATE TABLE ngo_users (
+id       		SERIAL PRIMARY KEY,
+user_name     	TEXT NOT NULL,
+user_email		TEXT NOT NULL,
+user_password	TEXT NOT NULL
+);
+
 INSERT INTO users (name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status) 
 VALUES ('Ehsan', 'Abdul', 'H235690L', 'Street Tree 23', 'Male', '1970-06-20', 'Syrian', 'ehsan90@gmail.com', 44590832, 'Active');
 INSERT INTO users (name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status) 
@@ -56,3 +63,5 @@ INSERT INTO station (station_name) VALUES ('Polikastro');
 INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id) VALUES (2, 3, 3, 'Unavailable', '2021-01-18', 1, '04:00:00', 2);
 INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id) VALUES (1, 2, 2, 'Unavailable', '2021-01-18', 1, '04:00:00', 1);
 INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id) VALUES (3, 1, 2, 'Unavailable', '2021-01-18', 2, '04:00:00', 3);
+
+INSERT INTO ngo_users (user_name, user_email, user_password) VALUES ('Irene', 'ireneocc@gmail.com', 'igrece4381');
