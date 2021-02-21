@@ -13,7 +13,7 @@ function Login() {
                         <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe" /> Remember Me
                     </label>
                     <Link to={'/volunteerpanel'}>
-                        <button className="btn btn-lg btn-primary btn-block mb-5" type="submit">Login as Coordinator</button>
+                        <button className="btn btn-lg btn-primary submit-button btn-block mb-5" type="submit">Login </button>
                     </Link>
                    
                 </form>

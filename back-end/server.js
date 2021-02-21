@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const routes = require("./routes.js");
 
-const bcrypt= require("bcrypt"); // add 13/02
+ 
 
 const PORT = process.env.PORT || 3000;
 
@@ -13,7 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(routes);
 
-app.use(express.urlencoded({ extended: false})); // add 13/02
+app.use(express.urlencoded({ extended: false}));
 
 app.use((req, res, next) => {
     const err = new Error("Not found")
