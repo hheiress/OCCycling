@@ -6,7 +6,7 @@ import VolunteerPanel from '../VolunteerPanel';
 function RentBicycle() {
     const [bikes, setBikes] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:3000/bikes")
+        fetch("http://localhost:3001/bikes")
             .then((res) => res.json())
             .then((data) => {
                 console.log("First render");
