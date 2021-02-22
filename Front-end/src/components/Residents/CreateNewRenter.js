@@ -27,7 +27,8 @@ const formReducer = (state, event) => {
 }
 
 function CreateNewRenter() {
-  const [dataForm, setDataForm] = useReducer(formReducer, {});
+  const [dataForm, setDataForm] = useReducer(formReducer, {
+ });
   const [submitting, setSubmitting] = useState(false);
   const [selectedFile, setSelectedFile] = useState("");
   const [isFilePicked, setIsFilePicked] = useState(false);
@@ -61,7 +62,7 @@ function CreateNewRenter() {
 
       setSubmitting(true);
 
-      fetch("http://localhost:3000/users", {
+      fetch("http://localhost:3001/users", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
