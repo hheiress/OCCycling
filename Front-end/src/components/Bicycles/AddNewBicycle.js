@@ -23,7 +23,9 @@ const formReducer = (state, event) => {
 }
 
 function AddNewBicycle() {
-  const [dataForm, setDataForm] = useReducer(formReducer, {});
+  const [dataForm, setDataForm] = useReducer(formReducer, {
+    
+  });
   const [submitting, setSubmitting] = useState(false);
   const [station, setStation] = useState([]);
   const [selectedFile, setSelectedFile] = useState("");
@@ -31,7 +33,7 @@ function AddNewBicycle() {
   const [photoThumbnail, setPhotoThumbnail] = useState ("Photo")
 
   useEffect(() => {
-    fetch("http://localhost:3000/station")
+    fetch("http://localhost:3001/station")
       .then((res) => res.json())
       .then((data) => {
         console.log("First render");
@@ -45,9 +47,9 @@ function AddNewBicycle() {
     
     const object = { 
      "model_name": dataForm.model_name,
-     /*"station_name": dataForm.station,*/
      "entry_date": today, 
-     "conditions": dataForm.conditions 
+     "conditions": dataForm.conditions,
+     "station": dataForm.station, 
     }
 
     const formData = new FormData();
@@ -55,7 +57,7 @@ function AddNewBicycle() {
     
     event.preventDefault();
     setSubmitting(true);
-    fetch("http://localhost:3000/bikes", {
+    fetch("http://localhost:3001/bikes", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -90,7 +92,7 @@ function AddNewBicycle() {
 
     setTimeout(() => {
       
-      alert(selectedFile.type);
+      alert(dataForm.station);
       setSubmitting(false);
       setDataForm({
         reset: true
