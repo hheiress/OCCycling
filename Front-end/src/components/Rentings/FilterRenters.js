@@ -34,6 +34,7 @@ const FilterRenters = props => {
                           <table className="table user-renting">
                               <thead>
                                   <tr>
+                                      <th>User ID</th>
                                       <th>First name</th>
                                       <th>Last name</th>
                                       <th>Date of birthday</th>
@@ -43,10 +44,11 @@ const FilterRenters = props => {
                               <tbody>
                                   {renters.map((item, index) => (
                                       <tr onClick={props.handleRowClick} key={index} >
-                                      <td data-title={item.name} headers={item.last_name}>{item.name}</td>
-                                      <td data-title={item.name} headers={item.last_name}> {item.last_name}</td>
-                                      <td data-title={item.name} headers={item.last_name}>{item.date_birth}</td>
-                                      <td data-title={item.name} headers={item.last_name}>{item.phone_number}</td>
+                                      <td data-title={item.id} >{item.id}</td>
+                                      <td data-title={item.id} >{item.name}</td>
+                                      <td data-title={item.id} >{item.last_name}</td>
+                                      <td data-title={item.id} >{item.date_birth}</td>
+                                      <td data-title={item.id}>{item.phone_number}</td>
                                     </tr>
                                   ))} 
             </tbody>
