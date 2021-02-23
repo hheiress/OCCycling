@@ -6,7 +6,7 @@ import Search from "../Residents/Search";
 const Rentings = props => {
     const [rentings, setRentings] = useState([]);
 useEffect(()=>{
-      fetch("http://localhost:3001/rentings")
+      fetch("http://localhost:3002/rentings")
       .then((res) => res.json())
       .then((data) => {
         console.log("First render");

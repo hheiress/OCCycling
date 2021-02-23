@@ -52,7 +52,7 @@ function RentBicycle() {
 
      //get station 
     useEffect(() => {
-        fetch("http://localhost:3001/station")
+        fetch("http://localhost:3002/station")
           .then((res) => res.json())
           .then((data) => {
             console.log("First render for station");
@@ -62,7 +62,7 @@ function RentBicycle() {
 
     //get bikes with the status null
     useEffect(() => {
-        fetch("http://localhost:3001/bikes")
+        fetch("http://localhost:3002/bikes")
             .then((res) => res.json())
             .then((data) => {
                 console.log("Second render");
@@ -105,7 +105,7 @@ function RentBicycle() {
 
         event.preventDefault();
         setSubmitting(true);
-        fetch("http://localhost:3001/rentings", {
+        fetch("http://localhost:3002/rentings", {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

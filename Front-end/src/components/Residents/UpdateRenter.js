@@ -65,7 +65,7 @@ function UpdateRenter(props) {
 
             setSubmitting(true);
 
-            fetch("http://localhost:3001/users", {
+            fetch("http://localhost:3002/users", {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
