@@ -1,27 +1,46 @@
-const { Pool } = require("pg");
+const pool = require("../db.js");
 
-const pool = new Pool({
-    user: "pepe",
-    host: "localhost",
-    database: "occycling",
-    password: "pepe1234",
-    port: 5432,
-});
-
-const find = () => {
-    return pool.query("SELECT * FROM bikes").then((results) => (results.rows))
+function find () {
+    return pool.query("SELECT b.id, b.model_name, r.status, b.entry_date, b.conditions FROM bikes b LEFT JOIN rentings r ON r.bike_id = b.id").then((results) => (results.rows))
 }
 
-const create = (bike) => {
-    // ... create bike in db
+function create(req, res) {
+    const { model_name, entry_date, conditions, station } = req.body;
+
+    if (!model_name || !entry_date || !conditions || !station) {
+        return res
+            .status(400)
+            .send("Please insert a model name, entry date, conditions, station");
+    }
+    return pool
+        .query('INSERT INTO bikes (model_name, entry_date, conditions, station) VALUES ($1, $2, $3, $4)', [model_name, entry_date, conditions, station])
+        .then(() => res.send('Bike created'))
 }
 
-const update = (bike) => {
-    // ... update bike in db
+function update(req, res) {
+    const { model_name, entry_date, conditions, station } = req.body;
+    const { id } = req.params;
+    if (!model_name || !entry_date || !conditions || !station) {
+        return res
+            .status(400)
+            .send("Please insert a model name, entry date, conditions, station");
+    }
+    return pool
+        .query("UPDATE bikes SET model_name  =$2, entry_date = $3, conditions = $4, station = $5 WHERE id = $1", [id, model_name, entry_date, conditions, station])
+        .then(() => res.send('Bike Modified'))
 }
 
-const remove = (id) => {
-    // ... remove bike in db
+function remove(req, res) {
+    const { id } = req.params;
+    if (!id) {
+        return res
+            .status(400)
+            .send("Please insert a id");
+    }
+    return pool
+        .query("DELETE FROM bikes WHERE id = $1", [id])
+        .then(() => res.send('Bike Eliminated'))
+
 }
 
 module.exports = {

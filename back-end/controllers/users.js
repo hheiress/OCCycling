@@ -1,26 +1,42 @@
-const {userRepo} =require("../repositories");
+const {usersRepo} = require("../repositories");
 const ctrl = require("express").Router();
 
-ctrl.get ("/", function (req, res) {
-    userRepo
+
+ctrl.get ("/", function (req, res, next) {
+    usersRepo
         .find()
         .then((results) => res.json(results))
         .catch((err) => {
-            console.error(err.message)
-            res.status(500).send("Internal Server Error")
+            console.error(err.stack)
+            next(Error)
         });
 });
 
-ctrl.post("/", function (req, res) {
-    //... post a user into the users table
+ctrl.post("/", function (req, res, next) {
+    usersRepo
+    .create(req, res)
+    .catch((err) => {
+        console.error(err.stack)
+        next(Error)
+    });
 });
 
-ctrl.put("/", function (req, res) {
-    //... put a user into the users table
-});
+ctrl.put("/:id", function(req, res, next) {
+    usersRepo
+        .update(req, res)
+        .catch((err) => {
+            console.error(err.stack);
+            next(Error)
+        });
+    });
 
-ctrl.delete("/", function (req, res) {
-    //... delete a user into the users table
-});
+ctrl.delete("/:id", function(req, res, next) {
+    usersRepo
+        .remove(req, res)
+        .catch((err) => {
+            console.log(err.stack);
+            next(Error)
+        });
+ });
 
 module.exports = ctrl;
