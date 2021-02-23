@@ -40,6 +40,7 @@ function remove(req, res) {
     return pool
         .query("DELETE FROM users WHERE id = $1", [id])
         .then(() => res.send('User Eliminated'))
+
 }
 
 module.exports = {
