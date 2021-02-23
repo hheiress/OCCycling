@@ -404,3 +404,23 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+textarea {
+  resize: none;
+}
+
+.update-button{
+  background-color:white;
+  border:2px solid #F7B500;
+  color:#0D4C51 ;
+  border-radius:23px;
+  outline:none;
+  border-color:#F7B500;
+}
+.delete-button{
+  background-color:white;
+  border:2px solid #F7B500;
+  color:#D53E3E ;
+  border-radius:23px;
+  outline:none;
+  border-color:#F7B500;
+}
