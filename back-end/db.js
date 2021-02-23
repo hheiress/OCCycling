@@ -7,3 +7,7 @@ const pool = new Pool({
     password: "pepe1234",
     port: 5432,
 });
+
+module.exports = pool;
+
+

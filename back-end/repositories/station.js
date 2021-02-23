@@ -1,27 +1,45 @@
-const { Pool } = require("pg");
-
-const pool = new Pool({
-    user: "pepe",
-    host: "localhost",
-    database: "occycling",
-    password: "pepe1234",
-    port: 5432,
-});
+const pool = require("../db.js");
 
 const find = () => {
     return pool.query("SELECT * FROM station").then((results) => (results.rows))
 }
 
-const create = (station) => {
-    // ... create a station in db
+const create = (req, res) => {
+    const station_name = req.body.station_name;
+
+    if (!station_name) {
+        return res
+            .status(400)
+            .send ("Please Insert a Station")
+        } return pool
+                .query("INSERT INTO station (station_name) VALUES ($1)", [station_name])
+                .then(()=> res.send('Station created'))
+   
 }
 
-const update = (station) => {
-    // ... update a station in db
+function update(req, res) {
+    const { station_name } = req.body;
+    const { id } = req.params;
+    if (!station_name) {
+        return res
+            .status(400)
+            .send("Please update a station_name");
+    }
+    return pool
+        .query("UPDATE station SET station_name = $2 WHERE id = $1", [id, station_name])
+        .then(() => res.send('Station Modified'))
 }
 
-const remove = (id) => {
-    // ... remove a station in db
+function remove(req, res) {
+    const { id } = req.params;
+    if (!id) {
+        return res
+            .status(400)
+            .send("Please insert a id");
+    }
+    return pool
+        .query("DELETE FROM station WHERE id = $1", [id])
+        .then(() => res.send('Station Eliminated'))
 }
 
 module.exports = {

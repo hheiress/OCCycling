@@ -1,26 +1,43 @@
-const repo = require("../repositories/station.js");
+const {stationsRepo} = require("../repositories");
 const ctrl = require("express").Router();
 
-ctrl.get ("/", function (req, res) {
-    repo
+
+ctrl.get ("/", function (req, res, next) {
+    stationsRepo
         .find()
         .then((results) => res.json(results))
         .catch((err) => {
-            console.error(err.message)
-            res.status(500).send("Internal Server Error")
+            console.error(err.stack)
+            next(Error)
         });
 });
 
-ctrl.post("/", function (req, res) {
-    //... post a station into the stations table
+ctrl.post("/", function (req, res, next) {
+    stationsRepo
+    .create(req, res)
+    .catch((err) => {
+        console.error(err.stack)
+        next(Error)
+    })
 });
 
-ctrl.put("/", function (req, res) {
-    //... put a station into the stations table
+ctrl.put("/:id", function(req, res, next) {
+    stationsRepo
+        .update(req, res)
+        .catch((err) => {
+            console.error(err.message);
+            next(Error)
+        })
 });
 
-ctrl.delete("/", function (req, res) {
-    //... delete a station into the stations table
+ctrl.delete("/:id", function(req, res, next) {
+    stationsRepo
+        .remove(req, res)
+        .catch((err) => {
+            console.log(err.message);
+            next(Error)
+        })
+
 });
 
 module.exports = ctrl;
