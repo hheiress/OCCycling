@@ -115,6 +115,9 @@ code {
 	  margin-bottom: 30px;
 } 
 
+textarea {
+  resize: none;
+}
 	.checkbox {
 	  font-weight: normal;
 	}
@@ -203,6 +206,24 @@ input[type="password"] {
   margin-bottom: 20px;
 }
 
+.update-button{
+  background-color:white;
+  border:2px solid #F7B500;
+  color:#0D4C51 ;
+  border-radius:23px;
+  outline:none;
+  border-color:#F7B500;
+}
+
+.delete-button{
+  background-color:white;
+  border:2px solid #F7B500;
+  color:#D53E3E ;
+  border-radius:23px;
+  outline:none;
+  border-color:#F7B500;
+}
+
 .login-input {
   margin-bottom: 20px;
 }
@@ -255,8 +276,13 @@ table {
   width: 100%;
   font-size: small;
   margin:30px 30px 30px 0px;
+  border-color:none;
 }
+
 table tr:hover {
+  background-color: #ddd;
+}
+table tr:clicked {
   background-color: #ddd;
 }
 

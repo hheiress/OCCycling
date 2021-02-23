@@ -6,6 +6,8 @@ import VolunteerPanel from '../VolunteerPanel';
 
 const formReducer = (state, event) => {
 
+    
+
     return {
         ...state,
         [event.name]: event.value
