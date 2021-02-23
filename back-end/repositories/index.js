@@ -5,4 +5,5 @@ module.exports = {
     stationsRepo: require("./station.js"),
     jwtAuthRepo: require("./jwtAuth"),
     dashboardRepo: require("./dashboard"),
+
 };

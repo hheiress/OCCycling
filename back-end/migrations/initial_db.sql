@@ -58,11 +58,14 @@ INSERT INTO bikes (model_name, entry_date, conditions, station) VALUES ('Trek', 
 INSERT INTO bikes (model_name, entry_date, conditions, station) VALUES ('Apache', '2015-10-16', 'flat tire', 'Polikastro' );
 INSERT INTO bikes (model_name, entry_date, conditions, station) VALUES ('Vento', '2016-11-04', 'Good', 'Camp');
 
+
 INSERT INTO station (station_name) VALUES ('Camp');
 INSERT INTO station (station_name) VALUES ('Polikastro');
+
 
 INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id) VALUES (2, 3, 3, 'Unavailable', '2021-01-18', 1, '04:00:00', 2);
 INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id) VALUES (1, 2, 2, 'Unavailable', '2021-01-18', 1, '04:00:00', 1);
 INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id) VALUES (3, 1, 2, 'Unavailable', '2021-01-18', 2, '04:00:00', 3);
 
 INSERT INTO ngo_users (user_name, user_email, user_password) VALUES ('Irene', 'ireneocc@gmail.com', 'igrece4381');
+
