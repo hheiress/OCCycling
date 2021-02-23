@@ -5,16 +5,36 @@ import FilterRenters from "./FilterRenters"
 import VolunteerPanel from '../VolunteerPanel';
 import AddTime from "./AddTime";
 
+const options = [
+    {
+      label: "1 hour",
+      value: "1",
+    },
+    {
+      label: "2 hours",
+      value: "2",
+    },
+    {
+      label: "3 hours",
+      value: "3",
+    },
+    {
+      label: "4 hours",
+      value: "4",
+    },
+  ];
+
 const rentingForm = (state, event) => {
     if (event.reset) {
       return {
-        model_name: '',
-        name: '',
+        bike_id: '',
+        user_id: '',
         last_name: '',
         status: '',
         renting_date: '',
-        station_name: '',
+        station_id: '',
         starting_time: '',
+        condition_id: ''
       }
       
     }
@@ -49,30 +69,38 @@ function RentBicycle() {
                 setBikes(data);
             })
     }, []);
+
     const filteredBicycles = bikes.filter(
         item => item.status === null
       );
-      
+    
+    const getBikeId = filteredBicycles.filter(
+        item => item.model_name === dataForm.model_name
+    ) 
+    
+    const getStationId = station.filter(
+        item => item.station_name === dataForm.station_name
+    )
     const handleSubmit = event => {
         const today =  new Date().toString().slice(4, 25);
-
-        // const conditions = dataForm.filter(
-        //     item=>{
-        //         if(dataForm.model_name === item.model_name){
-        //         return item.condition;
-        //     }
-        //})
-
+         const dataRow = {
+            name: event.target.dataset.title,
+            last_name: event.target.headers
+          };
+          
         const object = { 
-         "model_name": dataForm.model_name,
-         "name": dataForm.dataRow.name,
-         "last_name":dataForm.dataRow.last_name,
-         "status": 'Unavailable',
-         "renting_date": today, 
-         "station_name": dataForm.station_name,
-         "starting_time": dataForm.starting_time,
-         "conditions": dataForm.condition
-        }
+            // "model_name": dataForm.model_name,
+            "bike_id": getBikeId[0].id,
+            "user_id": dataRow.id,
+            "last_name":dataForm.last_name,
+            "status": 'Unavailable',
+            "renting_date": today, 
+            // "station_name": dataForm.station_name,
+            "station_id": getStationId[0].id,
+            "starting_time": dataForm.starting_time ,
+            "conditions": getBikeId[0].id
+           }
+        console.log(dataForm.model_name);
         console.log(object);
 
         event.preventDefault();
@@ -99,14 +127,19 @@ function RentBicycle() {
                     });
                     console.log(event.target.value)
                 };   
-        const handleRowClick = event => {
+
+                
+    const handleRowClick = event => {
         const dataRow = {
-          name: event.target.dataset.title,
-          last_name: event.target.headers
+          id: event.target.dataset.title
+        //   last_name: event.target.headers
         };
         alert("User Selected")
-        console.log(dataRow);
+        console.log(dataRow)
+        // console.log(dataRow.name);
+        // console.log(dataRow.last_name);
       }
+    
     return (
         <div>
             <VolunteerPanel />
@@ -127,7 +160,7 @@ function RentBicycle() {
                         required >
                             <option> Choose </option>
                             {filteredBicycles.map((item, index) => (
-                                <option key={index} value={item.value} >{item.model_name} </option>))}
+                                <option key={index} value={item.value}>{item.model_name} </option>))}
                          </Form.Control>
                          
                          <h4 className="bicycle-rent mt-3">Assign Station</h4>
@@ -141,7 +174,23 @@ function RentBicycle() {
                             {station.map((item, index) => (
                                 <option key={index} value={item.value}>{item.station_name}</option>))}
                          </Form.Control>
-                        <AddTime  value={dataForm}/>
+
+                         <h4 className="addtime-header mt-3">Add Time</h4>
+                         <Form.Control
+                         as="select"
+                         name="starting_time"
+                         onChange={handleChange}
+                         value={dataForm.starting_time}
+                         required>
+                             <option value="">-- Select --</option>
+                             {options.map((option) => (
+                             <option value={option.value}>{option.label}</option>
+                        ))}
+                        </Form.Control> 
+                        {/* <AddTime 
+                        name="starting_time" 
+                        onChange={handleChange}
+                        value={dataForm.starting_time}/> */}
                     </div>
                     <button className="mt-5 btn btn-primary w-100" type="submit" onClick={handleSubmit}>Submit</button>
                 </div>
