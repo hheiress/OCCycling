@@ -40,6 +40,7 @@ function remove(req, res) {
     return pool
         .query("DELETE FROM bikes WHERE id = $1", [id])
         .then(() => res.send('Bike Eliminated'))
+
 }
 
 module.exports = {
