@@ -31,6 +31,7 @@ useEffect(()=>{
                                     <th>Station</th>
                                     <th>Time left</th>
                                     <th>Condition</th>
+                                    <th></th>
                                     </tr>
                                 </thead>
                             <tbody>
@@ -43,6 +44,7 @@ useEffect(()=>{
                                     <td>{item.station_name}</td>
                                     <td>{item.starting_time}</td>
                                     <td>{item.conditions}</td>
+                                    <td><button className="delete-button">Remove</button></td>
                                   </tr>
                                 ))} 
           </tbody>
