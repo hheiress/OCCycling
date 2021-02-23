@@ -37,6 +37,6 @@ ctrl.delete("/:id", function(req, res, next) {
             console.log(err.stack);
             next(Error)
         });
-});
+ });
 
 module.exports = ctrl;
