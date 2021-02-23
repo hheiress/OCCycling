@@ -41,7 +41,7 @@ useEffect(()=>{
                                     <td>{item.status}</td>
                                     <td>{item.renting_date}</td>
                                     <td>{item.station_name}</td>
-                                    <td>{item.time_left}</td>
+                                    <td>{item.starting_time}</td>
                                     <td>{item.conditions}</td>
                                   </tr>
                                 ))} 
