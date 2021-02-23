@@ -27,13 +27,14 @@ const options = [
 const rentingForm = (state, event) => {
     if (event.reset) {
       return {
-        model_name: '',
-        name: '',
+        bike_id: '',
+        user_id: '',
         last_name: '',
         status: '',
         renting_date: '',
-        station_name: '',
+        station_id: '',
         starting_time: '',
+        condition_id: ''
       }
       
     }
@@ -73,25 +74,32 @@ function RentBicycle() {
         item => item.status === null
       );
     
-    const getCondition = filteredBicycles.filter(
+    const getBikeId = filteredBicycles.filter(
         item => item.model_name === dataForm.model_name
-    )  
+    ) 
+    
+    const getStationId = station.filter(
+        item => item.station_name === dataForm.station_name
+    )
     const handleSubmit = event => {
         const today =  new Date().toString().slice(4, 25);
          const dataRow = {
             name: event.target.dataset.title,
             last_name: event.target.headers
           };
+          
         const object = { 
-         "model_name": dataForm.model_name,
-         "name": dataRow.name,
-         "last_name":dataForm.last_name,
-         "status": 'Unavailable',
-         "renting_date": today, 
-         "station_name": dataForm.station_name,
-         "starting_time": dataForm.starting_time ,
-         "conditions": getCondition[0].conditions
-        }
+            // "model_name": dataForm.model_name,
+            "bike_id": getBikeId[0].id,
+            "user_id": dataRow.id,
+            "last_name":dataForm.last_name,
+            "status": 'Unavailable',
+            "renting_date": today, 
+            // "station_name": dataForm.station_name,
+            "station_id": getStationId[0].id,
+            "starting_time": dataForm.starting_time ,
+            "conditions": getBikeId[0].id
+           }
         console.log(dataForm.model_name);
         console.log(object);
 
@@ -123,8 +131,8 @@ function RentBicycle() {
                 
     const handleRowClick = event => {
         const dataRow = {
-          name: event.target.dataset.title,
-          last_name: event.target.headers
+          id: event.target.dataset.title
+        //   last_name: event.target.headers
         };
         alert("User Selected")
         console.log(dataRow)
@@ -152,7 +160,7 @@ function RentBicycle() {
                         required >
                             <option> Choose </option>
                             {filteredBicycles.map((item, index) => (
-                                <option key={index} value={item.value} >{item.model_name} </option>))}
+                                <option key={index} value={item.value}>{item.model_name} </option>))}
                          </Form.Control>
                          
                          <h4 className="bicycle-rent mt-3">Assign Station</h4>
