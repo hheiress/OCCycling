@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import VolunteerPanel from '../VolunteerPanel';
-import Moment from 'react-moment';
-import 'moment-timezone';
+// import Moment from 'react-moment';
+// import moment from 'moment-timezone';
 
 const formReducer = (state, event) => {
     if (event.reset) {
