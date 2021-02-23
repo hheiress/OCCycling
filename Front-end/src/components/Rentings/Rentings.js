@@ -6,7 +6,7 @@ import Search from "../Residents/Search";
 const Rentings = props => {
     const [rentings, setRentings] = useState([]);
 useEffect(()=>{
-      fetch("http://localhost:3000/rentings")
+      fetch("http://localhost:3001/rentings")
       .then((res) => res.json())
       .then((data) => {
         console.log("First render");
@@ -41,7 +41,7 @@ useEffect(()=>{
                                     <td>{item.status}</td>
                                     <td>{item.renting_date}</td>
                                     <td>{item.station_name}</td>
-                                    <td>{item.time_left}</td>
+                                    <td>{item.starting_time}</td>
                                     <td>{item.conditions}</td>
                                   </tr>
                                 ))} 
