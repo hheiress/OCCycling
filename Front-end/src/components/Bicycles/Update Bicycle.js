@@ -39,6 +39,7 @@ function UpdateBicycle(props) {
         console.log(data)
         setBike(data.find(x => x.id == props.match.params.id));
       })
+      console.log(bike);
   }, []);
 
   const [dataForm, setDataForm] = useReducer(formReducer, {
@@ -52,28 +53,18 @@ function UpdateBicycle(props) {
       "conditions": dataForm.conditions,
       "station": dataForm.station,
     }
-
-    const formData = new FormData();
-    formData.append('File', selectedFile);
-
+ 
     event.preventDefault();
     setSubmitting(true);
-    fetch("http://localhost:3001/bikes", {
+    
+    fetch(`http://localhost:3001/bikes/${bike.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(object),
     })
-
-      .then((response) => response.json())
-      .then((result) => {
-        console.log('Success:', result);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      })
-
+    
     //FETCH TO UPLOAD THE BICYCLE PHOTO 
 
     /*fetch(
