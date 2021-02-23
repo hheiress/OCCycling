@@ -66,6 +66,7 @@ const AllRenters = props => {
                       <Link to={'/updaterenter/' + item.id}>
                         <button className="update-button">Update</button>
                       </Link>
+                      <button className="delete-button">Delete</button>
                     </td>
                   </tr>
                 ))}
