@@ -38,6 +38,7 @@ ctrl.delete("/:id", function(req, res, next) {
             console.error(err.stack)
             next(Error) 
         })
+
 }); 
 
 module.exports = ctrl;
