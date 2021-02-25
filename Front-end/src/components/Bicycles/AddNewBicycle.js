@@ -33,7 +33,7 @@ function AddNewBicycle() {
   const [photoThumbnail, setPhotoThumbnail] = useState ("Photo")
 
   useEffect(() => {
-    fetch("http://localhost:3001/station")
+    fetch("http://localhost:3000/station")
       .then((res) => res.json())
       .then((data) => {
         console.log("First render");
@@ -57,7 +57,7 @@ function AddNewBicycle() {
     
     event.preventDefault();
     setSubmitting(true);
-    fetch("http://localhost:3001/bikes", {
+    fetch("http://localhost:3000/bikes", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

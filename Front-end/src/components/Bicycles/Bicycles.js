@@ -6,7 +6,7 @@ import SearchBicycle from "./SearchBicycle";
 const AllBicycles = props => {
     const [bikes, setBikes] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:3001/bikes")
+        fetch("http://localhost:3000/bikes")
             .then((res) => res.json())
             .then((data) => {
                 console.log("First render");
@@ -56,10 +56,6 @@ const AllBicycles = props => {
                                         <td>{item.entry_date}</td>
                                         <td>{item.conditions}</td>
                                         <td>
-<<<<<<< HEAD
-                                            <button className="delete-button">Delete</button>
-=======
->>>>>>> e23287d1c9bdb87e36239a5417103dd81c6c9ee2
                                             <Link to={'/updatebicycle/'+ item.id}>
                                                 <button className="update-button">Update</button>
                                             </Link>

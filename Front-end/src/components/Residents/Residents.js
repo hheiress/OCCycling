@@ -6,7 +6,7 @@ import Search from "./Search";
 const AllRenters = props => {
   const [renters, setRenters] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3001/users")
+    fetch("http://localhost:3000/users")
       .then((res) => res.json())
       .then((data) => {
         console.log("First render");
@@ -62,7 +62,6 @@ const AllRenters = props => {
                     <td>{item.email}</td>
                     <td>{item.phone_number}</td>
                     <td>
-                      <button className="delete-button">Delete</button>
                       <Link to={'/updaterenter/' + item.id}>
                         <button className="update-button">Update</button>
                       </Link>
