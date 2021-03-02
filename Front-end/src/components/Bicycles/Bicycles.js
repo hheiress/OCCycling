@@ -6,7 +6,7 @@ import SearchBicycle from "./SearchBicycle";
 const AllBicycles = props => {
     const [bikes, setBikes] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:3001/bikes")
+        fetch("http://localhost:3000/bikes")
             .then((res) => res.json())
             .then((data) => {
                 console.log("First render");
