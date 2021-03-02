@@ -5,7 +5,7 @@ import SetTimer from "../SetTimer";
 const Rentings = props => {
     const [rentings, setRentings] = useState([]);
 useEffect(()=>{
-      fetch("http://localhost:3001/rentings")
+      fetch("http://localhost:3000/rentings")
       .then((res) => res.json())
       .then((data) => {
         console.log("First render");
