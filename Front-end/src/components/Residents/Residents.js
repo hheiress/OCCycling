@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import VolunteerPanel from '../VolunteerPanel';
 import { Link } from "react-router-dom";
 import Search from "./Search";
+import Footer from "../Footer";
 
 const AllRenters = props => {
   const [renters, setRenters] = useState([]);
@@ -72,9 +73,7 @@ const AllRenters = props => {
               </tbody>
             </table>
           </div>
-
-
-
+          <Footer />
         </div>
       </div>
     </>)

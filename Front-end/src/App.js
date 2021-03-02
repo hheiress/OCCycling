@@ -26,7 +26,7 @@ import CreateNewRenter from './components/Residents/CreateNewRenter';
 import Dashboard from './components/Dashboard'; /* Add 19/02 */
 import UpdateBicycle from './components/Bicycles/Update Bicycle';
 import UpdateRenter from './components/Residents/UpdateRenter';
-
+import Footer from './components/Footer';
 
 toast.configure()
 

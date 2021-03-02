@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import VolunteerPanel from '../VolunteerPanel';
-import { Link } from "react-router-dom";
-import Search from "../Residents/Search";
+import SetTimer from "../SetTimer";
 
 const Rentings = props => {
     const [rentings, setRentings] = useState([]);
@@ -14,6 +13,19 @@ useEffect(()=>{
       })
     }, []);
 
+    const rentingDate = rentings.map(
+      item => item.renting_date
+    )
+    const futureDate =rentings.map(
+      item => item.starting_time
+    )
+    const finalDate = rentingDate + futureDate;
+    console.log(finalDate)
+
+    Date.prototype.addHours = function(h) {
+      this.setTime = rentingDate + (h*60*60*1000);
+      return this;
+    }
     return (
         <>
          <VolunteerPanel />
@@ -42,7 +54,8 @@ useEffect(()=>{
                                     <td>{item.status}</td>
                                     <td>{item.renting_date}</td>
                                     <td>{item.station_name}</td>
-                                    <td>{item.starting_time}</td>
+                                    <td><SetTimer
+                                    finalDate={rentingDate.addHours(4)}/></td>
                                     <td>{item.conditions}</td>
                                     <td><button className="delete-button">Remove</button></td>
                                   </tr>
