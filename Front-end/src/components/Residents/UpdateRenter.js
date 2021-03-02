@@ -3,25 +3,11 @@ import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import VolunteerPanel from '../VolunteerPanel';
-// import Moment from 'react-moment';
-// import moment from 'moment-timezone';
 
 const formReducer = (state, event) => {
-    if (event.reset) {
-        return {
-            user_photo: '',
-            gender: '',
-            name: '',
-            last_name: '',
-            passport: '',
-            address: '',
-            date_birth: '',
-            nationality: '',
-            email: '',
-            phone_number: '',
-            status: '',
-        }
-    }
+
+    
+
     return {
         ...state,
         [event.name]: event.value
@@ -29,13 +15,28 @@ const formReducer = (state, event) => {
 }
 
 function UpdateRenter(props) {
-    const [dataForm, setDataForm] = useReducer(formReducer, {
-    });
+    console.log(props.match.params.id);
+    
     const [submitting, setSubmitting] = useState(false);
     const [selectedFile, setSelectedFile] = useState("");
     const [isFilePicked, setIsFilePicked] = useState(false);
     const [photoThumbnail, setPhotoThumbnail] = useState("Photo")
     const [user, setUser] = useState([]);
+
+    useEffect(() => {
+        fetch("http://localhost:3001/users")
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("First render");
+                console.log(data);
+                setUser(data.find(x => x.id == props.match.params.id));
+                console.log(user);
+                
+            })
+    }, []);
+
+    const [dataForm, setDataForm] = useReducer(formReducer, {
+    });
 
     const handleSubmit = event => {
 
@@ -49,11 +50,8 @@ function UpdateRenter(props) {
             "nationality": dataForm.nationality,
             "email": dataForm.email,
             "phone_number": dataForm.phone_number,
-            "status": "Active"
+            "status": "Active",
         }
-
-        const formData = new FormData();
-        formData.append('File', selectedFile);
 
         if (dataForm.phone_number > 2147483647) {
             alert("***Phone Number must have 9 digits***");
@@ -72,15 +70,9 @@ function UpdateRenter(props) {
                 },
                 body: JSON.stringify(object),
 
-            })
 
-                .then((response) => response.json())
-                .then((result) => {
-                    console.log('Success:', result);
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                })
+            })
+            console.log(object);
 
             //FETCH TO UPLOAD THE USER PHOTO 
 
@@ -100,25 +92,16 @@ function UpdateRenter(props) {
                     });*/
 
             setTimeout(() => {
+
                 alert("User Updated");
                 setSubmitting(false);
-                setDataForm({
-                    reset: true
-                });
+
 
             }, 3000);
         }
     }
 
-    useEffect(() => {
-        fetch("http://localhost:3001/users")
-            .then((res) => res.json())
-            .then((data) => {
-                console.log("First render");
-                setUser(data.find(x => x.id == props.match.params.id));
-                console.log(user)
-            })
-    }, []);
+ 
 
     const handleChange = event => {
         setDataForm({
@@ -186,7 +169,7 @@ function UpdateRenter(props) {
                                     name="name"
                                     autocomplete="off"
                                     onChange={handleChange}
-                                    value={dataForm.name}
+                                    value={dataForm.name || user.name}
                                     defaultValue={user.name}
                                     placeholder="Update Name"
                                     disabled={submitting}
@@ -288,7 +271,7 @@ function UpdateRenter(props) {
 
                         <div className="margin-form">
                             <Form.Control
-                            as="textarea"
+                                as="textarea"
                                 rows={1}
                                 type="email"
                                 name="email"
@@ -302,7 +285,7 @@ function UpdateRenter(props) {
 
                         <div className="margin-form">
                             <Form.Control className="number"
-                            as="textarea"
+                                as="textarea"
                                 rows={1}
                                 type="number"
                                 name="phone_number"
