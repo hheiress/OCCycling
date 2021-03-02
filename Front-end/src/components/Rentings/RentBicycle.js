@@ -105,7 +105,7 @@ function RentBicycle() {
 
         event.preventDefault();
         setSubmitting(true);
-        fetch("http://localhost:3001/rentings", {
+        fetch("http://localhost:3000/rentings", {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

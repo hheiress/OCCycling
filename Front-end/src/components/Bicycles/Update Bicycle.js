@@ -23,7 +23,7 @@ function UpdateBicycle(props) {
   const [bike, setBike] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/station")
+    fetch("http://localhost:3000/station")
       .then((res) => res.json())
       .then((data) => {
         console.log("First render");
@@ -32,7 +32,7 @@ function UpdateBicycle(props) {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:3001/bikes")
+    fetch("http://localhost:3000/bikes")
       .then((res) => res.json())
       .then((data) => {
         console.log("First render");
@@ -58,7 +58,7 @@ function UpdateBicycle(props) {
 
     event.preventDefault();
     setSubmitting(true);
-    fetch("http://localhost:3001/bikes", {
+    fetch("http://localhost:3000/bikes", {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
