@@ -12,9 +12,9 @@ class SetTimer extends Component{
  
      setCountdown(){
          const futureDate = moment(this.props.futureDate)
-         const today = moment();
- 
-         const clockDuration =duration(futureDate.diff(today));
+         const rentingDate = moment(this.props.rentingDate);
+
+         const clockDuration =duration(futureDate.diff(rentingDate));
          const hours=clockDuration.hours();
          const mins =clockDuration.minutes();
          const seconds =clockDuration.seconds();
