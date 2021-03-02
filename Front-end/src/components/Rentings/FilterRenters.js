@@ -6,7 +6,7 @@ const FilterRenters = props => {
     
     const [renters, setRenters] = useState([]);
       useEffect(()=>{
-        fetch("http://localhost:3001/users")
+        fetch("http://localhost:3000/users")
         .then((res) => res.json())
         .then((data) => {
           console.log("First render");

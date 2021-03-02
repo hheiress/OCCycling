@@ -52,7 +52,7 @@ function RentBicycle() {
 
      //get station 
     useEffect(() => {
-        fetch("http://localhost:3001/station")
+        fetch("http://localhost:3000/station")
           .then((res) => res.json())
           .then((data) => {
             console.log("First render for station");
