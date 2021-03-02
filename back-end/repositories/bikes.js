@@ -1,7 +1,7 @@
 const pool = require("../db.js");
 
 function find () {
-    return pool.query("SELECT b.id, b.model_name, r.status, b.entry_date, b.conditions FROM bikes b LEFT JOIN rentings r ON r.bike_id = b.id").then((results) => (results.rows))
+    return pool.query("SELECT b.id, b.model_name, b.entry_date, b.conditions, b.station FROM bikes b LEFT JOIN rentings r ON r.bike_id = b.id").then((results) => (results.rows))
 }
 
 function create(req, res) {

@@ -33,7 +33,7 @@ function AddNewBicycle() {
   const [photoThumbnail, setPhotoThumbnail] = useState ("Photo")
 
   useEffect(() => {
-    fetch("http://localhost:3001/station")
+    fetch("http://localhost:3000/station")
       .then((res) => res.json())
       .then((data) => {
         console.log("First render");
@@ -44,6 +44,7 @@ function AddNewBicycle() {
   const handleSubmit = event => {
     
     const today = new Date().toISOString().slice(0, 10)
+    console.log(today);
     
     const object = { 
      "model_name": dataForm.model_name,
@@ -57,7 +58,7 @@ function AddNewBicycle() {
     
     event.preventDefault();
     setSubmitting(true);
-    fetch("http://localhost:3001/bikes", {
+    fetch("http://localhost:3000/bikes", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -92,7 +93,7 @@ function AddNewBicycle() {
 
     setTimeout(() => {
       
-      alert(dataForm.station);
+      alert("New Bicycle Added!");
       setSubmitting(false);
       setDataForm({
         reset: true
@@ -100,7 +101,7 @@ function AddNewBicycle() {
       setPhotoThumbnail("Photo");
      
       
-    }, 3000);
+    }, 500);
   }
 
   const handleChange = event => {
