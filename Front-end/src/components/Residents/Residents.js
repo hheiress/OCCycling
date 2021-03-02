@@ -29,7 +29,7 @@ const AllRenters = props => {
         <div className="residents-wrapper">
           <h2 className="text-center">Residents</h2>
           <Link to={'/createnewrenter'}>
-            <button className="mt-5 btn btn-primary w-100" type="submit">Create New Renter</button>
+            <button className="mt-5 btn btn-primary create-resident-btn" type="submit">Create New Renter</button>
           </Link>
           <Search search={search} />
           <div className="table">
