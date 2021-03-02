@@ -22,7 +22,6 @@ const AllBicycles = props => {
         setBikes(filteredBicycles);
     };
 
-
     return (
         <>
             <VolunteerPanel />
@@ -57,6 +56,7 @@ const AllBicycles = props => {
                                         <td>{item.entry_date}</td>
                                         <td>{item.conditions}</td>
                                         <td>
+                                            <button className="delete-button">Delete</button>
                                             <Link to={'/updatebicycle/'+ item.id}>
                                                 <button className="update-button">Update</button>
                                             </Link>
