@@ -34,7 +34,7 @@ const rentingForm = (state, event) => {
         renting_date: '',
         station_id: '',
         starting_time: '',
-        condition_id: ''
+        conditions_id: ''
       }
       
     }
@@ -52,7 +52,7 @@ function RentBicycle() {
 
      //get station 
     useEffect(() => {
-        fetch("http://localhost:3001/station")
+        fetch("http://localhost:3000/station")
           .then((res) => res.json())
           .then((data) => {
             console.log("First render for station");
@@ -92,13 +92,13 @@ function RentBicycle() {
             // "model_name": dataForm.model_name,
             "bike_id": getBikeId[0].id,
             "user_id": dataRow.id,
-            "last_name":dataForm.last_name,
+            "last_name":dataForm.id,
             "status": 'Unavailable',
             "renting_date": today, 
             // "station_name": dataForm.station_name,
             "station_id": getStationId[0].id,
-            "starting_time": dataForm.starting_time ,
-            "conditions": getBikeId[0].id
+            "starting_time": dataForm.starting_time + ":00:00",
+            "conditions_id": getBikeId[0].id
            }
         console.log(dataForm.model_name);
         console.log(object);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import VolunteerPanel from '../VolunteerPanel';
+import DeleteBike from "./DeleteBike";
 import SearchBicycle from "./SearchBicycle";
 
 const AllBicycles = props => {
@@ -21,6 +22,8 @@ const AllBicycles = props => {
         );
         setBikes(filteredBicycles);
     };
+
+    
 
     return (
         <>
@@ -53,14 +56,14 @@ const AllBicycles = props => {
                                 {bikes.map((item, index) => (
                                     <tr key={index}>
                                         <td>{item.model_name}</td>
+
                                         <td>{item.entry_date}</td>
-                                        <td>{item.conditions}</td>
+                                      
                                         <td>
-                                            <button className="delete-button">Delete</button>
                                             <Link to={'/updatebicycle/'+ item.id}>
                                                 <button className="update-button">Update</button>
                                             </Link>
-                                            <button className="delete-button">Delete</button>
+                                            <DeleteBike params= {item.id}/>
                                         </td>
                                     </tr>
 

@@ -138,8 +138,10 @@ textarea {
 	  padding: 10px;
 	}
 .btn-primary{
-  border-radius: 23px;
-  margin: 0px;
+  border-radius: 23px ;
+  border:none;
+  margin:10px 10px 10px 0px;
+  background-color: #F7B500;
 }
 .search-fbox{
   margin:0;
@@ -266,6 +268,9 @@ input[type="password"] {
   
 }
 
+.create-resident-btn{
+  width:90%;
+}
 .rentings-wrapper {
   padding: 15px 55px 45px;
   margin: 0 auto;
