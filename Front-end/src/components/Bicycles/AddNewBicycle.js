@@ -44,6 +44,7 @@ function AddNewBicycle() {
   const handleSubmit = event => {
     
     const today = new Date().toISOString().slice(0, 10)
+    console.log(today);
     
     const object = { 
      "model_name": dataForm.model_name,
@@ -92,7 +93,7 @@ function AddNewBicycle() {
 
     setTimeout(() => {
       
-      alert(dataForm.station);
+      alert("New Bicycle Added!");
       setSubmitting(false);
       setDataForm({
         reset: true
@@ -100,7 +101,7 @@ function AddNewBicycle() {
       setPhotoThumbnail("Photo");
      
       
-    }, 3000);
+    }, 500);
   }
 
   const handleChange = event => {

@@ -38,5 +38,6 @@ ctrl.delete("/:id", function(req, res, next) {
             console.error(err.stack)
             next( new Error ("Internal server error"))
         })
-    })
+});
+
 module.exports = ctrl;
