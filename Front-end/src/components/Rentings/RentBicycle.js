@@ -64,7 +64,7 @@ function RentBicycle() {
 
     //get bikes with the status null
     useEffect(() => {
-        fetch("http://localhost:3001/bikes")
+        fetch("http://localhost:3000/bikes")
             .then((res) => res.json())
             .then((data) => {
                 console.log("Second render");
@@ -88,7 +88,7 @@ function RentBicycle() {
          const object = { 
           "bike_id": getBikeId[0].id,
           "user_id": users.id,
-          "last_name":users.id,
+          "last_name": users.id,
           "status": 'Unavailable',
           "renting_date": today,
           "station_id": getStationId[0].id,
@@ -100,7 +100,7 @@ function RentBicycle() {
 
       event.preventDefault();
       setSubmitting(true);
-      fetch("http://localhost:3001/rentings", {
+      fetch("http://localhost:3000/rentings", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

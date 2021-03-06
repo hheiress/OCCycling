@@ -11,14 +11,13 @@ class SetTimer extends Component{
      };
  
      setCountdown(){
-         const futureDate = moment(this.props.futureDate)
-         const rentingDate = moment(this.props.rentingDate);
-
-         const clockDuration =duration(futureDate.diff(rentingDate));
+         const now = moment(new Date());
+         const dueDate = moment(this.props.dueDate);
+        //(rentingDate()20:00+starting_time(04:00))-localTime()22:00- = diff 
+         const clockDuration =duration(now.diff(dueDate));
          const hours=clockDuration.hours();
          const mins =clockDuration.minutes();
          const seconds =clockDuration.seconds();
- 
          this.setState(
              [hours + ":" + mins + ":" + seconds]
          );
