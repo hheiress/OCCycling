@@ -3,21 +3,21 @@ const ctrl = require("express").Router();
 const validInfo = require("../middleware/validInfo");
 const authorization = require("../middleware/authorization");
 
-ctrl.post("/register", validInfo, function (req, res)  {
+ctrl.post("/register", validInfo, function (req, res, next)  {
     jwtAuthRepo
     .register(req, res)
     .catch((err) => {
         console.error(err.stack);
-        res.status(500).send("Internal Server Error") // add handler error
+        next( new Error ("Internal server error"))
     })
 })
 
-ctrl.post("/login", validInfo, function (req, res)  {
+ctrl.post("/login", validInfo, function (req, res, next)  {
     jwtAuthRepo
     .login(req, res)
     .catch((err) => {
         console.error(err.stack);
-        res.status(500).send("Internal Server Error") // add handler error
+        next( new Error ("Internal server error"))
     })
 })
 

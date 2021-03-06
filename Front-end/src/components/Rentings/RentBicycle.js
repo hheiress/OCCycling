@@ -120,10 +120,9 @@ function RentBicycle() {
         setDataForm({
           reset: true
         });
-
       }, 3000);
-
     }
+
      const handleChange = event => {
          setDataForm({
             name: event.target.name,

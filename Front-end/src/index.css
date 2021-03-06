@@ -111,6 +111,15 @@ code {
   
 }
 
+.form-forgot {
+  max-width: 330px;
+  padding: 40px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1);  
+  
+}
+
 .form-signin-heading, .checkbox {
 	  margin-bottom: 30px;
 } 
@@ -144,6 +153,11 @@ input[type="password"] {
 
 .login {
   background-color: #15D4BE;
+  padding:150px;
+}
+
+.forgot-password {
+  background-color: #0D4C51;
   padding:150px;
 }
 
