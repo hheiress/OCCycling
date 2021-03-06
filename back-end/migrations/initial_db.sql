@@ -31,9 +31,9 @@ CREATE TABLE rentings (
   user_id			INT REFERENCES users(id),
   last_name         INT REFERENCES users(id),
   status			TEXT NOT NULL,
-  renting_date		DATE NOT NULL,
+  renting_date		TIMESTAMP NOT NULL,
   station_id		INT REFERENCES station(id),
-  starting_time		TIME NOT NULL,
+  starting_time		INTERVAL NOT NULL,
   conditions_id		INT REFERENCES bikes(id)
  );
 

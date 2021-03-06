@@ -64,7 +64,7 @@ code {
   text-align: right;
   position: absolute;
   font-size: 16px;
-  background-color:#15D4BE ;
+  background-color:gray ;
   width:100%;
 
 }
@@ -92,7 +92,7 @@ code {
 }
 
 .btn-nav:active{
-  color:#F7B500;
+  color:#15D4BE;
 }
 
 .wrapper{	
@@ -132,7 +132,7 @@ textarea {
   border-radius: 23px ;
   border:none;
   margin:10px;
-  background-color: #F7B500;
+  background-color:#15D4BE;
 }
 .search-fbox{
   margin:0;
@@ -169,7 +169,7 @@ input[type="password"] {
 
 .searchTerm {
   width: 100%;
-  border: 3px solid #F7B500;
+  border: 3px solid #15D4BE;
   border-right: none;
   padding: 15px;
   height: 37px;
@@ -180,14 +180,14 @@ input[type="password"] {
 }
 
 .searchTerm:focus{
-  color: #F7B500;
+  color: #15D4BE;
 }
 
 .searchButton {
   width: 40px;
   height: 36px;
-  border: 1px solid #F7B500;
-  background: #F7B500;
+  border: 1px solid #15D4BE;
+  background: #15D4BE;
   text-align: center;
   color: #fff;
   border-radius:15px;
@@ -210,7 +210,7 @@ input[type="password"] {
 
 .update-button{
   background-color:white;
-  border:2px solid #F7B500;
+  border:2px solid #15D4BE;
   color:#15D4BE ;
   border-radius:23px;
   outline:none;
@@ -219,11 +219,10 @@ input[type="password"] {
 
 .delete-button{
   background-color:white;
-  border:2px solid #F7B500;
+  border:2px solid #15D4BE;
   color:#D53E3E ;
   border-radius:23px;
   outline:none;
-  border-color:#F7B500;
 }
 
 .login-input {
@@ -272,7 +271,7 @@ input[type="password"] {
 
 .form-control{
   border-radius:23px;
-  border-color: #F7B500;
+  border-color: #15D4BE;
 }
 
 table {
@@ -307,7 +306,7 @@ th {
 .select{
   width:100%;
   border-radius: 23px;
-  border-color: #F7B500;
+  border-color: #15D4BE;
   padding:10px;
   outline:none;
 }
@@ -353,7 +352,7 @@ th {
   height: 125px;
   width: 125px;
   border-radius: 50%;
-  border: 1.25px solid #F7B500;
+  border: 1.25px solid #15D4BE;
   background-color: white;
   outline:none;
   
@@ -387,14 +386,14 @@ th {
 }
 
 .submit-button {
-  border: 1.25px solid #F7B500;
-  background-color: #F7B500;
+  border: 1.25px solid #15D4BE;
+  background-color: #15D4BE;
   
 
 }
 .submit-button:hover {
-  border: 1.25px solid #F7B500;
-  background-color: #F7B500;
+  border: 1.25px solid #15D4BE;
+  background-color: #15D4BE;
 
 }
 
@@ -435,7 +434,7 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 .footercontainer{
-  background-color:#15D4BE ;
+  background-color:gray ;
 }
 .footer-name{
   padding:20px;
@@ -448,17 +447,17 @@ textarea {
 
 .update-button{
   background-color:white;
-  border:2px solid #F7B500;
+  border:2px solid #15D4BE;
   color:#0D4C51 ;
   border-radius:23px;
   outline:none;
-  border-color:#F7B500;
+  border-color:#15D4BE;
 }
 .delete-button{
   background-color:white;
-  border:2px solid #F7B500;
+  border:2px solid #15D4BE;
   color:#D53E3E ;
   border-radius:23px;
   outline:none;
-  border-color:#F7B500;
+  border-color:#15D4BE;
 }

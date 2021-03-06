@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import VolunteerPanel from '../VolunteerPanel';
 import SetTimer from "../SetTimer";
+import moment from "moment";
 
 const Rentings = props => {
     const [rentings, setRentings] = useState([]);
@@ -13,19 +14,28 @@ useEffect(()=>{
       })
     }, []);
 
-    const rentingDate = rentings.map(
-      item => item.renting_date
-    )
-    const futureDate =rentings.map(
-      item => item.starting_time
-    )
-    const finalDate = rentingDate + futureDate;
-    console.log(finalDate)
+    function magic(item){
 
-    Date.prototype.addHours = function(h) {
-      this.setTime = rentingDate + (h*60*60*1000);
-      return this;
+     let rentingDuration = moment.duration (item.starting_time);
+     const rentingDate = moment(item.renting_date);
+     console.log(rentingDuration)
+     console.log(rentingDate)
+     console.log(item)
+     const resultOfDuration = rentingDate.add(rentingDuration)
+     return resultOfDuration;
     }
+
+
+    function magicTwo(item){
+      let renting_date = item.renting_date;
+      
+      return renting_date
+    }
+
+    // Date.prototype.addHours = function(h) {
+    //   this.setTime = rentingDate + (h*60*60*1000);
+    //   return this;
+    // }
     return (
         <>
          <VolunteerPanel />
@@ -55,9 +65,10 @@ useEffect(()=>{
                                     <td>{item.renting_date}</td>
                                     <td>{item.station_name}</td>
                                     <td><SetTimer
-                                    finalDate={rentingDate.addHours(4)}/></td>
+                                    dueDate={magic(item)}
+                                    /></td>
                                     <td>{item.conditions}</td>
-                                    <td><button className="delete-button">Remove</button></td>
+                                    <td><button className="delete-button">Received</button></td>
                                   </tr>
                                 ))} 
           </tbody>
