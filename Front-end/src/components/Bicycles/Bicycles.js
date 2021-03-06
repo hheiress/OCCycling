@@ -58,7 +58,7 @@ const AllBicycles = props => {
                                         <td>{item.model_name}</td>
 
                                         <td>{item.entry_date}</td>
-                                        <td>{item.conditions}</td>
+                                      
                                         <td>
                                             <Link to={'/updatebicycle/'+ item.id}>
                                                 <button className="update-button">Update</button>
