@@ -3,59 +3,46 @@ import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import VolunteerPanel from '../VolunteerPanel';
-// import Moment from 'react-moment';
-// import moment from 'moment-timezone';
 
-const formReducer = (state, event) => {
-    if (event.reset) {
-        return {
-            user_photo: '',
-            gender: '',
-            name: '',
-            last_name: '',
-            passport: '',
-            address: '',
-            date_birth: '',
-            nationality: '',
-            email: '',
-            phone_number: '',
-            status: '',
-        }
+const userFormReducer = (state, event) => {
+    if (event.type === 'fetch') {
+      return event.user;
     }
+    console.log(state, event);
     return {
-        ...state,
-        [event.name]: event.value
+      ...state,
+      [event.name]: event.value,
     }
-}
+  }
 
 function UpdateRenter(props) {
-    const [dataForm, setDataForm] = useReducer(formReducer, {
-    });
+    console.log(props.match.params.id);
+    
     const [submitting, setSubmitting] = useState(false);
     const [selectedFile, setSelectedFile] = useState("");
     const [isFilePicked, setIsFilePicked] = useState(false);
     const [photoThumbnail, setPhotoThumbnail] = useState("Photo")
-    const [user, setUser] = useState([]);
+    
+    const [user, setUser] = useReducer(userFormReducer, {
+    });
+    useEffect(() => {
+        fetch("http://localhost:3000/users")
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("First render");
+                console.log(data);
+                const user = (data.find(x => x.id == props.match.params.id));
+                setUser({
+                    type: 'fetch',
+                    user: user,
+                  })
+                  console.log(user); 
+            })
+    }, [setUser, props.match.params.id]);
 
     const handleSubmit = event => {
 
-        const object = {
-            "name": dataForm.name,
-            "last_name": dataForm.last_name,
-            "passport": dataForm.passport,
-            "address": dataForm.address,
-            "gender": dataForm.gender,
-            "date_birth": dataForm.date_birth,
-            "nationality": dataForm.nationality,
-            "email": dataForm.email,
-            "phone_number": dataForm.phone_number,
-            "status": "Active"
-        }
-
-        const formData = new FormData();
-        formData.append('File', selectedFile);
-
-        if (dataForm.phone_number > 2147483647) {
+        if (user.phone_number > 2147483647) {
             alert("***Phone Number must have 9 digits***");
             event.preventDefault();
 
@@ -65,22 +52,16 @@ function UpdateRenter(props) {
 
             setSubmitting(true);
 
-            fetch("http://localhost:3002/users", {
+            fetch("http://localhost:3000/users", {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(object),
+                body: JSON.stringify(user),
+
 
             })
-
-                .then((response) => response.json())
-                .then((result) => {
-                    console.log('Success:', result);
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                })
+            
 
             //FETCH TO UPLOAD THE USER PHOTO 
 
@@ -100,28 +81,19 @@ function UpdateRenter(props) {
                     });*/
 
             setTimeout(() => {
-                alert("User Updated");
-                setSubmitting(false);
-                setDataForm({
-                    reset: true
-                });
 
-            }, 3000);
+                alert("User Updated!");
+                setSubmitting(false);
+
+
+            }, 500);
         }
     }
 
-    useEffect(() => {
-        fetch("http://localhost:3001/users")
-            .then((res) => res.json())
-            .then((data) => {
-                console.log("First render");
-                setUser(data.find(x => x.id == props.match.params.id));
-                console.log(user)
-            })
-    }, []);
+ 
 
     const handleChange = event => {
-        setDataForm({
+        setUser({
             name: event.target.name,
             value: event.target.value,
         });
@@ -170,7 +142,7 @@ function UpdateRenter(props) {
                                 id="userphoto"
                                 name="user_photo"
                                 onChange={changeHandler}
-                                value={dataForm.user_photo || ''}
+                                value={user.user_photo || ''}
                                 ref={hiddenFileInput}
                                 style={{ display: 'none' }}
                             />
@@ -181,13 +153,10 @@ function UpdateRenter(props) {
                             <div className="margin-form-name">
 
                                 <Form.Control
-                                    as="textarea"
-                                    rows={1}
                                     name="name"
                                     autocomplete="off"
                                     onChange={handleChange}
-                                    value={dataForm.name}
-                                    defaultValue={user.name}
+                                    value={user.name}
                                     placeholder="Update Name"
                                     disabled={submitting}
                                     required
@@ -197,13 +166,10 @@ function UpdateRenter(props) {
 
                             <div className="margin-form-name">
                                 <Form.Control
-                                    as="textarea"
-                                    rows={1}
                                     name="last_name"
                                     autocomplete="off"
                                     onChange={handleChange}
-                                    value={dataForm.last_name}
-                                    defaultValue={user.last_name}
+                                    value={user.last_name}
                                     placeholder="Update Last Name"
                                     disabled={submitting}
                                     required
@@ -215,28 +181,26 @@ function UpdateRenter(props) {
 
                         <div className="margin-form">
                             <Form.Control
-                                as="textarea"
-                                rows={1}
+                                
                                 name="passport"
                                 autocomplete="off"
                                 onChange={handleChange}
-                                value={dataForm.passport}
-                                defaultValue={user.passport}
+                                value={user.passport}
                                 placeholder="Passport"
+                                disabled={submitting}
                                 required
                             />
                         </div>
 
                         <div className="margin-form">
                             <Form.Control
-                                as="textarea"
-                                rows={1}
+                                
                                 name="address"
                                 autocomplete="off"
                                 onChange={handleChange}
-                                value={dataForm.address}
-                                defaultValue={user.address}
+                                value={user.address}
                                 placeholder="Address"
+                                disabled={submitting}
                                 required
                             />
                         </div>
@@ -248,10 +212,11 @@ function UpdateRenter(props) {
                                 className="select"
                                 name="gender"
                                 onChange={handleChange}
-                                value={dataForm.gender}
+                                value={user.gender}
+                                disabled={submitting}
                                 required >
 
-                                <option value="" selected hidden>{user.gender}</option>
+                                <option value={user.gender} selected hidden>{user.gender}</option>
 
                                 <option value="female">Female</option>
                                 <option value="male">Male</option>
@@ -267,55 +232,48 @@ function UpdateRenter(props) {
                                 name="date_birth"
                                 autocomplete="off"
                                 onChange={handleChange}
-                                value={dataForm.date_birth}
-                                defaultValue={""}
+                                value={user.date_birth}
+                                disabled={submitting}
                                 required
                             />
                         </div>
 
                         <div className="margin-form condition">
                             <Form.Control
-                                as="textarea"
-                                rows={1}
                                 name="nationality"
                                 autocomplete="off"
                                 onChange={handleChange}
-                                value={dataForm.nationality}
-                                defaultValue={user.nationality}
+                                value={user.nationality}
                                 placeholder="Nationality"
+                                disabled={submitting}
                                 required />
                         </div>
 
                         <div className="margin-form">
                             <Form.Control
-                            as="textarea"
-                                rows={1}
                                 type="email"
                                 name="email"
                                 autocomplete="off"
                                 onChange={handleChange}
-                                value={dataForm.email}
-                                defaultValue={user.email}
+                                value={user.email}
                                 placeholder="Email"
+                                disabled={submitting}
                                 required />
                         </div>
 
                         <div className="margin-form">
                             <Form.Control className="number"
-                            as="textarea"
-                                rows={1}
                                 type="number"
                                 name="phone_number"
-
                                 onChange={handleChange}
-                                value={dataForm.phone_number}
-                                defaultValue={user.phone_number}
+                                value={user.phone_number}
                                 placeholder="Phone Number"
+                                disabled={submitting}
                                 required />
                         </div>
 
                         <div className="margin-form-button">
-                            <Button className="submit-button" type="submit">Register</Button>
+                            <Button className="submit-button" type="submit">Update User</Button>
                         </div>
 
                     </Form>

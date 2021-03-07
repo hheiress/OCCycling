@@ -6,7 +6,7 @@ const FilterRenters = props => {
     
     const [renters, setRenters] = useState([]);
       useEffect(()=>{
-        fetch("http://localhost:3002/users")
+        fetch("http://localhost:3000/users")
         .then((res) => res.json())
         .then((data) => {
           console.log("First render");
@@ -30,7 +30,7 @@ const FilterRenters = props => {
           <>
               <div className="search-box">
                       <Search search={search} />
-                      <div className="table">
+                      <div className="table scrollingTable">
                           <table className="table user-renting">
                               <thead>
                                   <tr>

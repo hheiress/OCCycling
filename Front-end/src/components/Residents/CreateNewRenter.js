@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import VolunteerPanel from '../VolunteerPanel';
+import Footer from "../Footer";
 
 const formReducer = (state, event) => {
   if (event.reset) {
@@ -62,7 +63,7 @@ function CreateNewRenter() {
 
       setSubmitting(true);
 
-      fetch("http://localhost:3002/users", {
+      fetch("http://localhost:3000/users", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -282,8 +283,9 @@ function CreateNewRenter() {
           </Form>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
 
-export default CreateNewRenter
+export default CreateNewRenter;

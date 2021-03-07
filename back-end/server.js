@@ -4,7 +4,7 @@ const cors = require("cors");
 const routes = require("./routes.js");
 
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3000;
 
 
 const app = express();
@@ -27,7 +27,7 @@ app.use((err, req, res, next) => {
     res.send({
         error:{
             status: err.status || 500,
-            message: "Internal server error"//err.message
+            message: err.message
         }
     });
 });

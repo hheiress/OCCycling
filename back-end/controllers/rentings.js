@@ -8,7 +8,7 @@ ctrl.get ("/", function (req, res, next) {
         .then((results) => res.json(results))
         .catch((err) => {
             console.error(err.stack)
-            next(Error)
+            next( new Error ("Internal server error"))
         });
 });
 
@@ -18,7 +18,7 @@ ctrl.post("/", function (req, res, next) {
     .create(req, res)
     .catch((err) => {
         console.error(err.stack)
-        next(Error)
+        next( new Error ("Internal server error"))
     });
 });
 
@@ -27,7 +27,7 @@ ctrl.put("/:id", function(req, res, next) {
         .update(req, res)
         .catch((err) => {
             console.error(err.stack)
-            next(Error) 
+            next( new Error ("Internal server error")) 
         })
 });
 
@@ -36,9 +36,8 @@ ctrl.delete("/:id", function(req, res, next) {
         .remove(req, res)
         .catch((err) => {
             console.error(err.stack)
-            next(Error) 
+            next( new Error ("Internal server error"))
         })
-
-}); 
+});
 
 module.exports = ctrl;

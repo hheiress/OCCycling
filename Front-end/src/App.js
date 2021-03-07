@@ -23,9 +23,12 @@ import AddTime from './components/Rentings/AddTime';
 import AllBicycles from './components/Bicycles/Bicycles';
 import AddNewBicycle from './components/Bicycles/AddNewBicycle';
 import CreateNewRenter from './components/Residents/CreateNewRenter';
-import Dashboard from './components/Dashboard'; /* Add 19/02 */
-import UpdateBicycle from './components/Bicycles/Update Bicycle';
+import Dashboard from './components/Dashboard';
 import UpdateRenter from './components/Residents/UpdateRenter';
+import Footer from './components/Footer';
+import UpdateBicycle from './components/Bicycles/Update Bicycle';
+import ForgotPassword from './components/ForgotPassword';
+import DeleteBicycle from './components/Bicycles/DeleteBicycles';
 
 
 toast.configure()
@@ -81,10 +84,11 @@ function App() {
           isAuthenticated ? ( <Dashboard {...props} setAuth = {setAuth} /> ) :
            ( <Redirect to = "/login" /> )
        }
-      />  {/* Add 19/02 */}
+      />
 
         {/* Volunteers */}
         {/* Volunteers */}
+        <Route exact path = "/forgot-password" render={props => <ForgotPassword {...props} setAuth = {setAuth}/> } />
         <Route exact path="/rentbicycle" component={RentBicycle} />
         <Route exact path="/findbike" component={FindBike} />
         <Route exact path="/addtime" component={AddTime} />
@@ -93,6 +97,7 @@ function App() {
         <Route exact path="/bicycles" component={AllBicycles} />
         <Route exact path="/addnewbicycle" component={AddNewBicycle} />
         <Route path="/updatebicycle/:id" component={UpdateBicycle} />
+        <Route path="/deletebicycle/:id" component={DeleteBicycle} />
         <Route path="/updaterenter/:id" component={UpdateRenter} />
         <Route exact path= "/createnewrenter" component={CreateNewRenter} />
         <Route exact path="/volunteerpanel" component={VolunteerPanel} />

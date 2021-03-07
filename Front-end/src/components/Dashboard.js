@@ -9,7 +9,7 @@ function Dashboard ( {setAuth} )  {
 
     async function getName () {
         try {
-            const response = await fetch("http://localhost:3002/dashboard/", {
+            const response = await fetch("http://localhost:3000/dashboard/", {
                 method: "GET",
                 headers: {token: localStorage.token}
             });
@@ -36,9 +36,9 @@ function Dashboard ( {setAuth} )  {
     return (
     <Fragment>
         <div className="dashboard">
-    <h1 className="text-center dashboard">Welcome! {name}</h1>
+            <h1 className="text-center dashboard">Welcome! {name}</h1>
             <button  className="btn btn-lg btn-primary 
-        submit-button btn-block mb-3" type="submit" onClick = {e => logout(e)} > Logout </button> <br />
+             submit-button btn-block mb-3" type="submit" onClick = {e => logout(e)} > Logout </button> <br />
          <Link to={'/volunteerpanel'}> 
             <button className="btn btn-lg btn-primary submit-button btn-block  mb-5" type="submit">Panel</button>
         </Link>
