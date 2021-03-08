@@ -111,13 +111,21 @@ code {
   
 }
 
-.form-forgot {
+.form-forgot  {
   max-width: 330px;
   padding: 40px;
   margin: 0 auto;
   background-color: #fff;
   border: 1px solid rgba(0,0,0,0.1);  
   
+}
+
+.form-reset {
+  max-width: 330px;
+  padding: 40px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1); 
 }
 
 .form-signin-heading, .checkbox {
@@ -140,7 +148,7 @@ textarea {
 .btn-primary{
   border-radius: 23px ;
   border:none;
-  margin:10px;
+  margin:10px 0px 10px 0px;
   background-color:#15D4BE;
 }
 .search-fbox{
@@ -157,10 +165,14 @@ input[type="password"] {
 }
 
 .forgot-password {
-  background-color: #0D4C51;
+  background-color: #15D4BE;
   padding:150px;
 }
 
+.reset-password {
+  background-color: #15D4BE;
+  padding:150px;
+}
 .dashboard {
   background-color: #15D4BE;
   padding:150px;

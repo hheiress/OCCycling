@@ -28,6 +28,7 @@ import UpdateRenter from './components/Residents/UpdateRenter';
 import Footer from './components/Footer';
 import UpdateBicycle from './components/Bicycles/Update Bicycle';
 import ForgotPassword from './components/ForgotPassword';
+import ResetPassword from './components/ResetPassword';
 //import DeleteBicycle from './components/Bicycles/DeleteBicycles';
 
 
@@ -89,7 +90,8 @@ function App() {
 
         {/* Volunteers */}
         {/* Volunteers */}
-        <Route exact path = "/forgot-password" render={props => <ForgotPassword {...props} setAuth = {setAuth}/> } />
+        <Route exact path = "/forgot-password" render={props => <ForgotPassword {...props} setAuth = {setAuth}/> } /> {/* investigar sobre setAuth, borrar?*/}
+        <Route exact path ="/reset-password" component={ResetPassword}/>
         <Route exact path="/rentbicycle" component={RentBicycle} />
         <Route exact path="/findbike" component={FindBike} />
         <Route exact path="/addtime" component={AddTime} />
