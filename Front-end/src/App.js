@@ -28,7 +28,7 @@ import UpdateRenter from './components/Residents/UpdateRenter';
 import Footer from './components/Footer';
 import UpdateBicycle from './components/Bicycles/Update Bicycle';
 import ForgotPassword from './components/ForgotPassword';
-import DeleteBicycle from './components/Bicycles/DeleteBicycles';
+//import DeleteBicycle from './components/Bicycles/DeleteBicycles';
 
 
 
