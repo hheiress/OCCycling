@@ -1,15 +1,15 @@
 import React from "react";
 
-function DeleteBike(props) {
+function DeleteRenter(props) {
 
     const handleChange = event => {
         event.preventDefault();
         console.log(props.params);
 
         setTimeout(() => {
-            if (window.confirm(`Do you want to deleted ${props.name}?`)) {
+            if (window.confirm(`Do you want to delete user ${props.name}?`)) {
 
-                fetch(`http://localhost:3000/bikes/${props.params}`, {
+                fetch(`http://localhost:3000/users/${props.params}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
@@ -30,4 +30,4 @@ function DeleteBike(props) {
 }
 
 
-export default DeleteBike;
+export default DeleteRenter;
