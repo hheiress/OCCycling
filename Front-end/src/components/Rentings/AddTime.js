@@ -69,9 +69,9 @@ function AddTime() {
                         ))}
               </Form.Control> 
               <div> 
-            <SetTimer futureDate={new Date().addHours(4)}/>
+           
         </div>
-                {/* <button className="mt-5 btn btn-primary w-100" type="submit" onClick={handleSubmit}>Submit</button> */}
+                {/* <button className="mt-5 btn btn-primary w-100" type="submit" onClick={handleSubmit}>Submit</button>  <SetTimer futureDate={new Date().addHours(4)}/>*/}
             </div>
      
     )

@@ -7,6 +7,7 @@ const {
     stationCtrl,
     jwtAuthCtrl,
     dashboardCtrl,
+    resetLinkCtrl,
 } = require("./controllers");
 
 
@@ -19,6 +20,7 @@ router
     .use("/rentings", rentingCtrl)
     .use("/station", stationCtrl)
     .use("/auth", jwtAuthCtrl)
-    .use("/dashboard", dashboardCtrl),
+    .use("/dashboard", dashboardCtrl)
+    .use("/resetlink", resetLinkCtrl),
 
 module.exports = router;

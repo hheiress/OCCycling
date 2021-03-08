@@ -30,7 +30,7 @@ const FilterRenters = props => {
           <>
               <div className="search-box">
                       <Search search={search} />
-                      <div className="table">
+                      <div className="table scrollingTable">
                           <table className="table user-renting">
                               <thead>
                                   <tr>
