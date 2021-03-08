@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import VolunteerPanel from '../VolunteerPanel';
 import { Link } from "react-router-dom";
 import Search from "./Search";
+import DeleteRenter from "./DeleteRenter";
 import Footer from "../Footer";
+
 
 const AllRenters = props => {
   const [renters, setRenters] = useState([]);
@@ -13,7 +15,7 @@ const AllRenters = props => {
         console.log("First render");
         setRenters(data);
       })
-  }, []);
+  }, [renters]);
 
   const search = searchVal => {
     console.info("TO DO!", searchVal);
@@ -66,7 +68,7 @@ const AllRenters = props => {
                       <Link to={'/updaterenter/' + item.id}>
                         <button className="update-button">Update</button>
                       </Link>
-                      <button className="delete-button">Delete</button>
+                      <DeleteRenter name={item.name} params= {item.id}/>
                     </td>
                   </tr>
                 ))}
