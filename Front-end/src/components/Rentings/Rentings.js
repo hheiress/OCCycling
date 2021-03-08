@@ -53,7 +53,7 @@ useEffect(()=>{
                                     <th>Station</th>
                                     <th>Time left</th>
                                     <th>Condition</th>
-                                    <th></th>
+                                    <th>Finished date</th>
                                     </tr>
                                 </thead>
                             <tbody>
@@ -68,6 +68,7 @@ useEffect(()=>{
                                     dueDate={magic(item)}
                                     /></td>
                                     <td>{item.conditions}</td>
+                                    <td>{item.finished_date}</td>
                                     <td><button className="delete-button">Received</button></td>
                                   </tr>
                                 ))} 

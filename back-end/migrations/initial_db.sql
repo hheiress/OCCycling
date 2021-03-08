@@ -34,7 +34,8 @@ CREATE TABLE rentings (
   renting_date		TIMESTAMP NOT NULL,
   station_id		INT REFERENCES station(id),
   starting_time		INTERVAL NOT NULL,
-  conditions_id		INT REFERENCES bikes(id)
+  conditions_id		INT REFERENCES bikes(id),
+  finished_date		TIMESTAMP 
  );
 
  CREATE TABLE ngo_users (
@@ -63,9 +64,9 @@ INSERT INTO station (station_name) VALUES ('Camp');
 INSERT INTO station (station_name) VALUES ('Polikastro');
 
 
-INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id) VALUES (2, 3, 3, 'Unavailable', '2021-01-18', 1, '04:00:00', 2);
-INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id) VALUES (1, 2, 2, 'Unavailable', '2021-01-18', 1, '04:00:00', 1);
-INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id) VALUES (3, 1, 2, 'Unavailable', '2021-01-18', 2, '04:00:00', 3);
+INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id, finished_date) VALUES (2, 3, 3, 'Unavailable', '2017-08-19 14:22:11', 1, '04:00:00', 2, '2017-08-19 14:22:11');
+INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id, finished_date) VALUES (1, 2, 2, 'Unavailable', '2017-08-19 14:22:11', 1, '04:00:00', 1, '2017-08-19 14:22:11');
+INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id, finished_date) VALUES (3, 1, 2, 'Unavailable', '2017-08-19 14:22:11', 2, '04:00:00', 3, '2017-08-19 14:22:11');
 
 INSERT INTO ngo_users (user_name, user_email, user_password) VALUES ('Irene', 'ireneocc@gmail.com', 'igrece4381');
 
