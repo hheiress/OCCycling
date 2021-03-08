@@ -13,7 +13,7 @@ const AllBicycles = props => {
                 console.log("First render");
                 setBikes(data);
             })
-    }, []);
+    }, [bikes]);
 
     const search = searchVal => {
         console.info("TO DO!", searchVal);
@@ -63,7 +63,7 @@ const AllBicycles = props => {
                                             <Link to={'/updatebicycle/'+ item.id}>
                                                 <button className="update-button">Update</button>
                                             </Link>
-                                            <DeleteBike params= {item.id}/>
+                                            <DeleteBike name={item.model_name} params= {item.id}/>
                                         </td>
                                     </tr>
 
