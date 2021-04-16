@@ -3,7 +3,7 @@ import VolunteerPanel from '../VolunteerPanel';
 import Footer from '../Footer'
 import SetTimer from "../SetTimer";
 import moment from "moment";
-import StopRenting from "./StopRenting";
+import UpdateRenting from "./UpdateRenting";
 
 const rentingForm = (state, event) => {
   if (event.reset) {
@@ -22,12 +22,13 @@ const rentingForm = (state, event) => {
 const Rentings = props => {
     const [submitting, setSubmitting] = useState(false);
     const [rentings, setRentings] = useState([]);
-useEffect(()=>{
+    useEffect(()=>{
       fetch("http://localhost:3000/rentings",{
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-        },})
+        }
+      })
       .then((res) => res.json())
       .then((data) => {
         console.log("First render");
@@ -35,25 +36,14 @@ useEffect(()=>{
       })
     }, []);
 
-    const [renting, updateRenting] = useReducer(rentingForm, {});
-
-    const handleSubmit = event => {
-      const today =  new Date().toString().slice(4, 25);
-      console.log(today)
-       const renting = { 
-        "starting_time": null,
-        "finished_date": today
-       }
-    console.log(renting) 
-    event.preventDefault();
-    setSubmitting(true);
-    fetch("http://localhost:3000/rentings/rentings.id}", {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(renting), 
-    })
+    // const handleSubmit = event => {
+    // fetch("http://localhost:3000/rentings/rentings.id}", {
+    //   method: 'PUT',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(renting), 
+    // })
     // .then((response) => response.json())
     // .then((result) => {
     //   console.log('Success:', result);
@@ -61,14 +51,18 @@ useEffect(()=>{
     // .catch((error) => {
     //   console.error('Error:', error);
     // })  
-    setTimeout(() => {
-      alert("Bike Received");
-      setSubmitting(false);
-    }, 500);
-  }
-
+  //   setTimeout(() => {
+  //     alert("Bike Received");
+  //     setSubmitting(false);
+  //   }, 500);
+  // }
+  
+   const sortedRentings = rentings.sort(
+     (a,b)=>{
+       return new Date(b.renting_date) - new Date(a.renting_date);}
+   )
     function magic(item){
-
+      if(item.finished_date===null){
      let rentingDuration = moment.duration (item.starting_time);
      const rentingDate = moment(item.renting_date);
      console.log(rentingDuration)
@@ -77,8 +71,8 @@ useEffect(()=>{
      const resultOfDuration = rentingDate.add(rentingDuration)
      return resultOfDuration;
     }
-
-   
+  }
+    
 
     return (
         <>
@@ -92,7 +86,6 @@ useEffect(()=>{
                                 <tr>
                                     <th>Bicycle ID</th>
                                     <th>User name</th>
-                                    <th>Status</th>
                                     <th>Renting date</th>
                                     <th>Station</th>
                                     <th>Time left</th>
@@ -102,19 +95,22 @@ useEffect(()=>{
                                     </tr>
                                 </thead>
                             <tbody>
-                                {rentings.map((item, index) => (
+                                {sortedRentings.map((item, index) => (
                                     <tr key={index}>
                                     <td>{item.model_name}</td>
-                                    <td>{item.name}</td>
-                                    <td>{item.status}</td>
+                                    <td>{item.name} {item.last_name}</td>
                                     <td>{item.renting_date}</td>
                                     <td>{item.station_name}</td>
                                     <td><SetTimer
                                     dueDate={magic(item)}
                                     /></td>
                                     <td>{item.conditions}</td>
-                                    <td><StopRenting onClick={handleSubmit}/></td>
-                                    <td >{item.finished_date}</td>
+                                    <td><UpdateRenting 
+                                    params={item.id}
+                                    name={item.name}
+                                    last_name={item.last_name}
+                                    /></td>
+                                    <td>{item.finished_date}</td>
                                   </tr>
                                 ))} 
           </tbody>

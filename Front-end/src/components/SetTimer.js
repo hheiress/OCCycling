@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import moment, {duration} from "moment";
-import StopRenting from './Rentings/StopRenting';
+import UpdateRenting from './Rentings/UpdateRenting';
 
 class SetTimer extends Component{
     state = {
@@ -8,7 +8,8 @@ class SetTimer extends Component{
         timerStopped: true,
         hours:0,
         mins:0,
-        seconds:0
+        seconds:0,
+        color: ""
      };
  
      setCountdown(){
@@ -22,6 +23,11 @@ class SetTimer extends Component{
          this.setState(
              [hours + ":" + mins + ":" + seconds]
          );
+         console.log(this.state[0]) 
+         if(this.state[0] > 0){
+          this.setState[0]({ color: "red" });
+        // clockDuration.style.color ="violet"
+         }
      }
      componentDidMount (){
          if(this.state.timerStopped){
@@ -29,6 +35,7 @@ class SetTimer extends Component{
          this.interval= setInterval(()=>{
              this.setCountdown({timerStarted:true, timerStopped:false});
      }, 1000);
+    
  }
 }
  
@@ -44,10 +51,10 @@ class SetTimer extends Component{
             {/* <h1>Time left: {count}, {newTime}  </h1> */}
             {Object.keys(this.state).map((key, i) => (
                 <div className= "countdown-segment">
-                    <p> {this.state[i]}</p>
+                    <p> {this.state[i]} </p>
                 </div>    
             ))}
-            {/* <StopRenting componentWillUnmount={this.componentWillUnmount()}/> */}
+            {/* <UpdateRenting componentWillUnmount={this.componentWillUnmount()}/> */}
         </div>
     )
    }

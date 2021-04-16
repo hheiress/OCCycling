@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useReducer } from "react";
-import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import FilterRenters from "./FilterRenters"
 import VolunteerPanel from '../VolunteerPanel';
-import AddTime from "./StopRenting";
 import Footer from "../Footer";
 
 const options = [
@@ -73,7 +71,7 @@ function RentBicycle() {
     }, []);
 
     const filteredBicycles = bikes.filter(
-        item => item.status === null
+        item => item.status === null ||  item.status === "Available"
       );
     
     const getBikeId = filteredBicycles.filter(
@@ -97,7 +95,7 @@ function RentBicycle() {
           "conditions_id": getBikeId[0].id,
       }
       console.log(dataForm.model_name);
-      console.log(object);
+      console.log(object.conditions_id);
 
       event.preventDefault();
       setSubmitting(true);

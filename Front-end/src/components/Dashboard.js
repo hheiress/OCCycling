@@ -39,7 +39,7 @@ function Dashboard ( {setAuth} )  {
             <h1 className="text-center dashboard">Welcome! {name}</h1>
             <button  className="btn btn-lg btn-primary 
              submit-button btn-block mb-3" type="submit" onClick = {e => logout(e)} > Logout </button> <br />
-         <Link to={'/volunteerpanel'}> 
+         <Link to={'/rentbicycle'}> 
             <button className="btn btn-lg btn-primary submit-button btn-block  mb-5" type="submit">Panel</button>
         </Link>
         </div>

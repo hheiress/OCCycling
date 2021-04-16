@@ -11,6 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* Homepage */
 .homepage-block{
   display: block;
 
@@ -36,7 +37,7 @@ code {
   color:#15D4BE;
   margin:10px
 }
-
+/*Dashboard*/
 .dashboard{
   color:#d3eef0;
   margin:10px
@@ -64,7 +65,7 @@ code {
   text-align: right;
   position: absolute;
   font-size: 16px;
-  background-color:gray ;
+  background-color:rgb(43, 42, 42) ;
   width:100%;
 
 }
@@ -135,16 +136,17 @@ code {
 textarea {
   resize: none;
 }
-	.checkbox {
-	  font-weight: normal;
-	}
+.checkbox {
+	font-weight: normal;
+}
 
-	.form-control {
-	  position: relative;
-	  font-size: 16px;
-	  height: auto;
-	  padding: 10px;
-	}
+.form-control {
+	position: relative;
+	font-size: 16px;
+	height: auto;
+	padding: 10px;
+}
+  
 .btn-primary{
   border-radius: 23px ;
   border:none;
@@ -160,7 +162,7 @@ input[type="password"] {
 }
 
 .login {
-  background-color: gray;
+  background-color: rgb(43, 42, 42);
   padding:150px;
 }
 
@@ -178,6 +180,7 @@ input[type="password"] {
   padding:150px;
 }
 
+/*Navbar - volunteer panel*/
 .volunteerpanel {
   padding: 20px 20px 20px;
 }
@@ -259,17 +262,11 @@ input[type="password"] {
   font-size: 20px;
 }
 
-.rentings-residents {
-  display: flex;
-  flex-direction: row;
-  width: 50%;
-  margin-bottom: 20px;
-}
-
 .inline {
   display: inline-block;
 }
 
+/*Residents page */
 .residents-wrapper {
   padding: 15px 55px 45px;
   margin: 0 auto;
@@ -278,10 +275,11 @@ input[type="password"] {
   border: 1px solid rgba(0,0,0,0.1);  
   
 }
-
 .create-resident-btn{
   width:90%;
 }
+
+/*Rentings page*/
 .rentings-wrapper {
   padding: 15px 55px 45px;
   margin: 0 auto;
@@ -340,7 +338,7 @@ th {
   width: 256px;
   height: 116px;
 }
-
+/*Bikes page*/
 .bicycles-wrapper {
   padding: 15px 22px 45px;
   margin: 0 auto;
@@ -381,48 +379,30 @@ th {
   border: 1.25px solid #15D4BE;
   background-color: white;
   outline:none;
-  
-  
 }
-
-
 .margin-form {
   margin-bottom: 11px;
   padding:5px;
   width: 100%;
-  ;
-  
 }
-
-
-
 .margin-form-name {
-  
   margin-bottom: 11px;
   padding:5px;
   width: 100%;
-  ;
-  
 }
-
 .condition p {
   text-align: justify;
   font-size: 15px;
   margin-left: 10px;
 }
-
 .submit-button {
   border: 1.25px solid #15D4BE;
   background-color: #15D4BE;
-  
-
 }
 .submit-button:hover {
   border: 1.25px solid #15D4BE;
   background-color: #15D4BE;
-
 }
-
 .newrenter-form-wrapper {
   padding: 15px 55px 45px;
   max-width: 150%;
@@ -432,18 +412,13 @@ th {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  
-   
+  text-align: center; 
   color: black;
-  
 }
 
 .wrap-names-renter {
   display: flex;
   flex-direction: row;
-  
- 
 }
 
 .form-align {
@@ -461,7 +436,7 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 .footercontainer{
-  background-color:gray ;
+  background-color:rgb(43, 42, 42) ;
 }
 .footer-img{
   padding:20px 0px 10px 20px;
@@ -472,6 +447,7 @@ textarea {
   resize: none;
 }
 
+/*Buttons*/
 .update-button{
   background-color:white;
   border:2px solid #15D4BE;
@@ -489,7 +465,11 @@ textarea {
   border-color:#15D4BE;
 }
 
+/*Rent-bicycle page*/
 .scrollingTable{
   overflow-x: auto;
   height:300px;
+}
+@media only screen and (max-width:600px){
+  
 }

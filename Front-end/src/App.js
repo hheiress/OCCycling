@@ -19,7 +19,7 @@ import Residents from './components/Residents/Residents';
 import RentBicycle from './components/Rentings/RentBicycle';
 import Rentings from './components/Rentings/Rentings';
 import FindBike from './components/SetTimer';
-import StopRenting from './components/Rentings/StopRenting';
+// import UpdateRenting from './components/Rentings/UpdateRenting';
 import AllBicycles from './components/Bicycles/Bicycles';
 import AddNewBicycle from './components/Bicycles/AddNewBicycle';
 import CreateNewRenter from './components/Residents/CreateNewRenter';
@@ -94,7 +94,6 @@ function App() {
         <Route exact path ="/reset-password" component={ResetPassword}/>
         <Route exact path="/rentbicycle" component={RentBicycle} />
         <Route exact path="/findbike" component={FindBike} />
-        <Route exact path="/stoprenting" component={StopRenting} />
         <Route exact path="/rentings" component={Rentings} />
         <Route exact path="/residents" component={Residents} />
         <Route exact path="/bicycles" component={AllBicycles} />

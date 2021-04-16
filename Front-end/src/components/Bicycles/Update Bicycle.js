@@ -48,7 +48,6 @@ function UpdateBicycle(props) {
         })
       })
     
-      console.log(bike);
     }, [setBike, props.match.params.id]);
   const handleSubmit = event => {
     
