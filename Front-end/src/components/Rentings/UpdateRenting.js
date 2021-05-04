@@ -92,7 +92,7 @@ const getStationId = station.filter(
         "bike_id": getBikeId[0].id,
         "user_id": getUserId[0].id,
         "last_name": getUserId[0].id,
-        "status": 'Available',
+        "status": 'Not Active',
         "renting_date": renting.renting_date,
         "station_id": getStationId[0].id,
         "starting_time": renting.starting_time,

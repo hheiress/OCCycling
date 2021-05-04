@@ -88,7 +88,7 @@ function RentBicycle() {
           "bike_id": getBikeId[0].id,
           "user_id": users.id,
           "last_name": users.id,
-          "status": 'Unavailable',
+          "status": "In Rent" , 
           "renting_date": today,
           "station_id": getStationId[0].id,
           "starting_time": dataForm.starting_time + ":00:00",
@@ -96,7 +96,7 @@ function RentBicycle() {
       }
       console.log(dataForm.model_name);
       console.log(object.conditions_id);
-
+      console.log(getBikeId[0].id);
       event.preventDefault();
       setSubmitting(true);
       fetch("http://localhost:3000/rentings", {
@@ -106,10 +106,27 @@ function RentBicycle() {
         },
         body: JSON.stringify(object), 
       })
+      .then(() => {
+        const body = {
+          "status": "Unavailable"
+        } 
+        return fetch(`http://localhost:3000/bikes/update/${getBikeId[0].id}`, {
+         method: 'PUT',
+         headers: {
+           'Content-Type': 'application/json',
+         },
+        
+         body:JSON.stringify(body)
+      })
       .then((response) => response.json())
       .then((result) => {
         console.log('Success:', result);
       })
+      .catch((error) => {
+        console.error('Error:', error);
+      })
+      }
+      )
       .catch((error) => {
         console.error('Error:', error);
       })  

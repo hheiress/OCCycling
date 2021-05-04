@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Search from "../Residents/Search";
+import Search from "./Search";
 
 const FilterRenters = props => {
     
@@ -9,7 +9,7 @@ const FilterRenters = props => {
         fetch("http://localhost:3000/users")
         .then((res) => res.json())
         .then((data) => {
-          console.log("First render");
+          console.log("First renter");
           setRenters(data);
         })
       }, []);

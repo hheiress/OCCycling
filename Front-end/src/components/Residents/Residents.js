@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import VolunteerPanel from '../VolunteerPanel';
 import { Link } from "react-router-dom";
-import Search from "./Search";
+import Search from "../RentBike/Search";
 import DeleteRenter from "./DeleteRenter";
 import Footer from "../Footer";
 
@@ -15,7 +15,7 @@ const AllRenters = props => {
         console.log("First render");
         setRenters(data);
       })
-  }, [renters]);
+  }, []);
 
   const search = searchVal => {
     console.info("TO DO!", searchVal);

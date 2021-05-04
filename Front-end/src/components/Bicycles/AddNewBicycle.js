@@ -10,6 +10,7 @@ const formReducer = (state, event) => {
       bike_photo: '',
       station: '',
       model_name: '',
+      status: '',
       conditions: '',
       entry_date: '',
       
@@ -48,6 +49,7 @@ function AddNewBicycle() {
     
     const object = { 
      "model_name": dataForm.model_name,
+     "status": 'Available',
      "entry_date": today, 
      "conditions": dataForm.conditions,
      "station": dataForm.station, 

@@ -16,7 +16,7 @@ import Login from './components/Login';
 import SignUp from "./components/SignUp"
 import VolunteerPanel from './components/VolunteerPanel';
 import Residents from './components/Residents/Residents';
-import RentBicycle from './components/Rentings/RentBicycle';
+import RentBicycle from './components/RentBike/RentBicycle';
 import Rentings from './components/Rentings/Rentings';
 import FindBike from './components/SetTimer';
 // import UpdateRenting from './components/Rentings/UpdateRenting';

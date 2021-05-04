@@ -4,6 +4,8 @@ import Footer from '../Footer'
 import SetTimer from "../SetTimer";
 import moment from "moment";
 import UpdateRenting from "./UpdateRenting";
+import FilterRentings from "./FilterRentings";
+
 
 const rentingForm = (state, event) => {
   if (event.reset) {
@@ -36,38 +38,39 @@ const Rentings = props => {
       })
     }, []);
 
-    // const handleSubmit = event => {
-    // fetch("http://localhost:3000/rentings/rentings.id}", {
-    //   method: 'PUT',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(renting), 
-    // })
-    // .then((response) => response.json())
-    // .then((result) => {
-    //   console.log('Success:', result);
-    // })
-    // .catch((error) => {
-    //   console.error('Error:', error);
-    // })  
-  //   setTimeout(() => {
-  //     alert("Bike Received");
-  //     setSubmitting(false);
-  //   }, 500);
-  // }
-  
    const sortedRentings = rentings.sort(
      (a,b)=>{
        return new Date(b.renting_date) - new Date(a.renting_date);}
    )
+  //  const [station, setStation] = useState([]);
+
+   const search = searchVal => {
+    console.log(searchVal)
+    console.info("new Filtered!", searchVal);
+    const filteredStation = rentings.filter((item)=>{
+      console.log(item)
+      return item.station_name === searchVal
+    });
+     setRentings(filteredStation);
+    };
+   //get station 
+  
+  // create a function to bann the user in case of overtimming
+  //  const bannTime= rentings.map(
+  //    (user)=>{
+  //    if((new Date(user.renting_date) - new Date(user.finished_date))> 4 ){
+  //       return user.status="Banned"
+  //    }
+  //   })
+ 
+
     function magic(item){
       if(item.finished_date===null){
      let rentingDuration = moment.duration (item.starting_time);
      const rentingDate = moment(item.renting_date);
-     console.log(rentingDuration)
-     console.log(rentingDate)
-     console.log(item)
+    //  console.log(rentingDuration)
+    //  console.log(rentingDate)
+    //  console.log(item)
      const resultOfDuration = rentingDate.add(rentingDuration)
      return resultOfDuration;
     }
@@ -80,6 +83,7 @@ const Rentings = props => {
             <div className="wrapper">
                 <div className="residents-wrapper">
                     <h2 className="text-center">Rentings</h2>
+                    <FilterRentings search={search}/>
                     <div className="table">
                         <table className="table">
                             <thead>

@@ -4,15 +4,9 @@ const find = () => {
     return pool.query("SELECT r.id, b.model_name, u.name, u.last_name, r.status, renting_date, s.station_name, starting_time, b.conditions, r.finished_date FROM rentings r JOIN bikes b ON b.id=r.bike_id JOIN users u ON u.id=r.user_id JOIN station s ON s.id=r.station_id;").then((results) => (results.rows))
 }
 
-const findById = () => {
-    const rentingId = req.params.rentingId;
-    return pool.query("SELECT * from rentings where id=$1", [rentingId])
-    .then((results) => (results.rows))
-}
-
 function create  (req, res)  {
     const {bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id} = req.body;
-
+     console.log(req.body)
     if(!bike_id || !user_id || !last_name || !status || !renting_date || !station_id || !starting_time || !conditions_id) {
         return res
         .status(400)

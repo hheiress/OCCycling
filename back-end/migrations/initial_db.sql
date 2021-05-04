@@ -20,6 +20,7 @@ CREATE TABLE station (
 CREATE TABLE bikes (
   id       			SERIAL PRIMARY KEY,
   model_name    	TEXT NOT NULL,
+  status        TEXT NOT NULL,
   entry_date		DATE NOT NULL,
   conditions		TEXT NOT NULL,
   station			TEXT NOT NULL 
@@ -54,19 +55,19 @@ VALUES ('Miray', 'Demir', 'TK239445J', 'AV. Rome 56', 'Female', '1994-05-13', 'T
 INSERT INTO users (name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status) 
 VALUES ('Alberto', 'Lopez', 'V228946K', 'Street Rose', 'Male', '1989-02-23', 'Venezuela', 'lopez10@gmail.com', 32568901, 'Banned');
 
-INSERT INTO bikes (model_name, entry_date, conditions, station) VALUES ('Decathlon', '2018-03-10', 'Change brakes', 'Polikastro' );
-INSERT INTO bikes (model_name, entry_date, conditions, station) VALUES ('Trek', '2020-03-20', 'New', 'Camp' );
-INSERT INTO bikes (model_name, entry_date, conditions, station) VALUES ('Apache', '2015-10-16', 'flat tire', 'Polikastro' );
-INSERT INTO bikes (model_name, entry_date, conditions, station) VALUES ('Vento', '2016-11-04', 'Good', 'Camp');
+INSERT INTO bikes (model_name, status, entry_date, conditions, station) VALUES ('Decathlon', 'Unavailable', '2018-03-10', 'Change brakes', 'Polikastro' );
+INSERT INTO bikes (model_name, status, entry_date, conditions, station) VALUES ('Trek', 'Unavailable','2020-03-20', 'New', 'Camp' );
+INSERT INTO bikes (model_name, status, entry_date, conditions, station) VALUES ('Apache', 'Unavailable', '2015-10-16', 'flat tire', 'Polikastro' );
+INSERT INTO bikes (model_name, status, entry_date, conditions, station) VALUES ('Vento', 'Available', '2016-11-04', 'Good', 'Camp');
 
 
 INSERT INTO station (station_name) VALUES ('Camp');
 INSERT INTO station (station_name) VALUES ('Polikastro');
 
 
-INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id, finished_date) VALUES (2, 3, 3, 'Unavailable', '2017-08-19 14:22:11', 1, '04:00:00', 2, '2017-08-19 14:22:11');
-INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id, finished_date) VALUES (1, 2, 2, 'Unavailable', '2017-08-19 14:22:11', 1, '04:00:00', 1, '2017-08-19 14:22:11');
-INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id, finished_date) VALUES (3, 1, 2, 'Unavailable', '2017-08-19 14:22:11', 2, '04:00:00', 3, '2017-08-19 14:22:11');
+INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id, finished_date) VALUES (2, 3, 3, 'In Rent', '2017-08-19 14:22:11', 1, '04:00:00', 2, '2017-08-19 14:22:11');
+INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id, finished_date) VALUES (1, 2, 2, 'In Rent', '2017-08-19 14:22:11', 1, '04:00:00', 1, '2017-08-19 14:22:11');
+INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id, finished_date) VALUES (3, 1, 2, 'In Rent', '2017-08-19 14:22:11', 2, '04:00:00', 3, '2017-08-19 14:22:11');
 
 INSERT INTO ngo_users (user_name, user_email, user_password) VALUES ('Irene', 'ireneocc@gmail.com', 'igrece4381');
 
