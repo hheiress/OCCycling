@@ -31,6 +31,15 @@ ctrl.put("/:id", function(req, res, next) {
         })
 });
 
+ctrl.put("/update/:id", function(req, res, next) {
+    rentingsRepo
+        .updateRentingDate(req, res)
+        .catch((err) => {
+            console.error(err.stack)
+            next( new Error ("Internal server error")) 
+        })
+});
+
 ctrl.delete("/:id", function(req, res, next) {
     rentingsRepo
         .remove(req, res)

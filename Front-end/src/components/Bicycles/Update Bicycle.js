@@ -95,7 +95,10 @@ function UpdateBicycle(props) {
     setPhotoThumbnail(<img className="photo-btn" src={URL.createObjectURL(event.target.files[0])} />);
     console.log(selectedFile);
   }
-  
+  const updatedStation = station.filter(
+    item => item.station_name === bike.station_name
+  )
+
   const hiddenFileInput = React.useRef(null);
   const imageUpload = event => {
     hiddenFileInput.current.click();
@@ -141,14 +144,14 @@ function UpdateBicycle(props) {
             <div className="margin-form">
               <Form.Control
                 as="select"
-                name="station"
+                name="station_id"
                 onChange={handleChange}
-                value={bike.station}
+                value={bike.station_id}
                 disabled={submitting}
                 required>
-                {<option value="" disabled selected hidden>{bike.station}</option>}
+                {<option value="" disabled selected hidden>{bike.station_name}</option>}
                 {station.map((item) => (
-                  <option value={item.station_name}>{item.station_name}</option>
+                  <option value={item.station_id}>{item.station_name}</option>
                 ))}
               </Form.Control>
             </div>

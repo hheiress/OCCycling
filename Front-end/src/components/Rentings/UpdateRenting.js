@@ -1,5 +1,7 @@
 import React, {useState, useEffect, useReducer} from 'react';
 
+import PopUp from './PopUp'
+
 const rentingFormReducer = (state, event) => {
   if (event.type === 'fetch') {
     return event.renting;
@@ -15,7 +17,9 @@ function UpdateRenting(props) {
   const [submitting, setSubmitting] = useState(false);
   const [renting, setRenting] = useReducer(rentingFormReducer, {});
   const [bikes, setBikes] = useState([]);
+  const [selectBike, setSelectBike] = useState(null)
   const [station, setStation] = useState([]);
+  const [showPopUp, setShowPopUp] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:3000/rentings")
@@ -60,20 +64,6 @@ const [renters, setRenters] = useState([]);
         })
       }, []);
 
-const getBikeId = bikes.filter(
-  item => {
-    if(item.model_name === renting.model_name ){
-      return item.id;
-    }
-  }
-) 
-const getUserId = renters.filter(
-  item => {
-    if(item.name === renting.name && item.last_name === renting.last_name){
-      return item.id;
-    }
-  }
-) 
 const getStationId = station.filter(
   item =>{ 
      if(item.station_name === renting.station_name){
@@ -82,6 +72,9 @@ const getStationId = station.filter(
      }
   })
 
+
+ 
+
   const handleSubmit = event => {
 
     event.preventDefault();
@@ -89,14 +82,7 @@ const getStationId = station.filter(
       let stoppedDate=new Date().toString().slice(4, 25);
       console.log(stoppedDate)
       const object = { 
-        "bike_id": getBikeId[0].id,
-        "user_id": getUserId[0].id,
-        "last_name": getUserId[0].id,
-        "status": 'Not Active',
-        "renting_date": renting.renting_date,
-        "station_id": getStationId[0].id,
-        "starting_time": renting.starting_time,
-        "conditions_id": getBikeId[0].id,
+        "status": 'Rent finished',
         "finished_date": stoppedDate,
     }
     console.log(object);
@@ -104,7 +90,7 @@ const getStationId = station.filter(
     setTimeout(() => {
         if (window.confirm(`Do you want to cancel the renting by ${props.name} ${props.last_name} ?`)) {
 
-            fetch(`http://localhost:3000/rentings/${props.params}`, {
+            fetch(`http://localhost:3000/rentings/update/${props.params}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -114,16 +100,29 @@ const getStationId = station.filter(
             
         };
         alert("Renting Updated!");
+        props.setUpdate(!props.update)
+        setSelectBike(bikes.filter(
+          item => item.model_name === props.model_name
+      ))
+      
         
         setSubmitting(false);
+        setShowPopUp(true)
     }, 500);
 
+}
+
+useEffect(() => console.log(selectBike), [selectBike])
+
+const togglePop = () => {
+  setShowPopUp(!showPopUp)
 }
 
 return (
 
     <div>
         <button onClick={handleSubmit} className="update-button" >Received</button>
+      {showPopUp ? <PopUp id={selectBike[0]?.id} toggle={togglePop} /> : null}
     </div>
 )
 }

@@ -52,9 +52,9 @@ function AddNewBicycle() {
      "status": 'Available',
      "entry_date": today, 
      "conditions": dataForm.conditions,
-     "station": dataForm.station, 
+     "station_id": dataForm.station, 
     }
-
+    console.log(object)
     const formData = new FormData();
 		formData.append('File', selectedFile);
     
@@ -186,7 +186,7 @@ function AddNewBicycle() {
 
                 <option value="" disabled selected hidden>Station</option>
                 {station.map((item) => (
-                  <option value={item.station_name}>{item.station_name}</option>
+                  <option value={item.id}>{item.station_name}</option>
                 ))}
 
               </Form.Control>

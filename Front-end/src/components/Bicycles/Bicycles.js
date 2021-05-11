@@ -4,14 +4,20 @@ import VolunteerPanel from '../VolunteerPanel';
 import DeleteBike from "./DeleteBike";
 import SearchBicycle from "./SearchBicycle";
 import Footer from "../Footer";
+import FilterBikes from "./FilterBikes";
 
 const AllBicycles = props => {
     const [bikes, setBikes] = useState([]);
+    const [filteredBikes, setFilteredBikes] = useState(null);
+
     useEffect(() => {
         fetch("http://localhost:3000/bikes")
             .then((res) => res.json())
             .then((data) => {
                 console.log("First render");
+                data = data.filter(
+                    item => item.status !== "Damaged and not in use"
+                );
                 setBikes(data);
             })
     }, []);
@@ -19,12 +25,21 @@ const AllBicycles = props => {
     const search = searchVal => {
         console.info("TO DO!", searchVal);
         const filteredBicycles = bikes.filter(
-            item => item.model_name === searchVal
+            item => item.model_name === searchVal 
         );
-        setBikes(filteredBicycles);
+        setFilteredBikes(filteredBicycles);
     };
 
     
+   const searchBike = searchVal => {
+    console.log(searchVal)
+    console.info("new Filtered!", searchVal);
+    const filteredStation = bikes.filter((item)=>{
+      console.log("filteres",item)
+      return item.station_name === searchVal 
+    });
+     setFilteredBikes(filteredStation);
+    };
 
     return (
         <>
@@ -35,7 +50,10 @@ const AllBicycles = props => {
                     <Link to={'/addnewbicycle'}>
                         <button className="mt-5 btn btn-primary w-100" type="submit">Add New Bicycle</button>
                     </Link>
+                    <div className="filters">
                     <SearchBicycle search={search} />
+                    <FilterBikes searchBike={searchBike} />
+                    </div>
                     {/* <div class="input-group rounded">
                         <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
                          aria-describedby="search-addon" />
@@ -48,26 +66,45 @@ const AllBicycles = props => {
                             <thead>
                                 <tr>
                                     <th>Model name</th>
+                                    <th>Station</th>
                                     <th>Entry Date</th>
                                     <th>Conditions</th>
                                     <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {bikes.map((item, index) => (
+                                {filteredBikes?.length > 0 ? filteredBikes.map((item, index) => (
                                     <tr key={index}>
                                         <td>{item.model_name}</td>
+                                        <td>{item.station_name}</td>
                                         <td>{item.entry_date}</td>
                                         <td>{item.conditions}</td>                 
                                         <td>
                                             <Link to={'/updatebicycle/'+ item.id}>
                                                 <button className="update-button">Update</button>
                                             </Link>
-                                            <DeleteBike name={item.model_name} params= {item.id}/>
+                                            <DeleteBike name={item.model_name} params={item.id}/>
                                         </td>
                                     </tr>
 
-                                ))}
+                                ))
+                                    : 
+                                    bikes.map((item, index) => (
+                                        <tr key={index}>
+                                            <td>{item.model_name}</td>
+                                            <td>{item.station_name}</td>
+                                            <td>{item.entry_date}</td>
+                                            <td>{item.conditions}</td>                 
+                                            <td>
+                                                <Link to={'/updatebicycle/'+ item.id}>
+                                                    <button className="update-button">Update</button>
+                                                </Link>
+                                                <DeleteBike name={item.model_name} params={item.id}/>
+                                            </td>
+                                        </tr>
+    
+                                    ))
+                            }
                             </tbody>
                         </table>
                     </div>

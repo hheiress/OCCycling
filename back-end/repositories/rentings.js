@@ -25,7 +25,7 @@ function update(req, res) {
         || !last_name 
         || !status 
         || !renting_date 
-        || !station_id 
+        || !station_id
         || !starting_time 
         || !conditions_id 
         || !finished_date) {
@@ -38,6 +38,19 @@ function update(req, res) {
         .then(() => res.send('Renting Modified'))
 }
 
+function updateRentingDate(req, res) {
+    const { status, finished_date } = req.body;
+    const { id } = req.params;
+    if (!status || !finished_date) {
+        return res
+            .status(400)
+            .send("Please insert a status, finished_date");
+    }
+    return pool
+        .query("UPDATE rentings SET status=$2, finished_date = $3 WHERE id = $1", [id, status, finished_date])
+        .then(() => res.send('Renting Modified'))
+
+}
 function remove(req, res) {
     const { id } = req.params;
     if (!id) {
@@ -55,5 +68,6 @@ module.exports = {
     find: find,
     create: create,
     update: update,
+    updateRentingDate:updateRentingDate,
     remove: remove,
 };

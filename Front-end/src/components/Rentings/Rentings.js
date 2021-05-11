@@ -7,6 +7,7 @@ import UpdateRenting from "./UpdateRenting";
 import FilterRentings from "./FilterRentings";
 
 
+
 const rentingForm = (state, event) => {
   if (event.reset) {
     return {
@@ -24,6 +25,9 @@ const rentingForm = (state, event) => {
 const Rentings = props => {
     const [submitting, setSubmitting] = useState(false);
     const [rentings, setRentings] = useState([]);
+    const [update, setUpdate] = useState(false)
+    const [bikes, setBikes] = useState([]);
+
     useEffect(()=>{
       fetch("http://localhost:3000/rentings",{
         method: 'GET',
@@ -36,7 +40,9 @@ const Rentings = props => {
         console.log("First render");
         setRentings(data);
       })
-    }, []);
+    }, [update]);
+
+    // useEffect(()=> {console.log(rentings)}, [rentings])
 
    const sortedRentings = rentings.sort(
      (a,b)=>{
@@ -48,7 +54,7 @@ const Rentings = props => {
     console.log(searchVal)
     console.info("new Filtered!", searchVal);
     const filteredStation = rentings.filter((item)=>{
-      console.log(item)
+      console.log("filteres",item)
       return item.station_name === searchVal
     });
      setRentings(filteredStation);
@@ -68,15 +74,11 @@ const Rentings = props => {
       if(item.finished_date===null){
      let rentingDuration = moment.duration (item.starting_time);
      const rentingDate = moment(item.renting_date);
-    //  console.log(rentingDuration)
-    //  console.log(rentingDate)
-    //  console.log(item)
      const resultOfDuration = rentingDate.add(rentingDuration)
      return resultOfDuration;
     }
   }
     
-
     return (
         <>
          <VolunteerPanel />
@@ -99,7 +101,10 @@ const Rentings = props => {
                                     </tr>
                                 </thead>
                             <tbody>
-                                {sortedRentings.map((item, index) => (
+                                {sortedRentings.map((item, index) => {
+                                  console.log(item)
+                                  return(
+                                  
                                     <tr key={index}>
                                     <td>{item.model_name}</td>
                                     <td>{item.name} {item.last_name}</td>
@@ -109,14 +114,17 @@ const Rentings = props => {
                                     dueDate={magic(item)}
                                     /></td>
                                     <td>{item.conditions}</td>
-                                    <td><UpdateRenting 
+                                    <td><UpdateRenting
+                                    setUpdate={setUpdate}
+                                    update={update} 
                                     params={item.id}
+                                    model_name={item.model_name}
                                     name={item.name}
                                     last_name={item.last_name}
                                     /></td>
                                     <td>{item.finished_date}</td>
                                   </tr>
-                                ))} 
+                                )})} 
           </tbody>
         </table>
       </div>

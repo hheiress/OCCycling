@@ -31,8 +31,19 @@ ctrl.put("/:id", function(req, res, next) {
 });
 
 ctrl.put("/update/:id", function(req, res, next) {
+    console.log(req.body)
     bikesRepo
         .updateBikeStatus(req, res)
+        .catch((err) => {
+            console.error(err.stack)
+            next( new Error ("Internal server error"))
+        })
+});
+
+ctrl.put("/delete/:id", function(req, res, next) {
+    console.log(req.body)
+    bikesRepo
+        .deleteBikeStatus(req, res)
         .catch((err) => {
             console.error(err.stack)
             next( new Error ("Internal server error"))

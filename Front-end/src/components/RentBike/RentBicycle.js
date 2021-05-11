@@ -49,6 +49,17 @@ function RentBicycle() {
     const [bikes, setBikes] = useState([]);
     const [station, setStation] = useState([]);
     const [users, setUser] = useState([]);
+    
+
+  //get bikes with the status null
+  useEffect(() => {
+  fetch("http://localhost:3000/bikes")
+      .then((res) => res.json())
+      .then((data) => {
+          console.log("Second render");
+          setBikes(data);
+      })
+  }, []);
 
      //get station 
     useEffect(() => {
@@ -60,43 +71,33 @@ function RentBicycle() {
           })
       }, []);
 
-    //get bikes with the status null
-    useEffect(() => {
-        fetch("http://localhost:3000/bikes")
-            .then((res) => res.json())
-            .then((data) => {
-                console.log("Second render");
-                setBikes(data);
-            })
-    }, []);
-
     const filteredBicycles = bikes.filter(
         item => item.status === null ||  item.status === "Available"
       );
     
-    const getBikeId = filteredBicycles.filter(
-        item => item.model_name === dataForm.model_name
-    ) 
-    
-    const getStationId = station.filter(
-        item => item.station_name === dataForm.station_name
-    )
+    // const getBikeId = filteredBicycles.filter(
+    //     item => item.model_name === dataForm.model_name
+    // ) 
+  
+
     const handleSubmit = event => {
         const today =  new Date().toString().slice(4, 25);
         console.log(today)
+       
          const object = { 
-          "bike_id": getBikeId[0].id,
+          "bike_id": dataForm.bike_id,
           "user_id": users.id,
           "last_name": users.id,
           "status": "In Rent" , 
           "renting_date": today,
-          "station_id": getStationId[0].id,
+          "station_id": dataForm.station_id,
           "starting_time": dataForm.starting_time + ":00:00",
-          "conditions_id": getBikeId[0].id,
+          "conditions_id": dataForm.bike_id,
       }
-      console.log(dataForm.model_name);
-      console.log(object.conditions_id);
-      console.log(getBikeId[0].id);
+      
+      console.log(dataForm.bike_id);
+      console.log(object);
+
       event.preventDefault();
       setSubmitting(true);
       fetch("http://localhost:3000/rentings", {
@@ -108,9 +109,10 @@ function RentBicycle() {
       })
       .then(() => {
         const body = {
-          "status": "Unavailable"
+          "status": "Unavailable",
+          "station_id": dataForm.station_id
         } 
-        return fetch(`http://localhost:3000/bikes/update/${getBikeId[0].id}`, {
+        return fetch(`http://localhost:3000/bikes/update/${dataForm.bike_id}`, {
          method: 'PUT',
          headers: {
            'Content-Type': 'application/json',
@@ -138,15 +140,33 @@ function RentBicycle() {
         });
       }, 3000);
     }
-
-     const handleChange = event => {
-         setDataForm({
+    // console.log(getStationId[0].id)
+      const handleChange = event => {
+          setDataForm({
             name: event.target.name,
             value: event.target.value,
-            });
-           console.log(event.target.value)
-          };   
+            
+          });
+          console.log(event.target.value)
+      };   
+      useEffect(()=>{
+        console.log(dataForm)
+        console.log("Bike selected ", dataForm);
+        const bikeObject = bikes.find(
+          item => item.id == dataForm.bike_id
+        );
+       const getStationId = station.find((item)=>{
+         if(item?.station_name === bikeObject?.station_name){
+           console.log(item.id)
+           dataForm.station_id = item.id
+           return item.id;
+         }
+        })
 
+       console.log(dataForm.bike_id)
+       console.log(getStationId)
+      }, [dataForm])
+      console.log(dataForm)
                 
     const handleRowClick = event => {
         const dataRow = {
@@ -171,25 +191,13 @@ function RentBicycle() {
                         <h4 className="bicycle-rent mt-3">Choose Bicycle</h4>
                         <Form.Control 
                         as="select" 
-                        name="model_name" 
+                        name="bike_id" 
                         onChange={handleChange}
-                        value={dataForm.model_name}
+                        value={dataForm.bike_id}
                         required >
                             <option> Choose </option>
                             {filteredBicycles.map((item, index) => (
-                                <option key={index} value={item.value}>{item.model_name} </option>))}
-                         </Form.Control>
-                         
-                         <h4 className="bicycle-rent mt-3">Assign Station</h4>
-                         <Form.Control 
-                          as="select"
-                          name="station_name"
-                          onChange={handleChange}
-                          value={dataForm.station_name}
-                          required>
-                            <option value=""> Choose </option>
-                            {station.map((item, index) => (
-                                <option key={index} value={item.value}>{item.station_name}</option>))}
+                                <option key={index} value={item.id}>{item.model_name} </option>))}
                          </Form.Control>
 
                          <h4 className="addtime-header mt-3">Add Time</h4>

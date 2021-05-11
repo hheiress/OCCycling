@@ -5,6 +5,8 @@ import Search from "./Search";
 const FilterRenters = props => {
     
     const [renters, setRenters] = useState([]);
+    const [filteredUsers, setFilteredUsers] = useState(null);
+
       useEffect(()=>{
         fetch("http://localhost:3000/users")
         .then((res) => res.json())
@@ -19,7 +21,7 @@ const FilterRenters = props => {
         const filteredResidents = renters.filter(
           item => item.name === searchVal || item.last_name === searchVal
         );
-        setRenters(filteredResidents);
+        setFilteredUsers(filteredResidents);
       };
 
       const handleSubmit = event => {
@@ -42,7 +44,7 @@ const FilterRenters = props => {
                                     </tr>
                                 </thead>
                               <tbody>
-                                  {renters.map((item, index) => (
+                                  {filteredUsers?.length > 0 ? filteredUsers.map((item, index) => (
                                       <tr onClick={props.handleRowClick} key={index} >
                                       <td data-title={item.id} >{item.id}</td>
                                       <td data-title={item.id} >{item.name}</td>
@@ -50,7 +52,18 @@ const FilterRenters = props => {
                                       <td data-title={item.id} >{item.date_birth}</td>
                                       <td data-title={item.id}>{item.phone_number}</td>
                                     </tr>
-                                  ))} 
+                                  ))
+                                  :
+                                  renters.map((item, index) => (
+                                    <tr onClick={props.handleRowClick} key={index} >
+                                    <td data-title={item.id} >{item.id}</td>
+                                    <td data-title={item.id} >{item.name}</td>
+                                    <td data-title={item.id} >{item.last_name}</td>
+                                    <td data-title={item.id} >{item.date_birth}</td>
+                                    <td data-title={item.id}>{item.phone_number}</td>
+                                    </tr>
+                                  ))  
+                                } 
             </tbody>
           </table>
 

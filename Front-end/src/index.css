@@ -474,3 +474,14 @@ textarea {
 @media only screen and (max-width:600px){
   
 }
+.modal {
+  
+
+  background-color: rgba(0, 0, 0, 0.25);
+}
+.modal_content {
+  background-color: #000;
+}
+.filters{
+  display:flex;
+}

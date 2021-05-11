@@ -8,6 +8,7 @@ import Footer from "../Footer";
 
 const AllRenters = props => {
   const [renters, setRenters] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState(null);
   useEffect(() => {
     fetch("http://localhost:3000/users")
       .then((res) => res.json())
@@ -22,7 +23,7 @@ const AllRenters = props => {
     const filteredResidents = renters.filter(
       item => item.name === searchVal || item.last_name === searchVal
     );
-    setRenters(filteredResidents);
+    setFilteredUsers(filteredResidents);
   };
 
   return (
@@ -53,7 +54,7 @@ const AllRenters = props => {
               </thead>
               <tbody>
                 {console.log(renters)}
-                {renters.map((item, index) => (
+                {filteredUsers?.length > 0 ? filteredUsers.map((item, index) => (
                   <tr key={index}>
                     <td>{item.name}</td>
                     <td>{item.last_name}</td>
@@ -71,7 +72,28 @@ const AllRenters = props => {
                       <DeleteRenter name={item.name} params= {item.id}/>
                     </td>
                   </tr>
-                ))}
+                ))
+              :
+              renters.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.name}</td>
+                  <td>{item.last_name}</td>
+                  <td>{item.passport}</td>
+                  <td>{item.address}</td>
+                  <td>{item.gender}</td>
+                  <td>{item.date_birth}</td>
+                  <td>{item.nationality}</td>
+                  <td>{item.email}</td>
+                  <td>{item.phone_number}</td>
+                  <td>
+                    <Link to={'/updaterenter/' + item.id}>
+                      <button className="update-button">Update</button>
+                    </Link>
+                    <DeleteRenter name={item.name} params= {item.id}/>
+                  </td>
+                </tr>
+              ))
+              }
               </tbody>
             </table>
           </div> 
