@@ -64,9 +64,9 @@ INSERT INTO bikes (model_name, status, entry_date, conditions, station_id) VALUE
 INSERT INTO bikes (model_name, status, entry_date, conditions, station_id) VALUES ('Apache', 'Unavailable', '2015-10-16', 'flat tire', 2);
 INSERT INTO bikes (model_name, status, entry_date, conditions, station_id) VALUES ('Vento', 'Available', '2016-11-04', 'Good', 1);
 
-INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id, finished_date) VALUES (2, 3, 3, 'In Rent', '2017-08-19 14:22:11', 2, '04:00:00', 2, '2021-05-10 14:22:11');
-INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id, finished_date) VALUES (1, 2, 2, 'In Rent', '2017-08-19 14:22:11', 1, '04:00:00', 1, '2021-04-09 14:22:11');
-INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id, finished_date) VALUES (3, 1, 1, 'In Rent', '2017-08-19 14:22:11', 3, '04:00:00', 3, '2021-02-11 14:22:11');
+INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id, finished_date) VALUES (2, 3, 3, 'Rent finished', '2021-05-09 10:12:06', 2, '04:00:00', 2, '2021-05-10 13:02:15');
+INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id, finished_date) VALUES (1, 2, 2, 'Rent finished', '2021-05-11 14:22:11', 1, '04:00:00', 1, '2021-05-11 18:23:41');
+INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id, finished_date) VALUES (3, 1, 1, 'Rent finished', '2021-05-09 09:42:10', 3, '04:00:00', 3, '2021-05-09 14:22:11');
 
 INSERT INTO ngo_users (user_name, user_email, user_password) VALUES ('Irene', 'ireneocc@gmail.com', 'igrece4381');
 

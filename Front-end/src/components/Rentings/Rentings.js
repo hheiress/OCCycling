@@ -5,7 +5,7 @@ import SetTimer from "../SetTimer";
 import moment from "moment";
 import UpdateRenting from "./UpdateRenting";
 import FilterRentings from "./FilterRentings";
-
+import BannUser from "./BannUser"
 
 
 const rentingForm = (state, event) => {
@@ -27,6 +27,7 @@ const Rentings = props => {
     const [rentings, setRentings] = useState([]);
     const [update, setUpdate] = useState(false)
     const [bikes, setBikes] = useState([]);
+    const [filteredRentings, setFilteredRentings] = useState(null);
 
     useEffect(()=>{
       fetch("http://localhost:3000/rentings",{
@@ -53,11 +54,11 @@ const Rentings = props => {
    const search = searchVal => {
     console.log(searchVal)
     console.info("new Filtered!", searchVal);
-    const filteredStation = rentings.filter((item)=>{
+    const filteredStation = sortedRentings.filter((item)=>{
       console.log("filteres",item)
       return item.station_name === searchVal
     });
-     setRentings(filteredStation);
+     setFilteredRentings(filteredStation);
     };
    //get station 
   
@@ -78,7 +79,6 @@ const Rentings = props => {
      return resultOfDuration;
     }
   }
-    
     return (
         <>
          <VolunteerPanel />
@@ -101,10 +101,9 @@ const Rentings = props => {
                                     </tr>
                                 </thead>
                             <tbody>
-                                {sortedRentings.map((item, index) => {
+                                {filteredRentings?.length > 0 ? filteredRentings.map((item, index) => {
                                   console.log(item)
                                   return(
-                                  
                                     <tr key={index}>
                                     <td>{item.model_name}</td>
                                     <td>{item.name} {item.last_name}</td>
@@ -121,10 +120,40 @@ const Rentings = props => {
                                     model_name={item.model_name}
                                     name={item.name}
                                     last_name={item.last_name}
-                                    /></td>
+                                    />
+                                    <BannUser user_id={item.user_id}/>
+                                    </td>
                                     <td>{item.finished_date}</td>
                                   </tr>
-                                )})} 
+                                )
+                              })
+                                :
+                                sortedRentings.map((item, index) => {
+                                  console.log(item)
+                                  return(
+                                    <tr key={index}>
+                                    <td>{item.model_name}</td>
+                                    <td>{item.name} {item.last_name}</td>
+                                    <td>{item.renting_date}</td>
+                                    <td>{item.station_name}</td>
+                                    <td><SetTimer
+                                    dueDate={magic(item)}
+                                    /></td>
+                                    <td>{item.conditions}</td>
+                                    <td><UpdateRenting
+                                    setUpdate={setUpdate}
+                                    update={update} 
+                                    params={item.id}
+                                    model_name={item.model_name}
+                                    name={item.name}
+                                    last_name={item.last_name}
+                                    />
+                                    <BannUser user_id={item.user_id}/>
+                                    </td>
+                                    <td>{item.finished_date}</td>
+                                  </tr>
+                                )})
+                              } 
           </tbody>
         </table>
       </div>

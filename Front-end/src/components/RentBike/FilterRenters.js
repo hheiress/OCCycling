@@ -12,6 +12,9 @@ const FilterRenters = props => {
         .then((res) => res.json())
         .then((data) => {
           console.log("First renter");
+          data = data.filter(
+            item => item.status !== "Banned"
+        );
           setRenters(data);
         })
       }, []);

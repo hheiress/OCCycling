@@ -485,3 +485,20 @@ textarea {
 .filters{
   display:flex;
 }
+.bann-button{
+  background-color:white;
+  border:2px solid ;
+  border-radius:23px;
+  outline:none;
+  margin:4px;
+  color:red;
+}
+
+.Active {
+  color: #15D4BE;
+}
+
+
+.Banned {
+  color: red;
+}

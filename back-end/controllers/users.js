@@ -30,6 +30,15 @@ ctrl.put("/:id", function(req, res, next) {
         });
     });
 
+ctrl.put("/update/:id", function(req, res, next) {
+    usersRepo
+        .updateUserStatus(req, res)
+        .catch((err) => {
+            console.error(err.stack);
+            next( new Error ("Internal server error"))
+        });
+    });    
+
 ctrl.delete("/:id", function(req, res, next) {
     usersRepo
         .remove(req, res)

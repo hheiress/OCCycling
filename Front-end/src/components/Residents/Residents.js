@@ -50,6 +50,7 @@ const AllRenters = props => {
                   <th>Email</th>
                   <th>Phone number</th>
                   <th>Edit</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -71,6 +72,7 @@ const AllRenters = props => {
                       </Link>
                       <DeleteRenter name={item.name} params= {item.id}/>
                     </td>
+                    <td>{item.status}</td>
                   </tr>
                 ))
               :
@@ -91,6 +93,8 @@ const AllRenters = props => {
                     </Link>
                     <DeleteRenter name={item.name} params= {item.id}/>
                   </td>
+                  
+                  <td className={item.status}>{item.status}</td>
                 </tr>
               ))
               }

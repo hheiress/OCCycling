@@ -30,6 +30,22 @@ function update(req, res) {
         .then(() => res.send('User Modified'))
 }
 
+async function updateUserStatus(req, res) {
+    const { status } = req.body;
+    const { id } = req.params;
+    if (!status) {
+        return res
+            .status(400)
+            .send("Please insert a status");
+    }
+    let user = await pool.query("SELECT * FROM users WHERE id = $1", [id])
+    if(user.rows.length > 0) {
+        console.log(user)     
+        user= await pool.query("UPDATE users SET status=$2 WHERE id = $1", [user.rows[0].id, status])
+    }
+    return res.send({message:'User Status Modified', user})
+
+}
 function remove(req, res) {
     const { id } = req.params;
     if (!id) {
@@ -47,5 +63,6 @@ module.exports = {
     find: find,
     create: create,
     update: update,
+    updateUserStatus:updateUserStatus,
     remove: remove,
 };

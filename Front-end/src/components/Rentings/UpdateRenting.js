@@ -124,7 +124,7 @@ return (
         <button onClick={handleSubmit} className="update-button" >Received</button>
       {showPopUp ? <PopUp id={selectBike[0]?.id} toggle={togglePop} /> : null}
     </div>
-)
+  )
 }
 
 export default UpdateRenting;
