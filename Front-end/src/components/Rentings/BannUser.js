@@ -17,6 +17,7 @@ const BannUser = (props) => {
          })
          .then(res => res.json())
          .then(data => console.log(data))
+         alert("User Banned! Update the page")
     };
 
 return (

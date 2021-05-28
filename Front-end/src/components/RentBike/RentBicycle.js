@@ -200,7 +200,7 @@ function RentBicycle() {
                                 <option key={index} value={item.id}>{item.model_name} </option>))}
                          </Form.Control>
 
-                         <h4 className="addtime-header mt-3">Add Time</h4>
+                         <h4 className="addtime-header mt-3">Set Time</h4>
                          <Form.Control
                          as="select"
                          name="starting_time"

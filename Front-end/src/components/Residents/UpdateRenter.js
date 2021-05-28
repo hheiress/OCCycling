@@ -1,8 +1,11 @@
 import React, { useEffect, useReducer, useState } from 'react'
+// import {Image} from "react-"
 import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import VolunteerPanel from '../VolunteerPanel';
+import ChangeStatus from './ChangeStatus';
+
 
 const userFormReducer = (state, event) => {
     if (event.type === 'fetch') {
@@ -26,17 +29,19 @@ function UpdateRenter(props) {
     const [user, setUser] = useReducer(userFormReducer, {
     });
     useEffect(() => {
-        fetch("http://localhost:3000/users")
+        fetch(`http://localhost:3000/users/${props.match.params.id}`)
             .then((res) => res.json())
             .then((data) => {
                 console.log("First render");
                 console.log(data);
-                const user = (data.find(x => x.id == props.match.params.id));
+                // const user = (data.find(x => x.id == props.match.params.id));
                 setUser({
                     type: 'fetch',
-                    user: user,
+                    user: data[0],
                   })
-                  console.log(user); 
+                  const buffer = data[1].filedata['data']
+                  setPhotoThumbnail(<img className="photo-btn" src={`data:image/png;${buffer}`} />);
+                
             })
     }, [setUser, props.match.params.id]);
 
@@ -89,7 +94,6 @@ function UpdateRenter(props) {
             }, 500);
         }
     }
-
  
 
     const handleChange = event => {
@@ -116,19 +120,17 @@ function UpdateRenter(props) {
     return (
         <div>
             <VolunteerPanel />
-
+            
             <div className="wrapper">
                 <div className="return-form">
                     <Link to={'/residents'}>
                         <p>&#60; ALL RENTERS</p>
                     </Link>
                 </div>
-
-
+        
                 <div className="newrenter-form-wrapper">
 
                     <p><b>UPDATE RENTER</b></p>
-
                     <Form className="form-align" onSubmit={handleSubmit}>
 
                         <div className="margin-form">
@@ -136,8 +138,14 @@ function UpdateRenter(props) {
                             <button
                                 type="button"
                                 onClick={imageUpload}
-                                className="photo-btn">{photoThumbnail}</button>
-
+                                className="photo-btn">{photoThumbnail}
+                            </button>
+                            {/* <select>
+                                <option className={user.status}>{user.status}</option>    
+                            </select> */}
+                            <h5 className={user.status}>{user.status}</h5>  
+                           <ChangeStatus user_id={user.id}
+                           user_status={user.status}/>
                             <Form.File
                                 id="userphoto"
                                 name="user_photo"
@@ -278,6 +286,15 @@ function UpdateRenter(props) {
 
                     </Form>
                 </div>
+                <div className="buttons-resident">
+                    <button className="delete-new-button">Delete</button>
+                    <Link to={'/history/'+ user.id}
+                    user_name={user.name}
+                    user_last_name={user.last_name}>    
+                    <button className="history-button">History</button>
+                    </Link>
+                </div>
+                {photoThumbnail}
             </div>
         </div>
     )

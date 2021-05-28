@@ -12,6 +12,14 @@ CREATE TABLE users (
   status		TEXT NOT NULL
 );
 
+CREATE TABLE user_photos (
+  id          SERIAL NOT NULL PRIMARY KEY,
+  user_id			INT REFERENCES users(id),
+  filename    TEXT NOT NULL,
+  mimetype    TEXT NOT NULL,
+  filedata    bytea
+);
+
 CREATE TABLE station (
   id       			SERIAL PRIMARY KEY,
   station_name    	TEXT NOT NULL
@@ -39,7 +47,7 @@ CREATE TABLE rentings (
   finished_date		TIMESTAMP 
  );
 
- CREATE TABLE ngo_users (
+CREATE TABLE ngo_users (
 id       		SERIAL PRIMARY KEY,
 user_name     	TEXT NOT NULL,
 user_email		TEXT NOT NULL,

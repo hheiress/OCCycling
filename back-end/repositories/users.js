@@ -1,21 +1,29 @@
 const pool = require("../db.js");
-
+const sharp = require('sharp');
 
 function find() {
     return pool.query("SELECT * FROM users").then((results) => (results.rows))
 }
 
-function create (req, res) {
+async function findUser(req) {
+    const user = await pool.query("SELECT * FROM users WHERE id = $1", [req.params.id]).then((results) => (results.rows))
+    const photo = await pool.query("SELECT * FROM user_photos WHERE user_id = $1", [req.params.id]).then((results) => (results.rows))
+    return [...user, ...photo];
+}
+
+async function create (req, res) {
     const {name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status} = req.body;
-    
+    const buffer = await sharp(req.file.buffer).resize({width:250, height:250}).png().toBuffer()
     if (!name || !last_name || !passport || !address || !gender || !date_birth || !nationality || !email || !phone_number || !status) {
         return res
         .status(400)
         .send("Please insert a name, last name, passport, address, gender, date birth, nationality, email, phone number, status");
     } return pool
-                .query('INSERT INTO users (name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)', [name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status])
+                .query('INSERT INTO users (name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id', [name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status])
+                .then((data) => pool.query('INSERT INTO user_photos (user_id, filename, mimetype, filedata) VALUES ($1, $2, $3, $4)', [data.rows[0].id, req.file.originalname, req.file.mimetype, buffer]))
                 .then(() => res.send(`User created`))
 }
+
 
 function update(req, res) {
     const { name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status } = req.body;
@@ -61,6 +69,7 @@ function remove(req, res) {
 
 module.exports = {
     find: find,
+    findUser: findUser,
     create: create,
     update: update,
     updateUserStatus:updateUserStatus,

@@ -6,6 +6,7 @@ import moment from "moment";
 import UpdateRenting from "./UpdateRenting";
 import FilterRentings from "./FilterRentings";
 import BannUser from "./BannUser"
+import ExportRentings from "./ExportRentings";
 
 
 const rentingForm = (state, event) => {
@@ -85,6 +86,7 @@ const Rentings = props => {
             <div className="wrapper">
                 <div className="residents-wrapper">
                     <h2 className="text-center">Rentings</h2>
+                    <ExportRentings />
                     <FilterRentings search={search}/>
                     <div className="table">
                         <table className="table">

@@ -17,7 +17,7 @@ import VolunteerPanel from './components/VolunteerPanel';
 import Residents from './components/Residents/Residents';
 import RentBicycle from './components/RentBike/RentBicycle';
 import Rentings from './components/Rentings/Rentings';
-import FindBike from './components/SetTimer';
+import History from './components/Residents/History';
 // import UpdateRenting from './components/Rentings/UpdateRenting';
 import AllBicycles from './components/Bicycles/Bicycles';
 import AddNewBicycle from './components/Bicycles/AddNewBicycle';
@@ -36,34 +36,34 @@ toast.configure()
 
 function App() {
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   const setAuth = (boolean) => {
     setIsAuthenticated (boolean);
   };
 
-  async function isAuth () {
-    try {
+  // async function isAuth () {
+  //   try {
 
-      const response = await fetch("http://localhost:3001/auth/verify", {
-        method: "GET",
-        headers: { token: localStorage.token }
-      });
+  //     const response = await fetch("http://localhost:3001/auth/verify", {
+  //       method: "GET",
+  //       headers: { token: localStorage.token }
+  //     });
 
-      const parseRes = await response.json()
-      console.log(parseRes)
+  //     const parseRes = await response.json()
+  //     console.log(parseRes)
 
-      parseRes === true ? setIsAuthenticated(true) :
-      setIsAuthenticated(false);
+  //     parseRes === true ? setIsAuthenticated(true) :
+  //     setIsAuthenticated(false);
 
-    } catch (err) {
-      console.error(err.message);
-    }
-  }
+  //   } catch (err) {
+  //     console.error(err.message);
+  //   }
+  // }
 
-  useEffect(() => {
-    isAuth()
-  })
+  // useEffect(() => {
+  //   isAuth()
+  // })
 
   return (
     <Router>
@@ -92,7 +92,7 @@ function App() {
         <Route exact path = "/forgot-password" render={props => <ForgotPassword {...props} setAuth = {setAuth}/> } /> {/* investigar sobre setAuth, borrar?*/}
         <Route exact path ="/reset-password" component={ResetPassword}/>
         <Route exact path="/rentbicycle" component={RentBicycle} />
-        <Route exact path="/findbike" component={FindBike} />
+        <Route exact path="/history/:id" component={History} />
         <Route exact path="/rentings" component={Rentings} />
         <Route exact path="/residents" component={Residents} />
         <Route exact path="/bicycles" component={AllBicycles} />

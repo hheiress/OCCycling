@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Search from "../RentBike/Search";
 import DeleteRenter from "./DeleteRenter";
 import Footer from "../Footer";
-
+import ExportResidents from "./ExportResidents"
 
 const AllRenters = props => {
   const [renters, setRenters] = useState([]);
@@ -32,7 +32,8 @@ const AllRenters = props => {
       <div className="wrapper">
         <div className="residents-wrapper">
           <h2 className="text-center">Residents</h2>
-          <Link to={'/createnewrenter'}>
+          <ExportResidents/>   
+         <Link to={'/createnewrenter'}>
             <button className="mt-5 btn btn-primary create-resident-btn" type="submit">Create New Renter</button>
           </Link>
           <Search search={search} />
@@ -72,7 +73,7 @@ const AllRenters = props => {
                       </Link>
                       <DeleteRenter name={item.name} params= {item.id}/>
                     </td>
-                    <td>{item.status}</td>
+                    <td className={item.status}>{item.status}</td>
                   </tr>
                 ))
               :

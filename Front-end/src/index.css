@@ -1,10 +1,14 @@
-body {
-  margin: 0;
+html.body {
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
   font-family: 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; 
 }
 
 code {
@@ -67,7 +71,6 @@ code {
   font-size: 16px;
   background-color:rgb(43, 42, 42) ;
   width:100%;
-
 }
 .menu{
  display:flex;
@@ -266,24 +269,25 @@ input[type="password"] {
   display: inline-block;
 }
 
-/*Residents page */
+/*Residents page */ 
 .residents-wrapper {
-  padding: 15px 55px 45px;
-  margin: 0 auto;
+  padding: 15px 55px 5px;
+  margin: 0px 30px;
   background-color: #fff;
   overflow: auto;
   border: 1px solid rgba(0,0,0,0.1);  
-  
+  padding:40px;
 }
+
 .create-resident-btn{
   width:100%;
- 
+
 }
 
 /*Rentings page*/
 .rentings-wrapper {
   padding: 15px 55px 45px;
-  margin: 0 auto;
+  margin: 0px;
   background-color: #fff;
   overflow: auto;
   border: 1px solid rgba(0,0,0,0.1);  
@@ -319,6 +323,7 @@ td, th {
   border: 1px solid #dddddd;
   text-align: center;
   padding: 4px;
+  color:black;
 }
 
 th {
@@ -450,12 +455,13 @@ textarea {
 
 /*Buttons*/
 .update-button{
-  background-color:white;
+  color:white;
   border:2px solid #15D4BE;
-  color:#0D4C51 ;
-  border-radius:23px;
+  background-color:#15D4BE ;
+  border-radius:3px;
   outline:none;
   border-color:#15D4BE;
+  width:80px;
 }
 .delete-button{
   background-color:white;
@@ -464,6 +470,7 @@ textarea {
   border-radius:23px;
   outline:none;
   border-color:#15D4BE;
+  
 }
 
 /*Rent-bicycle page*/
@@ -471,12 +478,8 @@ textarea {
   overflow-x: auto;
   height:300px;
 }
-@media only screen and (max-width:600px){
-  
-}
-.modal {
-  
 
+.modal {
   background-color: rgba(0, 0, 0, 0.25);
 }
 .modal_content {
@@ -488,17 +491,123 @@ textarea {
 .bann-button{
   background-color:white;
   border:2px solid ;
-  border-radius:23px;
+  border-radius:3px;
   outline:none;
   margin:4px;
-  color:red;
+  color:#d05a11;
+  border-color:#d05a11;
+  width:80px;
 }
 
 .Active {
+  font-weight: 900;
   color: #15D4BE;
 }
 
-
 .Banned {
   color: red;
+}
+.buttons-resident{
+  display:flex;
+  flex-direction: column;
+  justify-content:flex-end;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin:20px;
+  padding:20px;
+  position: absolute;
+  top: 260px;
+  right: 20px;
+  
+}
+.buttons-resident button{
+  margin: 5px;
+  border-radius: 5px;
+  width:100px;
+  height:40px;
+  outline:none;
+  border:2px solid;
+}
+
+.delete-new-button{
+  background-color:white;
+  border:2px solid;
+  color:#D53E3E ;
+  border-radius: 3px;
+  border-color:#15D4BE;
+  text-align: center;
+}
+.delete-new-button:hover{
+  background-color: rgb(202, 33, 21);
+  color:white;
+}
+.history-button{
+  width:80px;
+  height:30px;
+  background-color: white;
+  border:#15D4BE;
+}
+.residents-history-wrapper{
+  border:2px solid #15D4BE;
+  border-radius: 15px;
+  padding: 20px;
+  margin:40px;
+}
+.history-button:hover{
+  background-color: #15D4BE;
+  color:white;
+}
+.user-li{
+  margin:30px;
+}
+.user-history-list{
+  font-weight:700 ;
+  color:black;
+  margin:20px;
+}
+.header-history{
+  text-align: center;
+}
+.active-button{
+  background-color: #15D4BE;
+  color:white;
+  border:2px solid;
+  outline: none;
+}
+.export{
+  display:flex;
+  flex-direction: column;
+  margin:20px;
+  padding:20px;
+  position: absolute;
+  top: 165px;
+  right:150px;
+  border-radius:23px;
+}
+.export .export-button {
+  width:150px;
+  color:white;
+  padding:5px;
+  background-color: #9DBFAF;
+  border:2px solid;
+  border-radius:23px;
+}
+@media only screen and (max-width:600px){
+  .navbar{
+    width:600px;
+  }
+  .export{
+    top:125px;
+    right:65px;
+  }
+  .table{
+    width:300px;
+  }
+  .footercontainer{
+    width:600px;
+  }
+
+}
+@media only screen and (min-width:600px){
+ 
 }
