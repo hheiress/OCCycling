@@ -38,7 +38,7 @@ const AllRenters = props => {
           </Link>
           <Search search={search} />
           <div className="table">
-            <table className="table">
+            <table className="table" >
               <thead>
                 <tr>
                   <th>First name</th>
@@ -63,7 +63,7 @@ const AllRenters = props => {
                     <td>{item.passport}</td>
                     <td>{item.address}</td>
                     <td>{item.gender}</td>
-                    <td>{item.date_birth}</td>
+                    <td>{item.date_birth.slice(0,10)}</td>
                     <td>{item.nationality}</td>
                     <td>{item.email}</td>
                     <td>{item.phone_number}</td>
@@ -84,7 +84,7 @@ const AllRenters = props => {
                   <td>{item.passport}</td>
                   <td>{item.address}</td>
                   <td>{item.gender}</td>
-                  <td>{item.date_birth}</td>
+                  <td>{item.date_birth.slice(0,10)}</td>
                   <td>{item.nationality}</td>
                   <td>{item.email}</td>
                   <td>{item.phone_number}</td>

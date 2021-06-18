@@ -37,19 +37,6 @@ function CreateNewRenter() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    const object = {
-      // "user_photo": dataForm.user_photo,
-      // "name": dataForm.name,
-      // "last_name": dataForm.last_name,
-      // "passport": dataForm.passport,
-      // "address": dataForm.address,
-      // "gender": dataForm.gender,
-      // "date_birth": dataForm.date_birth,
-      // "nationality": dataForm.nationality,
-      // "email": dataForm.email,
-      // "phone_number": dataForm.phone_number,
-      // "status": "Active"
-    }
 
     const formData = new FormData();
     formData.append("user_photo", selectedFile);
@@ -63,8 +50,7 @@ function CreateNewRenter() {
     formData.append("email", dataForm.email);
     formData.append("phone_number", dataForm.phone_number);
     formData.append("status", "Active");
-		// formData.append('File', selectedFile);
-
+		
     if (dataForm.phone_number > 2147483647) {
       alert("***Phone Number must have 9 digits***");
       event.preventDefault();
@@ -77,9 +63,6 @@ function CreateNewRenter() {
 
       fetch("http://localhost:3000/users", {
         method: 'POST',
-        // headers: {
-        //   'Content-Type': 'multipart/form-data',
-        // },
         body: formData,
 
       })
@@ -91,23 +74,6 @@ function CreateNewRenter() {
 			.catch((error) => {
 				console.error('Error:', error);
 			})
-
-       //FETCH TO UPLOAD THE USER PHOTO 
-    
-    // fetch(
-		// 	`https://localhost:3000/users/${id}/photo`,
-		// 	{
-		// 		method: 'POST',
-		// 		body:  JSON.stringify(userImage),
-		// 	}
-		// )
-		// 	.then((response) => response.json())
-		// 	.then((result) => {
-		// 		console.log('Success:', result);
-		// 	})
-		// 	.catch((error) => {
-		// 		console.error('Error:', error);
-		// 	})
 
       setTimeout(() => {
         alert("New User Added");

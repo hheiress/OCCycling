@@ -10,7 +10,8 @@ function Footer() {
     return (
         <div className="footercontainer">
                 <div className="logo">
-                <img src="/images/OCC Logo White Transparant.png" className="footer-img"/>
+                <a href="https://migracode.openculturalcenter.org/" target="_blank"> <img src="./images/Migracode Barcelona Logo (Dark Background).png" className="footer-img"/></a> 
+                <div className="footer-names"><p>Diana Dashkovska | Jose Arriaga | Gustavo Rossini | Anny Gomez</p></div>
                 </div>
             </div>
     )

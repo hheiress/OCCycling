@@ -93,7 +93,7 @@ const AllBicycles = props => {
                                         <tr key={index}>
                                             <td>{item.model_name}</td>
                                             <td>{item.station_name}</td>
-                                            <td>{item.entry_date}</td>
+                                            <td>{item.entry_date.slice(0,10)}</td>
                                             <td>{item.conditions}</td>                 
                                             <td>
                                                 <Link to={'/updatebicycle/'+ item.id}>

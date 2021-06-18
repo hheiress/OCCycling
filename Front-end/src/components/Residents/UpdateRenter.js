@@ -19,15 +19,12 @@ const userFormReducer = (state, event) => {
   }
 
 function UpdateRenter(props) {
-    console.log(props.match.params.id);
-    
     const [submitting, setSubmitting] = useState(false);
     const [selectedFile, setSelectedFile] = useState("");
     const [isFilePicked, setIsFilePicked] = useState(false);
     const [photoThumbnail, setPhotoThumbnail] = useState("Photo")
     
-    const [user, setUser] = useReducer(userFormReducer, {
-    });
+    const [user, setUser] = useReducer(userFormReducer, {});
     useEffect(() => {
         fetch(`http://localhost:3000/users/${props.match.params.id}`)
             .then((res) => res.json())
@@ -37,64 +34,44 @@ function UpdateRenter(props) {
                 // const user = (data.find(x => x.id == props.match.params.id));
                 setUser({
                     type: 'fetch',
-                    user: data[0],
+                    user: data,
                   })
-                  const buffer = data[1].filedata['data']
-                  setPhotoThumbnail(<img className="photo-btn" src={`data:image/png;${buffer}`} />);
-                
+                setPhotoThumbnail(<img className="photo-btn" src={`http://localhost:3000/users/${props.match.params.id}/photo`} />);  
             })
     }, [setUser, props.match.params.id]);
 
     const handleSubmit = event => {
-
-        if (user.phone_number > 2147483647) {
+        event.preventDefault();
+        const formData = new FormData();
+        formData.append("name", user.name);
+        formData.append("last_name", user.last_name);
+        formData.append("passport", user.passport);
+        formData.append("address", user.address);
+        formData.append("gender", user.gender);
+        formData.append("date_birth", user.date_birth);
+        formData.append("nationality", user.nationality);
+        formData.append("email", user.email);
+        formData.append("phone_number", user.phone_number);
+        formData.append("status", "Active");
+        if(isFilePicked){
+            formData.append("user_photo", selectedFile);
+        }else{
+            formData.append("user_photo", null);
+        }
+        if (user.phone_number > 999999999) {
             alert("***Phone Number must have 9 digits***");
-            event.preventDefault();
-
         } else {
-
-            event.preventDefault();
-
             setSubmitting(true);
-
-            fetch("http://localhost:3000/users", {
+            fetch(`http://localhost:3000/users/${props.match.params.id}`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(user),
-
-
+                body: formData,
             })
-            
-
-            //FETCH TO UPLOAD THE USER PHOTO 
-
-            /*fetch(
-                    'https://localhost:...',
-                    {
-                        method: 'POST',
-                        body: formData,
-                    }
-                )
-                    .then((response) => response.json())
-                    .then((result) => {
-                        console.log('Success:', result);
-                    })
-                    .catch((error) => {
-                        console.error('Error:', error);
-                    });*/
-
             setTimeout(() => {
-
                 alert("User Updated!");
                 setSubmitting(false);
-
-
             }, 500);
         }
     }
- 
 
     const handleChange = event => {
         setUser({
@@ -106,10 +83,8 @@ function UpdateRenter(props) {
     const changeHandler = event => {
         setSelectedFile(event.target.files[0]);
         setIsFilePicked(true);
-
         setPhotoThumbnail(<img className="photo-btn" src={URL.createObjectURL(event.target.files[0])} />);
         console.log(selectedFile);
-
     }
 
     const hiddenFileInput = React.useRef(null);
@@ -120,21 +95,16 @@ function UpdateRenter(props) {
     return (
         <div>
             <VolunteerPanel />
-            
             <div className="wrapper">
                 <div className="return-form">
                     <Link to={'/residents'}>
                         <p>&#60; ALL RENTERS</p>
                     </Link>
                 </div>
-        
                 <div className="newrenter-form-wrapper">
-
                     <p><b>UPDATE RENTER</b></p>
                     <Form className="form-align" onSubmit={handleSubmit}>
-
                         <div className="margin-form">
-
                             <button
                                 type="button"
                                 onClick={imageUpload}
@@ -150,16 +120,13 @@ function UpdateRenter(props) {
                                 id="userphoto"
                                 name="user_photo"
                                 onChange={changeHandler}
-                                value={user.user_photo || ''}
+                                value={ "" || user.user_photo}
                                 ref={hiddenFileInput}
                                 style={{ display: 'none' }}
                             />
                         </div>
-
                         <div className="wrap-names-renter">
-
                             <div className="margin-form-name">
-
                                 <Form.Control
                                     name="name"
                                     autocomplete="off"
@@ -168,7 +135,6 @@ function UpdateRenter(props) {
                                     placeholder="Update Name"
                                     disabled={submitting}
                                     required
-
                                 />
                             </div>
 
@@ -181,15 +147,11 @@ function UpdateRenter(props) {
                                     placeholder="Update Last Name"
                                     disabled={submitting}
                                     required
-
                                 />
                             </div>
-
                         </div>
-
                         <div className="margin-form">
                             <Form.Control
-                                
                                 name="passport"
                                 autocomplete="off"
                                 onChange={handleChange}
@@ -199,10 +161,8 @@ function UpdateRenter(props) {
                                 required
                             />
                         </div>
-
                         <div className="margin-form">
                             <Form.Control
-                                
                                 name="address"
                                 autocomplete="off"
                                 onChange={handleChange}
@@ -212,7 +172,6 @@ function UpdateRenter(props) {
                                 required
                             />
                         </div>
-
                         <div className="margin-form condition">
                             <p>GENDER</p>
                             <Form.Control
@@ -223,16 +182,12 @@ function UpdateRenter(props) {
                                 value={user.gender}
                                 disabled={submitting}
                                 required >
-
                                 <option value={user.gender} selected hidden>{user.gender}</option>
-
-                                <option value="female">Female</option>
-                                <option value="male">Male</option>
-                                <option value="other">Other</option>
-
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Other">Other</option>
                             </Form.Control>
                         </div>
-
                         <div className="margin-form condition">
                             <p>DATE OF BIRTH</p>
                             <Form.Control
@@ -245,7 +200,6 @@ function UpdateRenter(props) {
                                 required
                             />
                         </div>
-
                         <div className="margin-form condition">
                             <Form.Control
                                 name="nationality"
@@ -256,7 +210,6 @@ function UpdateRenter(props) {
                                 disabled={submitting}
                                 required />
                         </div>
-
                         <div className="margin-form">
                             <Form.Control
                                 type="email"
@@ -268,7 +221,6 @@ function UpdateRenter(props) {
                                 disabled={submitting}
                                 required />
                         </div>
-
                         <div className="margin-form">
                             <Form.Control className="number"
                                 type="number"
@@ -279,11 +231,9 @@ function UpdateRenter(props) {
                                 disabled={submitting}
                                 required />
                         </div>
-
                         <div className="margin-form-button">
                             <Button className="submit-button" type="submit">Update User</Button>
                         </div>
-
                     </Form>
                 </div>
                 <div className="buttons-resident">
@@ -294,10 +244,9 @@ function UpdateRenter(props) {
                     <button className="history-button">History</button>
                     </Link>
                 </div>
-                {photoThumbnail}
             </div>
         </div>
     )
 }
 
-export default UpdateRenter
+export default UpdateRenter;

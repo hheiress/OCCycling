@@ -27,7 +27,7 @@ const PopUp = (props) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({station_id: e.target.value, status: 'Available'}),
+          body: JSON.stringify({status: 'Available', station_id: e.target.value }),
         })
         .then(res => res.json())
         .then(data => console.log(data))

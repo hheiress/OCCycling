@@ -23,6 +23,8 @@ function UpdateBicycle(props) {
   const [isFilePicked, setIsFilePicked] = useState(false);
   const [photoThumbnail, setPhotoThumbnail] = useState("Photo")
   
+  const [bike, setBike] = useReducer(bikeFormReducer, {});
+
   useEffect(() => {
     fetch("http://localhost:3000/station")
       .then((res) => res.json())
@@ -32,54 +34,46 @@ function UpdateBicycle(props) {
       })
   }, []);
   
-  const [bike, setBike] = useReducer(bikeFormReducer, {
-  });
   
   useEffect(() => {
-    fetch("http://localhost:3000/bikes")
+    fetch(`http://localhost:3000/bikes/${props.match.params.id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log("First render");
         console.log(data)
-        const bike = data.find(x => x.id == props.match.params.id)
+        // const bike = data.find(x => x.id == props.match.params.id)
         setBike({
           type: 'fetch',
-          bike: bike,
+          bike: data,
         })
+        setPhotoThumbnail(<img className="photo-btn" src={`http://localhost:3000/bikes/${props.match.params.id}/photo`} />);  
       })
-    
     }, [setBike, props.match.params.id]);
+
   const handleSubmit = event => {
-    
     event.preventDefault();
-    setSubmitting(true);
-    fetch(`http://localhost:3000/bikes/${bike.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(bike),
-    })
-    //FETCH TO UPLOAD THE BICYCLE PHOTO
-    /*fetch(
-      'https://localhost:...',
-      {
-        method: 'POST',
-        body: formData,
-      }
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        console.log('Success:', result);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });*/
+    const formData = new FormData();
+    formData.append("model_name", bike.model_name)
+    formData.append( "status", bike.status);
+    formData.append( "entry_date", bike.entry_date);
+    formData.append( "conditions", bike.conditions);
+    formData.append( "station_id", bike.station);
     
+    if(isFilePicked){
+        formData.append("bike_photo", selectedFile);
+    }else{
+        formData.append("bike_photo", null);
+    }{
+        setSubmitting(true);
+        fetch(`http://localhost:3000/bikes/${bike.props.match.params.id}`, {
+        method: 'PUT',
+        body: formData,
+    })
       setTimeout(() => {
-      alert("Bicycle Updated!");
-      setSubmitting(false);
-    }, 500);
+        alert("Bicycle Updated!");
+        setSubmitting(false);
+      }, 500);
+    }
   }
   
   const handleChange = event => {

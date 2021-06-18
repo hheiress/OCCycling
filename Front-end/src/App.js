@@ -29,7 +29,7 @@ import UpdateBicycle from './components/Bicycles/Update Bicycle';
 import ForgotPassword from './components/ForgotPassword';
 import DeleteBike from './components/Bicycles/DeleteBike';
 import ResetPassword from './components/ResetPassword';
-
+import ProtectedResidents from './components/Residents/ProtectedRoute'
 
 
 toast.configure()
@@ -95,6 +95,7 @@ function App() {
         <Route exact path="/history/:id" component={History} />
         <Route exact path="/rentings" component={Rentings} />
         <Route exact path="/residents" component={Residents} />
+        <Route exact path="/protectresidents" component={ProtectedResidents} />
         <Route exact path="/bicycles" component={AllBicycles} />
         <Route exact path="/addnewbicycle" component={AddNewBicycle} />
         <Route path="/updatebicycle/:id" component={UpdateBicycle} />

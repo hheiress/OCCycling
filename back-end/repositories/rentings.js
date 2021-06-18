@@ -12,7 +12,7 @@ function create  (req, res)  {
         .status(400)
         .send("Please insert a bike id, user id, status, renting date, station id, starting time, conditions");
     } return pool
-            .query('INSERT INTO rentings (bike_id, user_id,last_name, status, renting_date, station_id, starting_time, conditions_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', [bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id])
+            .query('INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', [bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id])
             .then(() => res.send('Renting created'))
     }
     
@@ -38,7 +38,7 @@ function update(req, res) {
         .then(() => res.send('Renting Modified'))
 }
 
-function updateRentingDate(req, res) {
+async function updateRentingDate(req, res) {
     const { status, finished_date } = req.body;
     const { id } = req.params;
     if (!status || !finished_date) {
@@ -46,9 +46,12 @@ function updateRentingDate(req, res) {
             .status(400)
             .send("Please insert a status, finished_date");
     }
-    return pool
-        .query("UPDATE rentings SET status=$2, finished_date = $3 WHERE id = $1", [id, status, finished_date])
-        .then(() => res.send('Renting Modified'))
+    let renting = await pool.query("SELECT * FROM rentings WHERE id = $1", [id])
+    if(renting.rows.length > 0){
+        console.log(renting) 
+        renting = await pool.query("UPDATE rentings SET status=$2, finished_date = $3 WHERE id = $1", [renting.rows[0].id, status, finished_date])
+    }
+    return res.send({message:'Renting Modified', renting})
 
 }
 function remove(req, res) {

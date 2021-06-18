@@ -13,9 +13,7 @@ const formReducer = (state, event) => {
       status: '',
       conditions: '',
       entry_date: '',
-      
     }
-    
   }
   return {
     ...state,
@@ -43,66 +41,41 @@ function AddNewBicycle() {
   }, []);
 
   const handleSubmit = event => {
-    
-    const today = new Date().toISOString().slice(0, 10)
-    console.log(today);
-    
-    const object = { 
-     "model_name": dataForm.model_name,
-     "status": 'Available',
-     "entry_date": today, 
-     "conditions": dataForm.conditions,
-     "station_id": dataForm.station, 
-    }
-    console.log(object)
-    const formData = new FormData();
-		formData.append('File', selectedFile);
-    
     event.preventDefault();
+    const today = new Date().toISOString().slice(0, 10)
+
+    const formData = new FormData();
+    formData.append("user_photo", selectedFile);
+    formData.append("model_name", dataForm.model_name)
+    formData.append( "status", 'Available');
+    formData.append( "entry_date", today);
+    formData.append( "conditions", dataForm.conditions);
+    formData.append( "station_id", dataForm.station);
+    
     setSubmitting(true);
     fetch("http://localhost:3000/bikes", {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(object), 
+      // headers: {
+      //   'Content-Type': 'application/json',
+      // },
+      body: formData, 
     })
 
     .then((response) => response.json())
-			.then((result) => {
+		.then((result) => {
 				console.log('Success:', result);
-			})
-			.catch((error) => {
+		})
+		.catch((error) => {
 				console.error('Error:', error);
-			})
-     
-    //FETCH TO UPLOAD THE BICYCLE PHOTO 
-    
-    /*fetch(
-			'https://localhost:...',
-			{
-				method: 'POST',
-				body: formData,
-			}
-		)
-			.then((response) => response.json())
-			.then((result) => {
-				console.log('Success:', result);
-			})
-			.catch((error) => {
-				console.error('Error:', error);
-			});*/
+		})
 
     setTimeout(() => {
-      
       alert("New Bicycle Added!");
       setSubmitting(false);
       setDataForm({
         reset: true
       });
-      setPhotoThumbnail("Photo");
-     
-      
+  
     }, 500);
   }
 
@@ -125,11 +98,9 @@ function AddNewBicycle() {
   const hiddenFileInput = React.useRef(null);
   const imageUpload = event => {
     hiddenFileInput.current.click();
-
-
   };
-  return (
 
+  return (
     <div>
       <VolunteerPanel />
 
@@ -140,20 +111,14 @@ function AddNewBicycle() {
           </Link>
 
         </div>
-
         <div className="form-wrapper">
-
           <p><b>ADD NEW BICYCLE</b></p>
-
           <Form onSubmit={handleSubmit} className="form-align" >
-
             <div className="margin-form">
               <button 
               type="button" 
               onClick={imageUpload} 
-              className="photo-btn"
-              disabled={submitting}
-              >{photoThumbnail}</button>
+              className="photo-btn">{photoThumbnail}</button>
               
               <Form.File
                 id="bikephoto"
@@ -162,9 +127,6 @@ function AddNewBicycle() {
                 value={dataForm.bike_photo || ''}
                 ref={hiddenFileInput}
                 style={{ display: 'none' }}
-                disabled={submitting}
-                
-
               />
             </div>
             <div className="margin-form">
@@ -178,17 +140,14 @@ function AddNewBicycle() {
               placeholder="Name"
               disabled={submitting}
               required  
-
               />
             </div>
             <div className="margin-form">
               <Form.Control as="select" name="station" onChange={handleChange} value={dataForm.station || ''} required>
-
                 <option value="" disabled selected hidden>Station</option>
                 {station.map((item) => (
                   <option value={item.id}>{item.station_name}</option>
                 ))}
-
               </Form.Control>
             </div>
             <div className="margin-form condition">

@@ -41,7 +41,7 @@ useEffect(() => {
   fetch("http://localhost:3000/station")
     .then((res) => res.json())
     .then((data) => {
-      console.log("First render for station");
+      console.log("Call of station API");
       setStation(data);
     })
 }, []);
@@ -50,7 +50,7 @@ useEffect(() => {
   fetch("http://localhost:3000/bikes")
       .then((res) => res.json())
       .then((data) => {
-          console.log("Second render");
+          console.log("Call of bike API");
           setBikes(data);
       })
 }, []);
@@ -59,7 +59,7 @@ const [renters, setRenters] = useState([]);
         fetch("http://localhost:3000/users")
         .then((res) => res.json())
         .then((data) => {
-          console.log("First render");
+          console.log("Call of users API");
           setRenters(data);
         })
       }, []);
@@ -71,9 +71,6 @@ const getStationId = station.filter(
 
      }
   })
-
-
- 
 
   const handleSubmit = event => {
 
@@ -104,8 +101,6 @@ const getStationId = station.filter(
         setSelectBike(bikes.filter(
           item => item.model_name === props.model_name
       ))
-      
-        
         setSubmitting(false);
         setShowPopUp(true)
     }, 500);

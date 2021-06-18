@@ -6,9 +6,11 @@ function find() {
 }
 
 async function findUser(req) {
-    const user = await pool.query("SELECT * FROM users WHERE id = $1", [req.params.id]).then((results) => (results.rows))
-    const photo = await pool.query("SELECT * FROM user_photos WHERE user_id = $1", [req.params.id]).then((results) => (results.rows))
-    return [...user, ...photo];
+    return await pool.query("SELECT * FROM users WHERE id = $1", [req.params.id]).then((results) => (results.rows[0]))
+}
+
+async function getUserPhoto(req) {
+    return await pool.query("SELECT * FROM user_photos WHERE user_id = $1", [req.params.id]).then((results) => (results.rows[0].filedata))
 }
 
 async function create (req, res) {
@@ -25,17 +27,25 @@ async function create (req, res) {
 }
 
 
-function update(req, res) {
+async function update(req, res) {
     const { name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status } = req.body;
     const { id } = req.params;
+
     if (!name || !last_name || !passport || !address || !gender || !date_birth || !nationality || !email || !phone_number || !status) {
         return res
             .status(400)
             .send("Please insert a name, last name, passport, address, gender, date birth, nationality, email, phone number, status");
     }
-    return pool
-        .query("UPDATE users SET name = $2, last_name = $3, passport = $4, address = $5, gender = $6, date_birth = $7, nationality = $8, email = $9, phone_number = $10, status=$11 WHERE id = $1", [id, name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status])
-        .then(() => res.send('User Modified'))
+    try {
+        await pool.query("UPDATE users SET name = $2, last_name = $3, passport = $4, address = $5, gender = $6, date_birth = $7, nationality = $8, email = $9, phone_number = $10, status=$11 WHERE id = $1", [id, name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status])
+        if (req.file.buffer){
+            const buffer = await sharp(req.file.buffer).resize({width:250, height:250}).png().toBuffer()
+            await pool.query("UPDATE user_photos SET filename = $2, mimetype = $3, filedata = $4 WHERE user_id = $1", [id, req.file.originalname, req.file.mimetype, buffer])
+        }
+        return res.send(`User updated`)
+    } catch (error) {
+        return res.send(error.message)
+    }
 }
 
 async function updateUserStatus(req, res) {
@@ -70,6 +80,7 @@ function remove(req, res) {
 module.exports = {
     find: find,
     findUser: findUser,
+    getUserPhoto: getUserPhoto,
     create: create,
     update: update,
     updateUserStatus:updateUserStatus,

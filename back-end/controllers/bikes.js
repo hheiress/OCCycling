@@ -1,10 +1,24 @@
 const {bikesRepo} = require("../repositories");
 const ctrl = require("express").Router();
-
+const multer = require("multer")
 
 ctrl.get ("/", function (req, res, next) {
     bikesRepo
         .find()
+        .then((results) => {
+            console.log(results)
+            res.json(results)
+        })
+       
+        .catch((err) => {
+            console.error(err.stack)
+            next( new Error ("Internal server error"))
+        });
+});
+
+ctrl.get ("/:id", function (req, res, next) {
+    bikesRepo
+        .findBike(req)
         .then((results) => res.json(results))
         .catch((err) => {
             console.error(err.stack)
@@ -12,7 +26,25 @@ ctrl.get ("/", function (req, res, next) {
         });
 });
 
-ctrl.post("/", function (req, res, next) {
+ctrl.get("/:id/photo", function (req, res, next) {
+    bikesRepo
+        .getBikePhoto(req)
+        .then((results) => {
+            res.set('Content-Type', 'image/png')
+            res.send(results)
+        })
+        .catch((err) => {
+            console.error(err.stack)
+            next( new Error ("Internal server error"))
+        });
+})
+
+const upload = multer({
+    limits:{fileSize:10000000
+    },
+})
+
+ctrl.post("/",  upload.single("user_photo"), function (req, res, next) {
     bikesRepo
     .create(req, res)
     .catch((err) => {
@@ -21,7 +53,7 @@ ctrl.post("/", function (req, res, next) {
     });
 });
 
-ctrl.put("/:id", function(req, res, next) {
+ctrl.put("/:id", upload.single("user_photo"), function(req, res, next) {
     bikesRepo
         .update(req, res)
         .catch((err) => {
@@ -31,7 +63,6 @@ ctrl.put("/:id", function(req, res, next) {
 });
 
 ctrl.put("/update/:id", function(req, res, next) {
-    console.log(req.body)
     bikesRepo
         .updateBikeStatus(req, res)
         .catch((err) => {

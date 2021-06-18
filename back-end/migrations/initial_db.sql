@@ -34,6 +34,14 @@ CREATE TABLE bikes (
   station_id			INT REFERENCES station(id) 
  );
 
+CREATE TABLE bike_photos (
+  id          SERIAL NOT NULL PRIMARY KEY,
+  bike_id			INT REFERENCES bikes(id),
+  filename    TEXT NOT NULL,
+  mimetype    TEXT NOT NULL,
+  filedata    bytea
+);
+
 CREATE TABLE rentings (
   id       			SERIAL PRIMARY KEY,
   bike_id		 	INT REFERENCES bikes(id),

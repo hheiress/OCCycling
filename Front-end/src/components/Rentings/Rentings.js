@@ -136,7 +136,7 @@ const Rentings = props => {
                                     <tr key={index}>
                                     <td>{item.model_name}</td>
                                     <td>{item.name} {item.last_name}</td>
-                                    <td>{item.renting_date}</td>
+                                    <td>{item.renting_date.slice(0,19)}</td>
                                     <td>{item.station_name}</td>
                                     <td><SetTimer
                                     dueDate={magic(item)}

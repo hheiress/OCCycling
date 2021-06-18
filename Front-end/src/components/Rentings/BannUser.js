@@ -6,8 +6,6 @@ const BannUser = (props) => {
         event.preventDefault();
         setSubmitting(true);
 
-     
-
         fetch(`http://localhost:3000/users/update/${props.user_id}`,{
             method: `PUT`,
             headers: {
