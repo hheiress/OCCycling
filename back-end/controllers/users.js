@@ -68,11 +68,20 @@ ctrl.put("/update/:id", function(req, res, next) {
         });
     });    
 
+ctrl.put("/delete/:id", function(req, res, next) {
+    usersRepo
+        .deleteUserStatus(req, res)
+        .catch((err) => {
+            console.error(err.stack)
+            next( new Error ("Internal server error"))
+        })
+});
+
 ctrl.delete("/:id", function(req, res, next) {
     usersRepo
         .remove(req, res)
         .catch((err) => {
-            console.log(err.stack);
+            (err.stack);
             next( new Error ("Internal server error"))
         });
  });

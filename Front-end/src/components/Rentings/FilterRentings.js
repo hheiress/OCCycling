@@ -7,7 +7,7 @@ const FilterRentings = (props) => {
         fetch("http://localhost:3000/station")
           .then((res) => res.json())
           .then((data) => {
-            console.log("First render for station");
+            ("First render for station");
             setStation(data);
           })
       }, []);
@@ -17,13 +17,12 @@ const FilterRentings = (props) => {
     setSearchInput(event.target.value);
   };
   useEffect(()=>{
-    console.log(searchInput)
-    console.log("Form submitted ", searchInput);
+  console.log("Form submitted ", searchInput);
     props.search(searchInput);
   }, [searchInput])
 //   const handleSubmit = event => {
 //     event.preventDefault();
-//     console.log("handle submit", event)
+//     ("handle submit", event)
 //     props.search(searchInput);
 // };
   // const search = searchVal => {

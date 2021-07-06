@@ -52,7 +52,7 @@ async function update(req, res) {
 async function updateBikeStatus(req, res) {
     const { status, station_id } = req.body;
     const { id } = req.params;
-    console.log(station_id)
+    (station_id)
     if (!status || !station_id) {
         return res
             .status(400)
@@ -60,10 +60,27 @@ async function updateBikeStatus(req, res) {
     }
     let bike = await pool.query("SELECT * FROM bikes WHERE id = $1", [id])
     if(bike.rows.length > 0) {
-        console.log(bike)    
+        (bike)    
         bike = await pool.query("UPDATE bikes SET status=$2, station_id = $3 WHERE id = $1", [bike.rows[0].id , status, station_id])
     } 
     return res.send({message: 'Bike Modified', bike})
+}
+async function updateNewStatus(req, res) {
+    const { status } = req.body;
+    console.log(req.body)
+    const { id } = req.params;
+    if (!status) {
+        return res
+            .status(400)
+            .send("Please insert a status");
+    }
+    let bike = await pool.query("SELECT * FROM bikes WHERE id = $1", [id])
+    if(bike.rows.length > 0) {
+        (bike)     
+        bike= await pool.query("UPDATE bikes SET status=$2 WHERE id = $1", [bike.rows[0].id, status])
+    }
+    return res.send({message:'Bike Status Modified', bike})
+
 }
 
 async function deleteBikeStatus(req, res) {
@@ -76,7 +93,7 @@ async function deleteBikeStatus(req, res) {
     }
     let bike = await pool.query("SELECT * FROM bikes WHERE id = $1", [id])
     if(bike.rows.length > 0) {
-        console.log(bike)    
+        (bike)    
         bike = await pool.query("UPDATE bikes SET status=$2 WHERE id = $1", [bike.rows[0].id , status])
     }
     return res.send({message: 'Bike Modified', bike})
@@ -101,6 +118,7 @@ module.exports = {
     create: create,
     update: update,
     updateBikeStatus:updateBikeStatus,
+    updateNewStatus:updateNewStatus,
     deleteBikeStatus:deleteBikeStatus,
     remove: remove,
 };

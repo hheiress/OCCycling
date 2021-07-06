@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import VolunteerPanel from '../VolunteerPanel';
+import ChangeBikeStatus from './ChangeBikeStatus'
 
 const bikeFormReducer = (state, event) => {
   if (event.type === 'fetch') {
@@ -114,18 +115,14 @@ function UpdateBicycle(props) {
               <button
                 type="button"
                 onClick={imageUpload}
-                className="photo-btn"
+                className="photo-btn-update"
                 disabled={submitting}
               >{photoThumbnail}</button>
-              <Form.File
-                id="bikephoto"
-                name="bike_photo"
-                onChange={changeHandler}
-                value={bike.bike_photo || ''}
-                ref={hiddenFileInput}
-                style={{ display: 'none' }}
-                disabled={submitting}/>
-            </div>
+              </div>
+              <h5 className={bike.status}>{bike.status}</h5>  
+              <ChangeBikeStatus 
+                    bike_id={bike.id}
+                    bike_status={bike.status}/>
             <div className="margin-form">
               <Form.Control
                 name="model_name"

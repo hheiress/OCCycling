@@ -50,6 +50,7 @@ async function update(req, res) {
 
 async function updateUserStatus(req, res) {
     const { status } = req.body;
+    console.log(req.body)
     const { id } = req.params;
     if (!status) {
         return res
@@ -58,12 +59,27 @@ async function updateUserStatus(req, res) {
     }
     let user = await pool.query("SELECT * FROM users WHERE id = $1", [id])
     if(user.rows.length > 0) {
-        console.log(user)     
+        (user)     
         user= await pool.query("UPDATE users SET status=$2 WHERE id = $1", [user.rows[0].id, status])
     }
     return res.send({message:'User Status Modified', user})
 
 }
+async function deleteUserStatus(req, res) {
+    const { status } = req.body;
+    const { id } = req.params;
+    if (!status) {
+        return res
+            .status(400)
+            .send("Please insert a new status");
+    }
+    let user = await pool.query("SELECT * FROM users WHERE id = $1", [id])
+    if(user.rows.length > 0) {
+       user = await pool.query("UPDATE users SET status=$2 WHERE id = $1", [user.rows[0].id , status])
+    }
+    return res.send({message: 'User Modified', user})
+}
+
 function remove(req, res) {
     const { id } = req.params;
     if (!id) {
@@ -84,5 +100,6 @@ module.exports = {
     create: create,
     update: update,
     updateUserStatus:updateUserStatus,
+    deleteUserStatus:deleteUserStatus,
     remove: remove,
 };

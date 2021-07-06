@@ -8,7 +8,7 @@ const PopUp = (props) => {
     fetch("http://localhost:3000/station")
       .then((res) => res.json())
       .then((data) => {
-        console.log("First render");
+        ("First render");
         setStation({...station, stations: data});
       })
   }, [])
@@ -20,8 +20,6 @@ const PopUp = (props) => {
   };
 
   const handleChange = (e) => {
-    console.log(e.target.value)
-    console.log(props.id)
       fetch(`http://localhost:3000/bikes/update/${props.id}`, {
           method: 'PUT',
           headers: {
@@ -30,20 +28,20 @@ const PopUp = (props) => {
           body: JSON.stringify({status: 'Available', station_id: e.target.value }),
         })
         .then(res => res.json())
-        .then(data => console.log(data))
-  }
+        .then(data => (data))
+        alert("Station Updated")}
 
 
   return (
     <>
       <div >
         <div >
-        {station.stations && <Form.Control as="select" name="station_id" onChange={handleChange}  required>
-            <option value=""  selected >Station</option>
+        {station.stations && <Form className="popup-station" as="select" name="station_id" onChange={handleChange}  required>
+            <option  value=""  selected >Station</option>
                 {station.stations?.map((item) => (
                 <option key={item.id} value={item.id}>{item.station_name}</option>
                 ))}
-        </Form.Control>}   
+        </Form>}   
         </div>
       </div>
     </>

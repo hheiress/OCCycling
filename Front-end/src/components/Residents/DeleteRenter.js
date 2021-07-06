@@ -9,11 +9,19 @@ function DeleteRenter(props) {
         setTimeout(() => {
             if (window.confirm(`Do you want to delete user ${props.name}?`)) {
 
-                fetch(`http://localhost:3000/users/${props.params}`, {
-                    method: 'DELETE',
+                fetch(`http://localhost:3000/users/delete/${props.params}`, {
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                     },
+                    body:JSON.stringify({status:"Not active"})
+                })
+                .then((response) => response.json())
+                .then((result) => {
+                console.log('Success:', result);
+                })
+                .catch((error) => {
+                console.error('Error:', error);
                 })
             };
 

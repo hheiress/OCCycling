@@ -15,7 +15,7 @@ const History = (props)=>{
             })
         .then((res) => res.json())
         .then((data) => {
-              console.log("First render");console.log("First render");
+            console.log("First render");
               let rentings = data.filter(x => x.user_id == props.match.params.id)
               console.log(rentings)
               setRentings(rentings)

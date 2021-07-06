@@ -20,7 +20,7 @@ const ProtectedRoute = () => {
         if(isAuthenticated===searchInput){
             return history.push('/residents')
         }else {
-            return setIsNotVerified(true)
+            return setIsNotVerified(true) 
         }
       };
     return (    
@@ -39,6 +39,7 @@ const ProtectedRoute = () => {
             value={searchInput}
             onChange = {handleChange}
             />
+           {isNotVerified ? <div> Not found, ask for the password to coordinator. </div> : ""}
             <button onSubmit={handleSubmit} className="btn btn-primary" >Verify</button>
             </form>
              

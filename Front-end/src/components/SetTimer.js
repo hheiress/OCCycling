@@ -23,7 +23,7 @@ class SetTimer extends Component{
          this.setState(
              [hours + ":" + mins + ":" + seconds]
          );
-        //  console.log(this.state[0]) 
+        //  (this.state[0]) 
          if(this.state[0] > 0){
           this.setState[0]({ color: "red" });
         // clockDuration.style.color ="violet"

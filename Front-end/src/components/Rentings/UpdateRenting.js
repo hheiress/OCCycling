@@ -25,7 +25,7 @@ function UpdateRenting(props) {
     fetch("http://localhost:3000/rentings")
         .then((res) => res.json())
         .then((data) => {
-            console.log("Renting render");
+          console.log("Renting render");
             console.log(data)
             const element = props.params;
             console.log(element)
@@ -50,7 +50,7 @@ useEffect(() => {
   fetch("http://localhost:3000/bikes")
       .then((res) => res.json())
       .then((data) => {
-          console.log("Call of bike API");
+        console.log("Call of bike API");
           setBikes(data);
       })
 }, []);

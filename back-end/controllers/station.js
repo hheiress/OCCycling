@@ -34,7 +34,7 @@ ctrl.delete("/:id", function(req, res, next) {
     stationsRepo
         .remove(req, res)
         .catch((err) => {
-            console.log(err.message);
+            (err.message);
             next( new Error ("Internal server error"))
         })
 

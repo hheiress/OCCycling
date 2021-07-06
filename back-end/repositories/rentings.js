@@ -6,7 +6,7 @@ const find = () => {
 
 function create  (req, res)  {
     const {bike_id, user_id, last_name, status, renting_date, station_id, starting_time, conditions_id} = req.body;
-     console.log(req.body)
+     (req.body)
     if(!bike_id || !user_id || !last_name || !status || !renting_date || !station_id || !starting_time || !conditions_id) {
         return res
         .status(400)
@@ -48,7 +48,7 @@ async function updateRentingDate(req, res) {
     }
     let renting = await pool.query("SELECT * FROM rentings WHERE id = $1", [id])
     if(renting.rows.length > 0){
-        console.log(renting) 
+        (renting) 
         renting = await pool.query("UPDATE rentings SET status=$2, finished_date = $3 WHERE id = $1", [renting.rows[0].id, status, finished_date])
     }
     return res.send({message:'Renting Modified', renting})

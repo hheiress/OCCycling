@@ -11,6 +11,8 @@ function sendEmail  (receiver, source, subject, content) {
             subject,
             html: content,
         };
+        console.log(data)
+        console.log(process.env.SENDGRID_API_KEY)
         return sgMail.send(data);
     } catch (err) {
         console.error(err.stack);

@@ -25,7 +25,7 @@ const FilterBikes = (props) => {
   }, [searchInput])
 //   const handleSubmit = event => {
 //     event.preventDefault();
-//     console.log("handle submit", event)
+//     ("handle submit", event)
 //     props.search(searchInput);
 // };
   // const search = searchVal => {

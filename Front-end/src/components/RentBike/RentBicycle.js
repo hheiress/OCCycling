@@ -56,7 +56,7 @@ function RentBicycle() {
   fetch("http://localhost:3000/bikes")
       .then((res) => res.json())
       .then((data) => {
-          console.log("Second render");
+          ("Second render");
           setBikes(data);
       })
   }, []);
@@ -66,7 +66,7 @@ function RentBicycle() {
         fetch("http://localhost:3000/station")
           .then((res) => res.json())
           .then((data) => {
-            console.log("First render for station");
+            ("First render for station");
             setStation(data);
           })
       }, []);
@@ -140,7 +140,7 @@ function RentBicycle() {
         });
       }, 3000);
     }
-    // console.log(getStationId[0].id)
+    // (getStationId[0].id)
       const handleChange = event => {
           setDataForm({
             name: event.target.name,
@@ -157,17 +157,18 @@ function RentBicycle() {
         );
        const getStationId = station.find((item)=>{
          if(item?.station_name === bikeObject?.station_name){
-           console.log(item.id)
+          console.log(item.id)
            dataForm.station_id = item.id
            return item.id;
          }
         })
 
-       console.log(dataForm.bike_id)
-       console.log(getStationId)
+        console.log(dataForm.bike_id)
+        console.log(getStationId)
       }, [dataForm])
       console.log(dataForm)
-                
+     
+    const [selectStatus, setSelectStatus] = useState(0);  
     const handleRowClick = event => {
         const dataRow = {
           id: event.target.dataset.title
@@ -175,6 +176,13 @@ function RentBicycle() {
         alert("User Selected")
         console.log(dataRow)
         setUser(dataRow)
+        if (selectStatus === "") {
+          console.log("Highlight row");
+          setSelectStatus("table-row");
+        } else {
+          console.log("Remove highlight");
+          setSelectStatus("");
+        }
       }
     
     return (

@@ -63,7 +63,7 @@ async function login (req, res) {
     try {
         res.json(true);
 } catch (err) {
-    console.log(err.message)
+    (err.message)
     res.status(500).send("Internal Server Error")
 }
  }

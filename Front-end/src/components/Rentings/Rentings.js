@@ -44,7 +44,7 @@ const Rentings = props => {
       })
     }, [update]);
 
-    // useEffect(()=> {console.log(rentings)}, [rentings])
+    // useEffect(()=> {(rentings)}, [rentings])
 
    const sortedRentings = rentings.sort(
      (a,b)=>{
@@ -85,8 +85,10 @@ const Rentings = props => {
          <VolunteerPanel />
             <div className="wrapper">
                 <div className="residents-wrapper">
+                  <div className="headerExport">
                     <h2 className="text-center">Rentings</h2>
                     <ExportRentings />
+                  </div>
                     <FilterRentings search={search}/>
                     <div className="table">
                         <table className="table">

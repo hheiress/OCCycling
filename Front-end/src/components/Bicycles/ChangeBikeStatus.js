@@ -1,6 +1,6 @@
 import react, { useState, useEffect } from "react";
 
-const ChangeStatus = (props) => {
+const ChangeBikeStatus = (props) => {
     const [submitting, setSubmitting] = useState(false);
     const [changedStatus, setChangedStatus] = useState(null);
 
@@ -10,7 +10,7 @@ const ChangeStatus = (props) => {
 
     function newMagic () {
         console.log(changedStatus);
-        fetch(`http://localhost:3000/users/update/${props.user_id}`,{
+        fetch(`http://localhost:3000/bikes/update/status/${props.bike_id}`,{
           method: `PUT`,
           headers: {
               'Content-Type': 'application/json',
@@ -22,24 +22,23 @@ const ChangeStatus = (props) => {
       
       }
     const handleSubmit=(event) => {
-        // setChangedStatus("Active")
         const findStatus = elem =>{
             console.log("status: ", elem) 
-               if(elem === 'Banned'){
-                return elem = 'Active'}
+               if(elem === 'Unavailable'){
+                return elem = 'Available'}
                else {
-                return elem = 'Banned'}
+                return elem = 'Unavailable'}
         }
         
-        const userStatus = props.user_status;
+        const bikeStatus = props.bike_status;
     
-        console.log(userStatus)
-        const newStatus = findStatus(userStatus)
+        console.log(bikeStatus)
+        const newStatus = findStatus(bikeStatus)
         console.log(newStatus)
         setChangedStatus(newStatus)
         event.preventDefault();
         setSubmitting(true);
-        alert("User Active! Update the page")
+        alert("Bike status updated! Update the page")
     }
 
 return (
@@ -49,4 +48,4 @@ return (
     )
 }
 
-export default ChangeStatus;
+export default ChangeBikeStatus;

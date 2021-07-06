@@ -15,7 +15,7 @@ const ExportResidents = () =>{
         })
         .then((res) => res.json())
         .then((data) => {
-          console.log("First render");
+          ("First render");
           setResidents(data);
         })
       }, []);

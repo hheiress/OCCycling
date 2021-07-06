@@ -11,7 +11,7 @@ const FilterRenters = props => {
         fetch("http://localhost:3000/users")
         .then((res) => res.json())
         .then((data) => {
-          console.log("First renter");
+          ("First renter");
           data = data.filter(
             item => item.status !== "Banned"
         );
@@ -31,6 +31,16 @@ const FilterRenters = props => {
         event.preventDefault();
         props.handleRowClick();
       };
+      const [selectStatus, setSelectStatus] = useState(null);
+      const highlightRow = () => {
+        if (selectStatus === "") {
+          console.log("Highlight row");
+          setSelectStatus("table-row");
+        } else {
+          console.log("Remove highlight");
+          setSelectStatus("");
+        }
+      };
       return (
           <>
               <div className="search-box">
@@ -38,7 +48,7 @@ const FilterRenters = props => {
                       <div className="table scrollingTable">
                           <table className="table user-renting">
                               <thead>
-                                  <tr>
+                                  <tr >
                                       <th>User ID</th>
                                       <th>First name</th>
                                       <th>Last name</th>
@@ -48,7 +58,7 @@ const FilterRenters = props => {
                                 </thead>
                               <tbody>
                                   {filteredUsers?.length > 0 ? filteredUsers.map((item, index) => (
-                                      <tr onClick={props.handleRowClick} key={index} >
+                                      <tr className={selectStatus} onClick={props.handleRowClick} key={index} >
                                       <td data-title={item.id} >{item.id}</td>
                                       <td data-title={item.id} >{item.name}</td>
                                       <td data-title={item.id} >{item.last_name}</td>
@@ -58,7 +68,7 @@ const FilterRenters = props => {
                                   ))
                                   :
                                   renters.map((item, index) => (
-                                    <tr onClick={props.handleRowClick} key={index} >
+                                    <tr className={selectStatus} onClick={props.handleRowClick} key={index} >
                                     <td data-title={item.id} >{item.id}</td>
                                     <td data-title={item.id} >{item.name}</td>
                                     <td data-title={item.id} >{item.last_name}</td>

@@ -35,7 +35,7 @@ function AddNewBicycle() {
     fetch("http://localhost:3000/station")
       .then((res) => res.json())
       .then((data) => {
-        console.log("First render");
+        ("First render");
         setStation(data);
       })
   }, []);
@@ -92,7 +92,6 @@ function AddNewBicycle() {
 		setIsFilePicked(true);
 
     setPhotoThumbnail(<img className="photo-btn" src={URL.createObjectURL(event.target.files[0])}/>);
-    console.log(selectedFile);
 
   }
   const hiddenFileInput = React.useRef(null);

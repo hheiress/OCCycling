@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import VolunteerPanel from '../VolunteerPanel';
 import ChangeStatus from './ChangeStatus';
-
+import DeleteRenter from './DeleteRenter';
 
 const userFormReducer = (state, event) => {
     if (event.type === 'fetch') {
@@ -41,6 +41,7 @@ function UpdateRenter(props) {
     }, [setUser, props.match.params.id]);
 
     const handleSubmit = event => {
+        const dataBirth = user.date_birth.slice(0,10)
         event.preventDefault();
         const formData = new FormData();
         formData.append("name", user.name);
@@ -52,7 +53,7 @@ function UpdateRenter(props) {
         formData.append("nationality", user.nationality);
         formData.append("email", user.email);
         formData.append("phone_number", user.phone_number);
-        formData.append("status", "Active");
+        formData.append("status", user.status);
         if(isFilePicked){
             formData.append("user_photo", selectedFile);
         }else{
@@ -108,14 +109,15 @@ function UpdateRenter(props) {
                             <button
                                 type="button"
                                 onClick={imageUpload}
-                                className="photo-btn">{photoThumbnail}
+                                className="photo-btn-update">{photoThumbnail}
                             </button>
                             {/* <select>
                                 <option className={user.status}>{user.status}</option>    
                             </select> */}
                             <h5 className={user.status}>{user.status}</h5>  
-                           <ChangeStatus user_id={user.id}
-                           user_status={user.status}/>
+                           <ChangeStatus 
+                                user_id={user.id}
+                                user_status={user.status}/>
                             <Form.File
                                 id="userphoto"
                                 name="user_photo"
@@ -237,7 +239,7 @@ function UpdateRenter(props) {
                     </Form>
                 </div>
                 <div className="buttons-resident">
-                    <button className="delete-new-button">Delete</button>
+                    <DeleteRenter name={user.name} params={user.id}/>
                     <Link to={'/history/'+ user.id}
                     user_name={user.name}
                     user_last_name={user.last_name}>    

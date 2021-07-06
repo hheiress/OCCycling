@@ -1,5 +1,5 @@
-import React, { Fragment, useState, useEffect } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -10,10 +10,10 @@ import {
   Redirect
 } from "react-router-dom";
 
+import ProtectedRoute from './components/ProtectedRoute';
 import HomePage from './components/HomePage';
 import Login from './components/Login';
 import SignUp from "./components/SignUp"
-import VolunteerPanel from './components/VolunteerPanel';
 import Residents from './components/Residents/Residents';
 import RentBicycle from './components/RentBike/RentBicycle';
 import Rentings from './components/Rentings/Rentings';
@@ -24,10 +24,8 @@ import AddNewBicycle from './components/Bicycles/AddNewBicycle';
 import CreateNewRenter from './components/Residents/CreateNewRenter';
 import Dashboard from './components/Dashboard';
 import UpdateRenter from './components/Residents/UpdateRenter';
-import Footer from './components/Footer';
 import UpdateBicycle from './components/Bicycles/Update Bicycle';
 import ForgotPassword from './components/ForgotPassword';
-import DeleteBike from './components/Bicycles/DeleteBike';
 import ResetPassword from './components/ResetPassword';
 import ProtectedResidents from './components/Residents/ProtectedRoute'
 
@@ -36,11 +34,19 @@ toast.configure()
 
 function App() {
 
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const history = useHistory();
 
   const setAuth = (boolean) => {
     setIsAuthenticated (boolean);
   };
+
+  useEffect(() => {
+    if(!isAuthenticated) {
+      history?.push('/login')
+    }
+
+  }, [isAuthenticated])
 
   // async function isAuth () {
   //   try {
@@ -51,7 +57,7 @@ function App() {
   //     });
 
   //     const parseRes = await response.json()
-  //     console.log(parseRes)
+  //     (parseRes)
 
   //     parseRes === true ? setIsAuthenticated(true) :
   //     setIsAuthenticated(false);
@@ -89,19 +95,19 @@ function App() {
 
         {/* Volunteers */}
         {/* Volunteers */}
+
         <Route exact path = "/forgot-password" render={props => <ForgotPassword {...props} setAuth = {setAuth}/> } /> {/* investigar sobre setAuth, borrar?*/}
-        <Route exact path ="/reset-password" component={ResetPassword}/>
-        <Route exact path="/rentbicycle" component={RentBicycle} />
-        <Route exact path="/history/:id" component={History} />
-        <Route exact path="/rentings" component={Rentings} />
-        <Route exact path="/residents" component={Residents} />
-        <Route exact path="/protectresidents" component={ProtectedResidents} />
-        <Route exact path="/bicycles" component={AllBicycles} />
-        <Route exact path="/addnewbicycle" component={AddNewBicycle} />
-        <Route path="/updatebicycle/:id" component={UpdateBicycle} />
-        <Route path="/updaterenter/:id" component={UpdateRenter} />
-        <Route exact path= "/createnewrenter" component={CreateNewRenter} />
-        <Route exact path="/volunteerpanel" component={VolunteerPanel} />
+        <ProtectedRoute isAuthenticated={isAuthenticated} path ="/reset-password" Component={ResetPassword}/>
+        <ProtectedRoute isAuthenticated={isAuthenticated} path="/rentbicycle" Component={RentBicycle} />
+        <ProtectedRoute isAuthenticated={isAuthenticated} path="/history/:id" Component={History} />
+        <ProtectedRoute isAuthenticated={isAuthenticated} path="/rentings" Component={Rentings} />
+        <ProtectedRoute isAuthenticated={isAuthenticated} path="/residents" Component={Residents} />
+        <ProtectedRoute isAuthenticated={isAuthenticated} path="/protectresidents" Component={ProtectedResidents} />
+        <ProtectedRoute isAuthenticated={isAuthenticated} path="/bicycles" Component={AllBicycles} />
+        <ProtectedRoute isAuthenticated={isAuthenticated} path="/addnewbicycle" Component={AddNewBicycle} />
+        <ProtectedRoute isAuthenticated={isAuthenticated} path="/updatebicycle/:id" Component={UpdateBicycle} />
+        <ProtectedRoute isAuthenticated={isAuthenticated} path="/updaterenter/:id" Component={UpdateRenter} />
+        <ProtectedRoute isAuthenticated={isAuthenticated} path= "/createnewrenter" Component={CreateNewRenter} />
         <HomePage/>
         
       </Switch>

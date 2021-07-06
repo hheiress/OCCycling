@@ -2,12 +2,12 @@ import react, { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
 
 
-const ExportRentings = () =>{
-    const [rentings, setRentings] = useState([]);
-    const [dataRentings, setDataRentings] = useState({});
+const ExportBikes = () =>{
+    const [bikes, setBikes] = useState([]);
+    const [dataBikes, setDataBikes] = useState({});
 
     useEffect(()=>{
-        fetch("http://localhost:3000/rentings",{
+        fetch("http://localhost:3000/bikes",{
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -16,7 +16,7 @@ const ExportRentings = () =>{
         .then((res) => res.json())
         .then((data) => {
           ("First render");
-          setRentings(data);
+          setBikes(data);
         })
       }, []);
 
@@ -25,18 +25,16 @@ const ExportRentings = () =>{
     },[])
     return (
         <>
-        <div className="export"> 
+          <div className="export"> 
             <CSVLink
-            data={rentings}
-            filename={"my-file.csv"}
+            data={bikes}
+            filename={"bikes.csv"}
             className="btn btn-primary export-button"
             target="_blank"
-            >
-               Export
-            </CSVLink>
-        </div>
+            > Export </CSVLink>
+            </div>
         </>
     )
 }
 
-export default ExportRentings;
+export default ExportBikes;

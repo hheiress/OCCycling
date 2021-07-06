@@ -28,8 +28,7 @@ function ForgotPassword ( ) {
                 body: JSON.stringify(body)
             });
             const parseRes = await response.json();
-            console.log(body)
-            console.log(parseRes)
+            console.log(body, parseRes)
             if (parseRes.token) {
                 localStorage.setItem("token", parseRes.token);
 

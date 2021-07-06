@@ -14,7 +14,10 @@ const AllRenters = props => {
       .then((res) => res.json())
       .then((data) => {
         console.log("First render");
-        setRenters(data);
+        data = data.filter(
+          item => item.status !== "Not active"
+      );
+      setRenters(data);
       })
   }, []);
 
@@ -31,8 +34,10 @@ const AllRenters = props => {
       <VolunteerPanel />
       <div className="wrapper">
         <div className="residents-wrapper">
-          <h2 className="text-center">Residents</h2>
-          <ExportResidents/>   
+        <div className="headerExport">
+            <h2 className="text-center">Residents</h2>
+            <ExportResidents/>   
+        </div>
          <Link to={'/createnewrenter'}>
             <button className="mt-5 btn btn-primary create-resident-btn" type="submit">Create New Renter</button>
           </Link>

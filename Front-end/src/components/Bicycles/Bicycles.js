@@ -5,6 +5,7 @@ import DeleteBike from "./DeleteBike";
 import SearchBicycle from "./SearchBicycle";
 import Footer from "../Footer";
 import FilterBikes from "./FilterBikes";
+import ExportBikes from "./ExportBikes";
 
 const AllBicycles = props => {
     const [bikes, setBikes] = useState([]);
@@ -46,7 +47,10 @@ const AllBicycles = props => {
             <VolunteerPanel />
             <div className="wrapper">
                 <div className="residents-wrapper">
+                <div className="headerExport">
                     <h2 className="text-center">Bicycles</h2>
+                    <ExportBikes/>   
+                </div>
                     <Link to={'/addnewbicycle'}>
                         <button className="mt-5 btn btn-primary w-100" type="submit">Add New Bicycle</button>
                     </Link>
@@ -69,6 +73,7 @@ const AllBicycles = props => {
                                     <th>Station</th>
                                     <th>Entry Date</th>
                                     <th>Conditions</th>
+                                    <th>Current Status</th>
                                     <th>Edit</th>
                                 </tr>
                             </thead>
@@ -78,7 +83,8 @@ const AllBicycles = props => {
                                         <td>{item.model_name}</td>
                                         <td>{item.station_name}</td>
                                         <td>{item.entry_date}</td>
-                                        <td>{item.conditions}</td>                 
+                                        <td>{item.conditions}</td>       
+                                        <td>{item.status}</td>        
                                         <td>
                                             <Link to={'/updatebicycle/'+ item.id}>
                                                 <button className="update-button">Update</button>
@@ -94,7 +100,8 @@ const AllBicycles = props => {
                                             <td>{item.model_name}</td>
                                             <td>{item.station_name}</td>
                                             <td>{item.entry_date.slice(0,10)}</td>
-                                            <td>{item.conditions}</td>                 
+                                            <td>{item.conditions}</td> 
+                                            <td className={item.status}>{item.status}</td>                   
                                             <td>
                                                 <Link to={'/updatebicycle/'+ item.id}>
                                                     <button className="update-button">Update</button>

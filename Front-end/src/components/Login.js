@@ -62,7 +62,7 @@ function Login( {setAuth} ) {
                     {/* Delete LINK class, Use Redirect in app.js in route Login and set to Auth */}
                         <button  className="btn btn-lg btn-primary submit-button btn-block mb-5" type="submit">Login</button>  
                         <Link to = "/signup">SignUp</Link><br/>
-                        <Link to = "/forgot-password">Forgot password?</Link> {/* endpoint backend*/}                
+                        {/* <Link to = "/forgot-password">Forgot password?</Link>  */}
                 </form>
                 </div>
             </div>
