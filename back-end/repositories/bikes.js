@@ -30,6 +30,7 @@ async function create(req, res) {
 
 async function update(req, res) {
     const { model_name, status, entry_date, conditions, station_id } = req.body;
+    console.log(req.body)
     const { id } = req.params;
     if (!model_name || !status || !entry_date || !conditions || !station_id) {
         return res
@@ -38,10 +39,10 @@ async function update(req, res) {
     }
    try  { 
        await pool
-        .query("UPDATE bikes SET model_name  =$2, status=$3, entry_date = $4, conditions = $5, station_id = $6 WHERE id = $1", [id, model_name, status, entry_date, conditions, station_id])
+        .query("UPDATE bikes SET model_name =$2, status=$3, entry_date = $4, conditions = $5, station_id = $6 WHERE id = $1", [id, model_name, status, entry_date, conditions, station_id])
         if(req.file.buffer){
             const buffer = await sharp(req.file.buffer).resize({width:250, height:250}).png().toBuffer()
-            await pool.query("UPDATE bike_photos SET filename = $2, mimetype = $3, filedata = $4 WHERE user_id = $1", [id, req.file.originalname, req.file.mimetype, buffer])
+            await pool.query("UPDATE bike_photos SET filename = $2, mimetype = $3, filedata = $4 WHERE bike_id = $1", [id, req.file.originalname, req.file.mimetype, buffer])
         }
         return res.send('Bike Modified')
     } catch (error){
@@ -52,7 +53,6 @@ async function update(req, res) {
 async function updateBikeStatus(req, res) {
     const { status, station_id } = req.body;
     const { id } = req.params;
-    (station_id)
     if (!status || !station_id) {
         return res
             .status(400)
