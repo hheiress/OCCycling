@@ -16,8 +16,6 @@ const bikeFormReducer = (state, event) => {
   }
 }
 function UpdateBicycle(props) {
-  console.log(props.match.params.id);
-  
   const [submitting, setSubmitting] = useState(false);
   const [station, setStation] = useState([]);
   const [selectedFile, setSelectedFile] = useState("");
@@ -25,7 +23,6 @@ function UpdateBicycle(props) {
   const [photoThumbnail, setPhotoThumbnail] = useState("Photo")
   
   const [bike, setBike] = useReducer(bikeFormReducer, {});
-
   useEffect(() => {
     fetch("http://localhost:3000/station")
       .then((res) => res.json())
@@ -58,7 +55,7 @@ function UpdateBicycle(props) {
     formData.append( "status", bike.status);
     formData.append( "entry_date", bike.entry_date);
     formData.append( "conditions", bike.conditions);
-    formData.append( "station_id", bike.station);
+    formData.append( "station_id", bike.station_id);
     
     if(isFilePicked){
         formData.append("bike_photo", selectedFile);
@@ -66,7 +63,7 @@ function UpdateBicycle(props) {
         formData.append("bike_photo", null);
     }{
         setSubmitting(true);
-        fetch(`http://localhost:3000/bikes/${bike.props.match.params.id}`, {
+        fetch(`http://localhost:3000/bikes/${props.match.params.id}`, {
         method: 'PUT',
         body: formData,
     })
@@ -115,14 +112,20 @@ function UpdateBicycle(props) {
               <button
                 type="button"
                 onClick={imageUpload}
-                className="photo-btn-update"
-                disabled={submitting}
-              >{photoThumbnail}</button>
+                className="photo-btn-update">{photoThumbnail}</button>
               </div>
               <h5 className={bike.status}>{bike.status}</h5>  
               <ChangeBikeStatus 
                     bike_id={bike.id}
                     bike_status={bike.status}/>
+                <Form.File
+                    id="bikephoto"
+                    name="bike_photo"
+                    onChange={changeHandler}
+                    value={ "" || bike.bike_photo}
+                    ref={hiddenFileInput}
+                    style={{ display: 'none' }}
+                 />
             <div className="margin-form">
               <Form.Control
                 name="model_name"

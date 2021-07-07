@@ -53,7 +53,7 @@ ctrl.post("/",  upload.single("user_photo"), function (req, res, next) {
     });
 });
 
-ctrl.put("/:id", upload.single("user_photo"), function(req, res, next) {
+ctrl.put("/:id", upload.single("bike_photo"), function(req, res, next) {
     bikesRepo
         .update(req, res)
         .catch((err) => {
