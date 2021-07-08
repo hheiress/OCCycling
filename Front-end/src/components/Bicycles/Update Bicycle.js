@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import VolunteerPanel from '../VolunteerPanel';
 import ChangeBikeStatus from './ChangeBikeStatus'
+import DeleteBike from './DeleteBike.js';
 
 const bikeFormReducer = (state, event) => {
   if (event.type === 'fetch') {
@@ -165,6 +166,14 @@ function UpdateBicycle(props) {
               <Button className="submit-button" type="submit" disabled={submitting}>Done</Button>
             </div>
           </Form>
+        </div>
+        <div className="buttons-resident">
+            <DeleteBike name={bike.model_name} params={bike.id}/>
+            <Link to={'/bikehistory/'+ bike.id}
+                bike_name={bike.model_name}
+            > 
+            <button className="history-button">History</button>
+            </Link>
         </div>
       </div>
     </div>

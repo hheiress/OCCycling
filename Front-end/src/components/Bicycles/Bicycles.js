@@ -12,7 +12,12 @@ const AllBicycles = props => {
     const [filteredBikes, setFilteredBikes] = useState(null);
 
     useEffect(() => {
-        fetch("http://localhost:3000/bikes")
+        fetch("http://localhost:3000/bikes",{
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          })
             .then((res) => res.json())
             .then((data) => {
                 console.log("First render");

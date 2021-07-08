@@ -17,8 +17,8 @@ import SignUp from "./components/SignUp"
 import Residents from './components/Residents/Residents';
 import RentBicycle from './components/RentBike/RentBicycle';
 import Rentings from './components/Rentings/Rentings';
-import History from './components/Residents/History';
-// import UpdateRenting from './components/Rentings/UpdateRenting';
+import UserHistory from './components/Residents/UserHistory';
+import BikeHistory from './components/Bicycles/BikeHistory';
 import AllBicycles from './components/Bicycles/Bicycles';
 import AddNewBicycle from './components/Bicycles/AddNewBicycle';
 import CreateNewRenter from './components/Residents/CreateNewRenter';
@@ -99,7 +99,8 @@ function App() {
         <Route exact path = "/forgot-password" render={props => <ForgotPassword {...props} setAuth = {setAuth}/> } /> {/* investigar sobre setAuth, borrar?*/}
         <ProtectedRoute isAuthenticated={isAuthenticated} path ="/reset-password" Component={ResetPassword}/>
         <ProtectedRoute isAuthenticated={isAuthenticated} path="/rentbicycle" Component={RentBicycle} />
-        <ProtectedRoute isAuthenticated={isAuthenticated} path="/history/:id" Component={History} />
+        <ProtectedRoute isAuthenticated={isAuthenticated} path="/bikehistory/:id" Component={BikeHistory} />
+        <ProtectedRoute isAuthenticated={isAuthenticated} path="/userhistory/:id" Component={UserHistory} />
         <ProtectedRoute isAuthenticated={isAuthenticated} path="/rentings" Component={Rentings} />
         <ProtectedRoute isAuthenticated={isAuthenticated} path="/residents" Component={Residents} />
         <ProtectedRoute isAuthenticated={isAuthenticated} path="/protectresidents" Component={ProtectedResidents} />

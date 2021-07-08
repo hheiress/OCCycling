@@ -7,7 +7,7 @@ import UpdateRenting from "./UpdateRenting";
 import FilterRentings from "./FilterRentings";
 import BannUser from "./BannUser"
 import ExportRentings from "./ExportRentings";
-
+import FilterByDate from "./FilterByDate"
 
 const rentingForm = (state, event) => {
   if (event.reset) {
@@ -24,11 +24,10 @@ const rentingForm = (state, event) => {
 }
 
 const Rentings = props => {
-    const [submitting, setSubmitting] = useState(false);
     const [rentings, setRentings] = useState([]);
     const [update, setUpdate] = useState(false)
-    const [bikes, setBikes] = useState([]);
     const [filteredRentings, setFilteredRentings] = useState(null);
+    const [filteredDay, setFilteredDay] = useState(null);
 
     useEffect(()=>{
       fetch("http://localhost:3000/rentings",{
@@ -39,38 +38,31 @@ const Rentings = props => {
       })
       .then((res) => res.json())
       .then((data) => {
-        console.log("First render");
         setRentings(data);
       })
     }, [update]);
-
-    // useEffect(()=> {(rentings)}, [rentings])
 
    const sortedRentings = rentings.sort(
      (a,b)=>{
        return new Date(b.renting_date) - new Date(a.renting_date);}
    )
-  //  const [station, setStation] = useState([]);
 
    const search = searchVal => {
-    console.log(searchVal)
-    console.info("new Filtered!", searchVal);
     const filteredStation = sortedRentings.filter((item)=>{
-      console.log("filteres",item)
       return item.station_name === searchVal
     });
+    console.log(filteredStation)
      setFilteredRentings(filteredStation);
     };
-   //get station 
-  
-  // create a function to bann the user in case of overtimming
-  //  const bannTime= rentings.map(
-  //    (user)=>{
-  //    if((new Date(user.renting_date) - new Date(user.finished_date))> 4 ){
-  //       return user.status="Banned"
-  //    }
-  //   })
- 
+
+    const filterByDay = searchDay => {
+      const filteredDay = sortedRentings.filter(
+        item => item.renting_date.slice(0,10) === searchDay
+      );
+       console.log("searchDay:"+ searchDay, "FILTEREDdAY:" + filteredDay)
+        console.log(filteredDay)
+        setFilteredRentings(filteredDay);
+      };
 
     function magic(item){
       if(item.finished_date===null){
@@ -89,7 +81,10 @@ const Rentings = props => {
                     <h2 className="text-center">Rentings</h2>
                     <ExportRentings />
                   </div>
-                    <FilterRentings search={search}/>
+                  <div className="filters-rentings"> 
+                      <FilterRentings search={search}/>
+                      <FilterByDate searchDay={filterByDay}/>
+                  </div>
                     <div className="table">
                         <table className="table">
                             <thead>
@@ -106,12 +101,11 @@ const Rentings = props => {
                                 </thead>
                             <tbody>
                                 {filteredRentings?.length > 0 ? filteredRentings.map((item, index) => {
-                                  console.log(item)
                                   return(
                                     <tr key={index}>
                                     <td>{item.model_name}</td>
                                     <td>{item.name} {item.last_name}</td>
-                                    <td>{item.renting_date}</td>
+                                    <td>{item.renting_date.slice(0,19)}</td>
                                     <td>{item.station_name}</td>
                                     <td><SetTimer
                                     dueDate={magic(item)}
@@ -133,7 +127,6 @@ const Rentings = props => {
                               })
                                 :
                                 sortedRentings.map((item, index) => {
-                                  console.log(item)
                                   return(
                                     <tr key={index}>
                                     <td>{item.model_name}</td>
