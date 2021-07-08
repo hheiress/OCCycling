@@ -1,7 +1,7 @@
 import React, {useState, useEffect } from "react";
 import VolunteerPanel from "../VolunteerPanel";
 
-const History = (props)=>{
+const UserHistory = (props)=>{
     console.log(props.match.params.id);
     console.log(props.match.params.name);
     const [rentings, setRentings] = useState([]);
@@ -16,7 +16,7 @@ const History = (props)=>{
         .then((res) => res.json())
         .then((data) => {
             console.log("First render");
-              let rentings = data.filter(x => x.user_id == props.match.params.id)
+              let rentings = data.filter(x => x.bike_id == props.match.params.id)
               console.log(rentings)
               setRentings(rentings)
             //   setRentings({
@@ -34,9 +34,9 @@ const History = (props)=>{
                 <ul className="user-history">
                     {rentings?.length > 0 ? rentings.map((item, index) => (
                         <li className="user-li" key={index}>
-                          <span className="user-history-list">Bike:</span> {item.model_name}<br/>
-                          <span className="user-history-list"> Renting Time:</span>{item.renting_date.slice(0,19)}<br/>
-                          <span className="user-history-list">Finished Rent:</span> {item.finished_date.slice(0,19)}<br/>
+                          <span className="user-history-list">User:</span> {item.name} {item.last_name}<br/>
+                          <span className="user-history-list"> Start of Rent:</span>{item.renting_date.slice(0,19)}<br/>
+                          <span className="user-history-list">Finished the Rent:</span> {item.finished_date.slice(0,19)}<br/>
                           <span className="user-history-list">Starting Station: </span>{item.station_name}<br/>
                         </li>
                         )
@@ -50,4 +50,4 @@ const History = (props)=>{
     </> 
     )
 }
-export default History;
+export default UserHistory;

@@ -108,9 +108,10 @@ a.page{
 }
 .headerExport{
   display:flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 30px;
+ 
 }
 .header-name{
   color:white;
@@ -174,6 +175,8 @@ textarea {
 }
 
 .form-control {
+  border-radius:23px;
+  border-color: #15D4BE;
 	position: relative;
 	font-size: 16px;
 	height: auto;
@@ -329,11 +332,6 @@ input[type="password"] {
 
 .rentings-history {
   width: 430px;
-}
-
-.form-control{
-  border-radius:23px;
-  border-color: #15D4BE;
 }
 
 table {
@@ -528,8 +526,17 @@ textarea {
 .modal_content {
   background-color: #000;
 }
+
 .filters{
   display:flex;
+}
+.filters-rentings{
+  display: flex;
+  flex-direction: row;
+  width:100%;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
 }
 .bann-button{
   background-color:white;
@@ -618,9 +625,6 @@ textarea {
   border:2px solid;
   outline: none;
 }
-.export{
-  padding-left:60px;
-}
 .export .export-button {
   width:150px;
   color:white;
@@ -660,7 +664,7 @@ select{
   padding:110px;
 }
 
-@media only screen and (min-width:600px){
+@media only screen and (min-width:550px){
   .header-name{
     color:white;
     padding:10px;
@@ -696,16 +700,33 @@ select{
      margin-right: 30px;
    }
    .headerExport{
-     padding:0px 0px 0px 170px;
+      display:flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
    }
    .export{
-   
-   }
+    padding-left:0px 0px 0px 190px;
+  }
+   .export .export-button {
+    width:150px;
+    color:white;
+    padding:5px;
+    background-color: #9DBFAF;
+    border:2px solid;
+    border-radius:23px;
+    margin-left:30px;
+  }
    .burgerbtn{
      display:none;
    }
    a.page{
     color:#15D4BE;
+  }
+  .renting-station-filter{
+    width:700px;
+    margin:10px;
+    padding:12px;
   }
 }
 

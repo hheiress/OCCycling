@@ -1,6 +1,5 @@
-import {React, useState, useEffect} from 'react';
+import {React, useState} from 'react';
 import { Link } from "react-router-dom";
-import ProtectedRoute from '../components/Residents/ProtectedRoute.js';
 
 // rent a bike
 // see list of actual rentings

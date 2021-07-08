@@ -240,7 +240,7 @@ function UpdateRenter(props) {
                 </div>
                 <div className="buttons-resident">
                     <DeleteRenter name={user.name} params={user.id}/>
-                    <Link to={'/history/'+ user.id}
+                    <Link to={'/userhistory/'+ user.id}
                     user_name={user.name}
                     user_last_name={user.last_name}>    
                     <button className="history-button">History</button>

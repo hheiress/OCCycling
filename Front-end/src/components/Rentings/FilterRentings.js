@@ -37,6 +37,7 @@ const FilterRentings = (props) => {
           <>
          <div>
                    <Form.Control 
+                          className="renting-station-filter"
                           as="select"
                           name="station_name"
                           value={searchInput}

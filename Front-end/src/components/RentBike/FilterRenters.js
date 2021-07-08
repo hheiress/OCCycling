@@ -62,7 +62,7 @@ const FilterRenters = props => {
                                       <td data-title={item.id} >{item.id}</td>
                                       <td data-title={item.id} >{item.name}</td>
                                       <td data-title={item.id} >{item.last_name}</td>
-                                      <td data-title={item.id} >{item.date_birth}</td>
+                                      <td data-title={item.id} >{item.date_birth.slice(0,10)}</td>
                                       <td data-title={item.id}>{item.phone_number}</td>
                                     </tr>
                                   ))
