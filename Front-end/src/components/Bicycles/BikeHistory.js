@@ -36,7 +36,7 @@ const UserHistory = (props)=>{
                         <li className="user-li" key={index}>
                           <span className="user-history-list">User:</span> {item.name} {item.last_name}<br/>
                           <span className="user-history-list"> Start of Rent:</span>{item.renting_date.slice(0,19)}<br/>
-                          <span className="user-history-list">Finished the Rent:</span> {item.finished_date.slice(0,19)}<br/>
+                          <span className="user-history-list">Finished the Rent:</span> {item.finished_date}<br/>
                           <span className="user-history-list">Starting Station: </span>{item.station_name}<br/>
                         </li>
                         )
