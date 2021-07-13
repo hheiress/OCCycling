@@ -86,3 +86,9 @@ INSERT INTO rentings (bike_id, user_id, last_name, status, renting_date, station
 
 INSERT INTO ngo_users (user_name, user_email, user_password) VALUES ('Irene', 'ireneocc@gmail.com', 'igrece4381');
 
+DROP USER if exists pepe;
+CREATE USER pepe with PASSWORD 'pepe1234';
+GRANT CONNECT ON DATABASE occycling TO pepe;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public to pepe;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO pepe;
+
