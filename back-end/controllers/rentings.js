@@ -5,7 +5,9 @@ const ctrl = require("express").Router();
 ctrl.get ("/", function (req, res, next) {
     rentingsRepo
         .find()
-        .then((results) => res.json(results))
+        .then((results) => {
+            res.json(results)
+        })
         .catch((err) => {
             console.error(err.stack)
             next( new Error ("Internal server error"))
