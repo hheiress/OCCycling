@@ -212,7 +212,7 @@ function UpdateRenter(props) {
                                 autocomplete="off"
                                 placeholder="Birth date"
                                 onChange={handleChange}
-                                value="27/04/1974"
+                                value={user.date_birth}
                                 disabled={submitting}
                                 required
                             />
