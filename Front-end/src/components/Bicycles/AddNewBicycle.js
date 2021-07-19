@@ -8,7 +8,7 @@ const formReducer = (state, event) => {
   if (event.reset) {
     return {
       bike_photo: null,
-      station: null,
+      station_id: null,
       model_name: '',
       brand_name: '',
       status: '',
@@ -53,7 +53,7 @@ function AddNewBicycle() {
     formData.append( "status", 'Available');
     formData.append( "entry_date", today);
     formData.append( "conditions", dataForm.conditions);
-    formData.append( "station_id", dataForm.station);
+    formData.append( "station_id", dataForm.station_id);
     formData.append( "bike_number", dataForm.bike_number);
 
     setSubmitting(true);
@@ -169,7 +169,7 @@ function AddNewBicycle() {
               />
             </div>
             <div className="margin-form">
-              <Form.Control as="select" name="station" onChange={handleChange} value={dataForm.station || ''} required>
+              <Form.Control as="select" name="station_id" onChange={handleChange} value={dataForm.station_id || ''} required>
                 <option value="" disabled selected hidden>Station</option>
                 {station.map((item) => (
                   <option value={item.id}>{item.station_name}</option>

@@ -167,9 +167,8 @@ function UpdateBicycle(props) {
                 value={bike.station_id}
                 disabled={submitting}
                 required>
-                {<option value="" disabled selected hidden>{bike.station_name}</option>}
                 {station.map((item) => (
-                  <option value={item.station_id}>{item.station_name}</option>
+                  <option value={item.id}>{item.station_name}</option>
                 ))}
               </Form.Control>
             </div>
