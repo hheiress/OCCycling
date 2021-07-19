@@ -74,11 +74,7 @@ function RentBicycle() {
     const filteredBicycles = bikes.filter(
         item => item.status === null ||  item.status === "Available"
       );
-    
-    // const getBikeId = filteredBicycles.filter(
-    //     item => item.model_name === dataForm.model_name
-    // ) 
-  
+
 
     const handleSubmit = event => {
         const today =  new Date().toString().slice(4, 25);
@@ -205,7 +201,7 @@ function RentBicycle() {
                         required >
                             <option> Choose </option>
                             {filteredBicycles.map((item, index) => (
-                                <option key={index} value={item.id}>{item.model_name} </option>))}
+                                <option key={index} value={item.id}>{item.bike_number} - {item.brand_name} {item.model_name}</option>))}
                          </Form.Control>
 
                          <h4 className="addtime-header mt-3">Set Time</h4>

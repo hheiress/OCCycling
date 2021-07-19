@@ -5,14 +5,10 @@ const multer = require("multer")
 ctrl.get ("/", function (req, res, next) {
     bikesRepo
         .find()
-        .then((results) => {
-            (results)
-            res.json(results)
-        })
-       
+        .then(rows => res.json(rows))
         .catch((err) => {
             console.error(err.stack)
-            next( new Error ("Internal server error"))
+            next( new Error (`Error trying to read all the bikes ${err.message}`))
         });
 });
 
@@ -70,6 +66,7 @@ ctrl.put("/update/:id", function(req, res, next) {
             next( new Error ("Internal server error"))
         })
 });
+
 ctrl.put("/update/status/:id", function(req, res, next) {
     bikesRepo
         .updateNewStatus(req, res)

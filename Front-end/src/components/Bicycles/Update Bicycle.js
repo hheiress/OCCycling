@@ -53,11 +53,13 @@ function UpdateBicycle(props) {
     event.preventDefault();
     const formData = new FormData();
     formData.append("model_name", bike.model_name)
+    formData.append("brand_name", bike.brand_name)
     formData.append( "status", bike.status);
     formData.append( "entry_date", bike.entry_date);
     formData.append( "conditions", bike.conditions);
     formData.append( "station_id", bike.station_id);
-    
+    formData.append( "bike_number", bike.bike_number);
+
     if(isFilePicked){
         formData.append("bike_photo", selectedFile);
     }else{
@@ -129,12 +131,33 @@ function UpdateBicycle(props) {
                  />
             <div className="margin-form">
               <Form.Control
+                  name="bike_number"
+                  type="number"
+                  autocomplete="off"
+                  onChange={handleChange}
+                  value={bike.bike_number}
+                  disabled={submitting}
+                  required/>
+            </div>
+            <div className="margin-form">
+              <Form.Control
                 name="model_name"
+                type="text"
                 autocomplete="off"
                 onChange={handleChange}
                 value={bike.model_name}
                 disabled={submitting}
                 required/>
+            </div>
+            <div className="margin-form">
+              <Form.Control
+                  name="brand_name"
+                  type="text"
+                  autocomplete="off"
+                  onChange={handleChange}
+                  value={bike.brand_name}
+                  disabled={submitting}
+                  required/>
             </div>
             <div className="margin-form">
               <Form.Control
@@ -144,9 +167,8 @@ function UpdateBicycle(props) {
                 value={bike.station_id}
                 disabled={submitting}
                 required>
-                {<option value="" disabled selected hidden>{bike.station_name}</option>}
                 {station.map((item) => (
-                  <option value={item.station_id}>{item.station_name}</option>
+                  <option value={item.id}>{item.station_name}</option>
                 ))}
               </Form.Control>
             </div>

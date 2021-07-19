@@ -7,12 +7,14 @@ import VolunteerPanel from '../VolunteerPanel';
 const formReducer = (state, event) => {
   if (event.reset) {
     return {
-      bike_photo: '',
-      station: '',
+      bike_photo: null,
+      station_id: null,
       model_name: '',
+      brand_name: '',
       status: '',
       conditions: '',
-      entry_date: '',
+      entry_date: null,
+      bike_number: null
     }
   }
   return {
@@ -28,7 +30,7 @@ function AddNewBicycle() {
   const [submitting, setSubmitting] = useState(false);
   const [station, setStation] = useState([]);
   const [selectedFile, setSelectedFile] = useState("");
-	const [isFilePicked, setIsFilePicked] = useState(false);
+  const [isFilePicked, setIsFilePicked] = useState(false);
   const [photoThumbnail, setPhotoThumbnail] = useState ("Photo")
 
   useEffect(() => {
@@ -47,11 +49,13 @@ function AddNewBicycle() {
     const formData = new FormData();
     formData.append("user_photo", selectedFile);
     formData.append("model_name", dataForm.model_name)
+    formData.append("brand_name", dataForm.brand_name)
     formData.append( "status", 'Available');
     formData.append( "entry_date", today);
     formData.append( "conditions", dataForm.conditions);
-    formData.append( "station_id", dataForm.station);
-    
+    formData.append( "station_id", dataForm.station_id);
+    formData.append( "bike_number", dataForm.bike_number);
+
     setSubmitting(true);
     fetch("http://localhost:3000/bikes", {
       method: 'POST',
@@ -129,20 +133,43 @@ function AddNewBicycle() {
               />
             </div>
             <div className="margin-form">
-
+              <Form.Control
+                  type="number"
+                  name="bike_number"
+                  autocomplete="off"
+                  onChange={handleChange}
+                  value={dataForm.bike_number || null}
+                  placeholder="Bike Number"
+                  disabled={submitting}
+                  required
+              />
+            </div>
+            <div className="margin-form">
               <Form.Control 
               type="text" 
               name="model_name" 
               autocomplete="off" 
               onChange={handleChange} 
               value={dataForm.model_name || ''} 
-              placeholder="Name"
+              placeholder="Model"
               disabled={submitting}
               required  
               />
             </div>
             <div className="margin-form">
-              <Form.Control as="select" name="station" onChange={handleChange} value={dataForm.station || ''} required>
+              <Form.Control
+                  type="text"
+                  name="brand_name"
+                  autocomplete="off"
+                  onChange={handleChange}
+                  value={dataForm.brand_name || ''}
+                  placeholder="Brand"
+                  disabled={submitting}
+                  required
+              />
+            </div>
+            <div className="margin-form">
+              <Form.Control as="select" name="station_id" onChange={handleChange} value={dataForm.station_id || ''} required>
                 <option value="" disabled selected hidden>Station</option>
                 {station.map((item) => (
                   <option value={item.id}>{item.station_name}</option>
