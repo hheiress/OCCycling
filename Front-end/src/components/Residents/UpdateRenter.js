@@ -22,6 +22,7 @@ function UpdateRenter(props) {
     const [submitting, setSubmitting] = useState(false);
     const [selectedFile, setSelectedFile] = useState("");
     const [isFilePicked, setIsFilePicked] = useState(false);
+    const [locations, setLocations] = useState([]);
     const [photoThumbnail, setPhotoThumbnail] = useState("Photo")
     
     const [user, setUser] = useReducer(userFormReducer, {});
@@ -29,9 +30,6 @@ function UpdateRenter(props) {
         fetch(`http://localhost:3000/users/${props.match.params.id}`)
             .then((res) => res.json())
             .then((data) => {
-                console.log("First render");
-                console.log(data);
-                // const user = (data.find(x => x.id == props.match.params.id));
                 setUser({
                     type: 'fetch',
                     user: data,
@@ -39,6 +37,14 @@ function UpdateRenter(props) {
                 setPhotoThumbnail(<img className="photo-btn" src={`http://localhost:3000/users/${props.match.params.id}/photo`} />);  
             })
     }, [setUser, props.match.params.id]);
+
+    useEffect(() => {
+        fetch("http://localhost:3000/location")
+            .then((res) => res.json())
+            .then((data) => {
+                setLocations(data);
+            })
+    }, []);
 
     const handleSubmit = event => {
         const dataBirth = user.date_birth.slice(0,10)
@@ -164,12 +170,20 @@ function UpdateRenter(props) {
                             />
                         </div>
                         <div className="margin-form">
+                            <Form.Control as="select" name="location_id" onChange={handleChange} value={user.location_id} required>
+                                <option value="" disabled selected hidden>Location</option>
+                                {locations.map((item) => (
+                                    <option value={item.id}>{item.name}</option>
+                                ))}
+                            </Form.Control>
+                        </div>
+                        <div className="margin-form">
                             <Form.Control
                                 name="address"
                                 autocomplete="off"
                                 onChange={handleChange}
                                 value={user.address}
-                                placeholder="Address"
+                                placeholder="Address or Container"
                                 disabled={submitting}
                                 required
                             />
@@ -196,8 +210,9 @@ function UpdateRenter(props) {
                                 type="date"
                                 name="date_birth"
                                 autocomplete="off"
+                                placeholder="Birth date"
                                 onChange={handleChange}
-                                value={user.date_birth}
+                                value="27/04/1974"
                                 disabled={submitting}
                                 required
                             />
