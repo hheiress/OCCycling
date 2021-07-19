@@ -1,9 +1,17 @@
+CREATE TABLE locations
+(
+    id          SERIAL PRIMARY KEY,
+    name        TEXT NOT NULL,
+    postal_code TEXT NOT NULL
+);
+
 CREATE TABLE users
 (
     id           SERIAL PRIMARY KEY,
     name         TEXT NOT NULL,
     last_name    TEXT NOT null,
     passport     TEXT NOT NULL,
+    location_id  INT REFERENCES locations (id),
     address      TEXT NOT NULL,
     gender       TEXT,
     date_birth   DATE NOT NULL,
@@ -70,17 +78,21 @@ CREATE TABLE ngo_users
     user_password TEXT NOT NULL
 );
 
-INSERT INTO users (name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status)
-VALUES ('Ehsan', 'Abdul', 'H235690L', 'Street Tree 23', 'Male', '1970-06-20', 'Syrian', 'ehsan90@gmail.com', 44590832,
+INSERT INTO  locations(name, postal_code) values ('Polykastro', '61200');
+INSERT INTO  locations(name, postal_code) values ('Axioupuli', '61400');
+INSERT INTO  locations(name, postal_code) values ('Nea Kavala', '61200');
+
+INSERT INTO users (name, last_name, passport, location_id, address, gender, date_birth, nationality, email, phone_number, status)
+VALUES ('Ehsan', 'Abdul', 'H235690L', 1, 'Street Tree 23', 'Male', '1970-06-20', 'Syrian', 'ehsan90@gmail.com', 44590832,
         'Active');
-INSERT INTO users (name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status)
-VALUES ('Abel', 'Honks', 'G567623P', 'Street Table 44', 'Male', '1980-10-08', 'Liberia', 'abel_lib@yahoo.com', 33456712,
+INSERT INTO users (name, last_name, passport, location_id, address, gender, date_birth, nationality, email, phone_number, status)
+VALUES ('Abel', 'Honks', 'G567623P', 1, 'Street Table 44', 'Male', '1980-10-08', 'Liberia', 'abel_lib@yahoo.com', 33456712,
         'Active');
-INSERT INTO users (name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status)
-VALUES ('Miray', 'Demir', 'TK239445J', 'AV. Rome 56', 'Female', '1994-05-13', 'Turkey', 'miraydream@yahoo.com',
+INSERT INTO users (name, last_name, passport, location_id, address, gender, date_birth, nationality, email, phone_number, status)
+VALUES ('Miray', 'Demir', 'TK239445J', 2, 'AV. Rome 56', 'Female', '1994-05-13', 'Turkey', 'miraydream@yahoo.com',
         77234509, 'Active');
-INSERT INTO users (name, last_name, passport, address, gender, date_birth, nationality, email, phone_number, status)
-VALUES ('Alberto', 'Lopez', 'V228946K', 'Street Rose', 'Male', '1989-02-23', 'Venezuela', 'lopez10@gmail.com', 32568901,
+INSERT INTO users (name, last_name, passport, location_id, address, gender, date_birth, nationality, email, phone_number, status)
+VALUES ('Ahmed', 'Rashid', 'V228946K', 3, 'C33', 'Male', '1989-02-23', 'Afghanistan', 'ahmed10@gmail.com', 32568901,
         'Banned');
 
 

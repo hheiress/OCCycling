@@ -1,269 +1,288 @@
-import React, { useEffect, useReducer, useState } from 'react'
-import { Link } from "react-router-dom";
+import React, {useEffect, useReducer, useState} from 'react'
+import {Link} from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import VolunteerPanel from '../VolunteerPanel';
 import Footer from "../Footer";
 
 const formReducer = (state, event) => {
-  if (event.reset) {
-    return {
-      user_photo: '',
-      gender: '',
-      name: '',
-      last_name: '',
-      passport: '',
-      address: '',
-      date_birth: '',
-      nationality: '',
-      email: '',
-      phone_number: '',
-      status: '',
+    if (event.reset) {
+        return {
+            user_photo: '',
+            gender: '',
+            name: '',
+            last_name: '',
+            passport: '',
+            address: '',
+            location_id: null,
+            date_birth: null,
+            nationality: '',
+            email: '',
+            phone_number: '',
+            status: '',
+        }
     }
-  }
-  return {
-    ...state,
-    [event.name]: event.value
-  }
+    return {
+        ...state,
+        [event.name]: event.value
+    }
 }
 
 function CreateNewRenter() {
-  const [dataForm, setDataForm] = useReducer(formReducer, {
- });
-  const [submitting, setSubmitting] = useState(false);
-  const [selectedFile, setSelectedFile] = useState("");
-  const [isFilePicked, setIsFilePicked] = useState(false);
-  const [photoThumbnail, setPhotoThumbnail] = useState ("Photo")
+    const [dataForm, setDataForm] = useReducer(formReducer, {});
+    const [submitting, setSubmitting] = useState(false);
+    const [selectedFile, setSelectedFile] = useState("");
+    const [isFilePicked, setIsFilePicked] = useState(false);
+    const [locations, setLocations] = useState([]);
+    const [photoThumbnail, setPhotoThumbnail] = useState("Photo")
 
-  const handleSubmit = event => {
-    event.preventDefault();
+    useEffect(() => {
+        fetch("http://localhost:3000/location")
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("Setting locastions %j", data)
+                setLocations(data);
+            })
+    }, []);
 
-    const formData = new FormData();
-    formData.append("user_photo", selectedFile);
-    formData.append("name", dataForm.name);
-    formData.append("last_name", dataForm.last_name);
-    formData.append("passport", dataForm.passport);
-    formData.append("address", dataForm.address);
-    formData.append("gender", dataForm.gender);
-    formData.append("date_birth", dataForm.date_birth);
-    formData.append("nationality", dataForm.nationality);
-    formData.append("email", dataForm.email);
-    formData.append("phone_number", dataForm.phone_number);
-    formData.append("status", "Active");
-		
-    if (dataForm.phone_number > 2147483647) {
-      alert("***Phone Number must have 9 digits***");
-      event.preventDefault();
+    const handleSubmit = event => {
+        event.preventDefault();
 
-    } else {
+        const formData = new FormData();
+        formData.append("user_photo", selectedFile);
+        formData.append("name", dataForm.name);
+        formData.append("last_name", dataForm.last_name);
+        formData.append("passport", dataForm.passport);
+        formData.append("address", dataForm.address);
+        formData.append("location_id", dataForm.location_id);
+        formData.append("gender", dataForm.gender);
+        formData.append("date_birth", dataForm.date_birth);
+        formData.append("nationality", dataForm.nationality);
+        formData.append("email", dataForm.email);
+        formData.append("phone_number", dataForm.phone_number);
+        formData.append("status", "Active");
 
-      event.preventDefault();
+        if (dataForm.phone_number > 2147483647) {
+            alert("***Phone Number must have 9 digits***");
+            event.preventDefault();
 
-      setSubmitting(true);
+        } else {
 
-      fetch("http://localhost:3000/users", {
-        method: 'POST',
-        body: formData,
+            event.preventDefault();
 
-      })
+            setSubmitting(true);
 
-      .then((response) => response.json())
-			.then((result) => {
-				console.log('Success:', result);
-			})
-			.catch((error) => {
-				console.error('Error:', error);
-			})
+            fetch("http://localhost:3000/users", {
+                method: 'POST',
+                body: formData,
+            })
 
-      setTimeout(() => {
-        alert("New User Added");
-        setSubmitting(false);
-        setDataForm({
-          reset: true
-        });
+                .then((response) => response.json())
+                .then((result) => {
+                    console.log('Success:', result);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                })
 
-      }, 3000);
+            setTimeout(() => {
+                alert("New User Added");
+                setSubmitting(false);
+                setDataForm({
+                    reset: true
+                });
+
+            }, 3000);
+        }
     }
-  }
 
-  const handleChange = event => {
-    setDataForm({
-      name: event.target.name,
-      value: event.target.value,
-    });
-  }
+    const handleChange = event => {
+        setDataForm({
+            name: event.target.name,
+            value: event.target.value,
+        });
+    }
 
-  const changeHandler = event => {
-    setSelectedFile(event.target.files[0]);
-		setIsFilePicked(true);
+    const changeHandler = event => {
+        setSelectedFile(event.target.files[0]);
+        setIsFilePicked(true);
 
-    setPhotoThumbnail(<img className="photo-btn" src={URL.createObjectURL(event.target.files[0])}/>);
-    console.log(selectedFile);
+        setPhotoThumbnail(<img className="photo-btn" src={URL.createObjectURL(event.target.files[0])}/>);
+        console.log(selectedFile);
 
-  }
+    }
 
-  const hiddenFileInput = React.useRef(null);
-  const imageUpload = event => {
-    hiddenFileInput.current.click();
-  };
+    const hiddenFileInput = React.useRef(null);
+    const imageUpload = event => {
+        hiddenFileInput.current.click();
+    };
 
-  return (
-    <div>
-      <VolunteerPanel />
+    return (
+        <div>
+            <VolunteerPanel/>
 
-      <div className="wrapper">
-        <div className="return-form">
-          <Link to={'/residents'}>
-            <p>&#60; ALL RENTERS</p>
-          </Link>
+            <div className="wrapper">
+                <div className="return-form">
+                    <Link to={'/residents'}>
+                        <p>&#60; ALL RENTERS</p>
+                    </Link>
+                </div>
+
+
+                <div className="newrenter-form-wrapper">
+
+                    <p><b>ADD NEW RENTER</b></p>
+
+                    <Form className="form-align" onSubmit={handleSubmit}>
+
+                        <div className="margin-form">
+
+                            <button
+                                type="button"
+                                onClick={imageUpload}
+                                className="photo-btn">{photoThumbnail}</button>
+
+                            <Form.File
+                                id="userphoto"
+                                name="user_photo"
+                                onChange={changeHandler}
+                                value={dataForm.user_photo || ''}
+                                ref={hiddenFileInput}
+                                style={{display: 'none'}}
+                            />
+                        </div>
+
+                        <div className="wrap-names-renter">
+
+                            <div className="margin-form-name">
+                                <Form.Control
+                                    name="name"
+                                    autocomplete="off"
+                                    onChange={handleChange}
+                                    value={dataForm.name || ''}
+                                    placeholder="Name"
+                                    required
+                                />
+                            </div>
+
+                            <div className="margin-form-name">
+                                <Form.Control
+                                    name="last_name"
+                                    autocomplete="off"
+                                    onChange={handleChange}
+                                    value={dataForm.last_name || ''}
+                                    placeholder="Last Name"
+                                    required
+                                />
+                            </div>
+
+                        </div>
+
+                        <div className="margin-form">
+                            <Form.Control
+                                name="passport"
+                                autocomplete="off"
+                                onChange={handleChange}
+                                value={dataForm.passport || ''}
+                                placeholder="Passport"
+                                required
+                            />
+                        </div>
+
+                        <div className="margin-form">
+                            <Form.Control as="select" name="location_id" onChange={handleChange} value={dataForm.location_id || null} required>
+                                <option value="" disabled selected hidden>Location</option>
+                                {locations.map((item) => (
+                                    <option value={item.id}>{item.name}</option>
+                                ))}
+                            </Form.Control>
+                        </div>
+
+                        <div className="margin-form">
+                            <Form.Control
+                                name="address"
+                                autocomplete="off"
+                                onChange={handleChange}
+                                value={dataForm.address || ''}
+                                placeholder="Address or Container"
+                                required
+                            />
+                        </div>
+
+                        <div className="margin-form condition">
+                            <p>GENDER</p>
+                            <Form.Control
+                                as="select"
+                                className="select"
+                                name="gender"
+                                onChange={handleChange}
+                                value={dataForm.gender || ''}
+                                required>
+
+                                <option value="" disabled selected hidden>Choose...</option>
+
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Other">Other</option>
+
+                            </Form.Control>
+                        </div>
+
+                        <div className="margin-form condition">
+                            <p>DATE OF BIRTH</p>
+                            <Form.Control
+                                type="date"
+                                name="date_birth"
+                                autocomplete="off"
+                                onChange={handleChange}
+                                value={dataForm.date_birth || ''}
+                                placeholder="Date of Birth"
+                                required
+                            />
+                        </div>
+
+                        <div className="margin-form condition">
+                            <Form.Control
+                                name="nationality"
+                                autocomplete="off"
+                                onChange={handleChange}
+                                value={dataForm.nationality || ''}
+                                placeholder="Nationality"
+                                required/>
+                        </div>
+
+                        <div className="margin-form">
+                            <Form.Control
+                                type="email"
+                                name="email"
+                                autocomplete="off"
+                                onChange={handleChange}
+                                value={dataForm.email || ''}
+                                placeholder="Email"
+                                required/>
+                        </div>
+
+                        <div className="margin-form">
+                            <Form.Control className="number"
+                                          type="number"
+                                          name="phone_number"
+
+                                          onChange={handleChange}
+                                          value={dataForm.phone_number || ''}
+                                          placeholder="Phone Number"
+                                          required/>
+                        </div>
+
+                        <div className="margin-form-button">
+                            <Button className="submit-button" type="submit">Register</Button>
+                        </div>
+
+                    </Form>
+                </div>
+            </div>
+            <Footer/>
         </div>
-
-
-        <div className="newrenter-form-wrapper">
-
-          <p><b>ADD NEW RENTER</b></p>
-
-          <Form className="form-align" onSubmit={handleSubmit}>
-
-            <div className="margin-form">
-
-              <button
-                type="button"
-                onClick={imageUpload}
-                className="photo-btn">{photoThumbnail}</button>
-
-              <Form.File
-                id="userphoto"
-                name="user_photo"
-                onChange={changeHandler}
-                value={dataForm.user_photo || ''}
-                ref={hiddenFileInput}
-                style={{ display: 'none' }}
-              />
-            </div>
-
-            <div className="wrap-names-renter">
-
-              <div className="margin-form-name">
-                <Form.Control
-                  name="name"
-                  autocomplete="off"
-                  onChange={handleChange}
-                  value={dataForm.name || ''}
-                  placeholder="Name"
-                  required
-                />
-              </div>
-
-              <div className="margin-form-name">
-                <Form.Control
-                  name="last_name"
-                  autocomplete="off"
-                  onChange={handleChange}
-                  value={dataForm.last_name || ''}
-                  placeholder="Last Name"
-                  required
-                />
-              </div>
-
-            </div>
-
-            <div className="margin-form">
-              <Form.Control
-                name="passport"
-                autocomplete="off"
-                onChange={handleChange}
-                value={dataForm.passport || ''}
-                placeholder="Passport"
-                required
-              />
-            </div>
-
-            <div className="margin-form">
-              <Form.Control
-                name="address"
-                autocomplete="off"
-                onChange={handleChange}
-                value={dataForm.address || ''}
-                placeholder="Address"
-                required
-              />
-            </div>
-
-            <div className="margin-form condition">
-              <p>GENDER</p>
-              <Form.Control
-                as="select"
-                className="select"
-                name="gender"
-                onChange={handleChange}
-                value={dataForm.gender || ''}
-                required >
-
-                <option value="" disabled selected hidden>Choose...</option>
-
-                <option value="female">Female</option>
-                <option value="male">Male</option>
-                <option value="other">Other</option>
-
-              </Form.Control>
-            </div>
-
-            <div className="margin-form condition">
-              <p>DATE OF BIRTH</p>
-              <Form.Control
-                type="date"
-                name="date_birth"
-                autocomplete="off"
-                onChange={handleChange}
-                value={dataForm.date_birth || ''}
-                placeholder="Date of Birth"
-                required
-              />
-            </div>
-
-            <div className="margin-form condition">
-              <Form.Control
-                name="nationality"
-                autocomplete="off"
-                onChange={handleChange}
-                value={dataForm.nationality || ''}
-                placeholder="Nationality"
-                required />
-            </div>
-
-            <div className="margin-form">
-              <Form.Control
-                type="email"
-                name="email"
-                autocomplete="off"
-                onChange={handleChange}
-                value={dataForm.email || ''}
-                placeholder="Email"
-                required />
-            </div>
-
-            <div className="margin-form">
-              <Form.Control className="number"
-                type="number"
-                name="phone_number"
-
-                onChange={handleChange}
-                value={dataForm.phone_number || ''}
-                placeholder="Phone Number"
-                required />
-            </div>
-
-            <div className="margin-form-button">
-              <Button className="submit-button" type="submit">Register</Button>
-            </div>
-
-          </Form>
-        </div>
-      </div>
-      <Footer />
-    </div>
-  )
+    )
 }
 
 export default CreateNewRenter;
