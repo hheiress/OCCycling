@@ -2,11 +2,9 @@ const {locationsRepo} = require("../repositories");
 const ctrl = require("express").Router();
 
 ctrl.get("/", function (req, res, next) {
-    console.log("--------_> Finding locations")
     locationsRepo
         .find()
         .then(rows => {
-            console.log("Reading all locations %j", rows)
             return res.json(rows)
         })
         .catch((err) => {
