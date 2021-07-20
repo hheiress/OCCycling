@@ -104,6 +104,7 @@ function remove(req, res) {
             .status(400)
             .send("Please insert a id");
     }
+    // TODO fix this as a user with rentings can not be removed this way
     return pool
         .query("DELETE FROM users WHERE id = $1", [id])
         .then(() => res.send('User Eliminated'))
