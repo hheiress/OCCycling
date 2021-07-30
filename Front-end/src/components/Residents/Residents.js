@@ -24,7 +24,7 @@ const AllRenters = props => {
   const search = searchVal => {
     console.info("TO DO!", searchVal);
     const filteredResidents = renters.filter(
-      item => item.name === searchVal || item.last_name === searchVal
+      item => item.name.includes(searchVal) || item.last_name.includes(searchVal)
     );
     setFilteredUsers(filteredResidents);
   };
@@ -68,7 +68,7 @@ const AllRenters = props => {
                     <td>{item.passport}</td>
                     <td>{item.address}</td>
                     <td>{item.gender}</td>
-                    <td>{item.date_birth.slice(0,10)}</td>
+                    <td>{item.date_birth}</td>
                     <td>{item.nationality}</td>
                     <td>{item.email}</td>
                     <td>{item.phone_number}</td>
@@ -89,7 +89,7 @@ const AllRenters = props => {
                   <td>{item.passport}</td>
                   <td>{item.address}</td>
                   <td>{item.gender}</td>
-                  <td>{item.date_birth.slice(0,10)}</td>
+                  <td>{item.date_birth}</td>
                   <td>{item.nationality}</td>
                   <td>{item.email}</td>
                   <td>{item.phone_number}</td>

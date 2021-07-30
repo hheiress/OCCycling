@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Search from "./Search";
+import NewTable from "./NewTable";
+const moment = require('moment');
 
 const FilterRenters = props => {
-    
+    const [activeRow, setActiveRow] = useState("");
     const [renters, setRenters] = useState([]);
     const [filteredUsers, setFilteredUsers] = useState(null);
-
+    
       useEffect(()=>{
         fetch("http://localhost:3000/users")
         .then((res) => res.json())
@@ -22,7 +24,7 @@ const FilterRenters = props => {
       const search = searchVal => {
         console.info("Filtered!", searchVal);
         const filteredResidents = renters.filter(
-          item => item.name === searchVal || item.last_name === searchVal
+          item => item.name.includes(searchVal) || item.last_name.includes(searchVal)
         );
         setFilteredUsers(filteredResidents);
       };
@@ -31,16 +33,6 @@ const FilterRenters = props => {
         event.preventDefault();
         props.handleRowClick();
       };
-      const [selectStatus, setSelectStatus] = useState(null);
-      const highlightRow = () => {
-        if (selectStatus === "") {
-          console.log("Highlight row");
-          setSelectStatus("table-row");
-        } else {
-          console.log("Remove highlight");
-          setSelectStatus("");
-        }
-      };
       return (
           <>
               <div className="search-box">
@@ -48,33 +40,35 @@ const FilterRenters = props => {
                       <div className="table scrollingTable">
                           <table className="table user-renting">
                               <thead>
-                                  <tr >
+                                  <tr>
                                       <th>User ID</th>
                                       <th>First name</th>
                                       <th>Last name</th>
-                                      <th>Date of birthday</th>
+                                      <th>Age</th>
                                       <th>Phone number</th>
                                     </tr>
                                 </thead>
                               <tbody>
                                   {filteredUsers?.length > 0 ? filteredUsers.map((item, index) => (
-                                      <tr className={selectStatus} onClick={props.handleRowClick} key={index} >
-                                      <td data-title={item.id} >{item.id}</td>
-                                      <td data-title={item.id} >{item.name}</td>
-                                      <td data-title={item.id} >{item.last_name}</td>
-                                      <td data-title={item.id} >{item.date_birth.slice(0,10)}</td>
-                                      <td data-title={item.id}>{item.phone_number}</td>
-                                    </tr>
+                                      <NewTable 
+                                      item={item}
+                                      index={index}
+                                      handleRowClick={props.handleRowClick}
+                                      activeRow={props.activeRow}
+                                      setUser={props.setUser}
+                                      />
                                   ))
                                   :
                                   renters.map((item, index) => (
-                                    <tr className={selectStatus} onClick={props.handleRowClick} key={index} >
-                                    <td data-title={item.id} >{item.id}</td>
-                                    <td data-title={item.id} >{item.name}</td>
-                                    <td data-title={item.id} >{item.last_name}</td>
-                                    <td data-title={item.id} >{item.date_birth.slice(0,10)}</td>
-                                    <td data-title={item.id}>{item.phone_number}</td>
-                                    </tr>
+                                    <>
+                                    <NewTable 
+                                    item={item}
+                                    index={index}
+                                    handleRowClick={props.handleRowClick}
+                                    activeRow={props.activeRow}
+                                    setUser={props.setUser}
+                                    />
+                                    </>
                                   ))  
                                 } 
             </tbody>

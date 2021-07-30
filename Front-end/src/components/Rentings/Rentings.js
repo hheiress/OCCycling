@@ -8,6 +8,7 @@ import FilterRentings from "./FilterRentings";
 import BannUser from "./BannUser"
 import ExportRentings from "./ExportRentings";
 import FilterByDate from "./FilterByDate"
+import CurrentRentings from "./CurrentRentings";
 
 const rentingForm = (state, event) => {
   if (event.reset) {
@@ -38,6 +39,9 @@ const Rentings = props => {
       })
       .then((res) => res.json())
       .then((data) => {
+        data = data.filter(
+          item => item.finished_date !== null
+      );
         setRentings(data);
       })
     }, [update]);
@@ -85,7 +89,9 @@ const Rentings = props => {
                       <FilterRentings search={search}/>
                       <FilterByDate searchDay={filterByDay}/>
                   </div>
+                  <CurrentRentings/>
                     <div className="table">
+                      <h3>All Rentings</h3>
                         <table className="table">
                             <thead>
                                 <tr>
