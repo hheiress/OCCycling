@@ -1,4 +1,5 @@
 import react, { useState,useEffect } from "react";
+import {toast} from "react-toastify";
 
 const BannUser = (props) => {
     const [submitting, setSubmitting] = useState(false);
@@ -15,7 +16,7 @@ const BannUser = (props) => {
          })
          .then(res => res.json())
          .then(data => (data))
-         alert("User Banned! Update the page")
+         toast.dark("User Banned! Update the page")
     };
 
 return (

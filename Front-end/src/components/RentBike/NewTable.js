@@ -1,11 +1,14 @@
 import react, {useState} from "react";
+import Alert from 'react-bootstrap/Alert';
+import {toast} from "react-toastify";
 const moment = require('moment');
+
 
 const NewTable = (props) => {
     const [activeRow, setActiveRow] = useState("");
-   
     const highlightRowClick = () => {
         if (activeRow === "") {
+            toast.info("User Selected!")
             console.log("Highlight row");
             setActiveRow("table-row");
           } else {
@@ -23,10 +26,11 @@ const NewTable = (props) => {
               highlightRowClick();
               props.handleRowClick(event)}
             }
-            className={activeRow}
+            variant="outline-success"
+            id={activeRow}
             key={props.index} 
         > 
-        <td data-title={props.item.id}> {props.item.id} </td>
+        <td data-title={props.item.id} className="id-number"> {props.item.id} </td>
         <td data-title={props.item.id}> {props.item.name} </td>
         <td data-title={props.item.id}> {props.item.last_name} </td>
         <td data-title={props.item.id}>  {

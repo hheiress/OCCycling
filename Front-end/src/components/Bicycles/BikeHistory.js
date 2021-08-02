@@ -29,7 +29,8 @@ const UserHistory = (props)=>{
         <>
         <VolunteerPanel />
         <div className="wrapper">
-        <h1 className="header-history">History</h1>
+            <h1 className="header-history"><hr width="20%"/></h1>
+            <h1 className="header-history"><span className="bike-word">Bike</span>  History</h1>
             <div className="residents-history-wrapper">
                 <ul className="user-history">
                     {rentings?.length > 0 ? rentings.map((item, index) => (

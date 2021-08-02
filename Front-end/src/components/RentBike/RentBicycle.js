@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import FilterRenters from "./FilterRenters"
 import VolunteerPanel from '../VolunteerPanel';
 import Footer from "../Footer";
+import {toast} from "react-toastify";
 
 const options = [
     {
@@ -129,7 +130,7 @@ function RentBicycle() {
         console.error('Error:', error);
       })  
       setTimeout(() => {
-        alert("New Renting Added");
+        toast.info("New Renting Added");
         setSubmitting(false);
         setDataForm({
           reset: true
@@ -164,13 +165,13 @@ function RentBicycle() {
       console.log(dataForm)
      
     const [activeRow, setActiveRow] = useState("");
+    const [show, setShow] = useState(false);
 
     function handleRowClick (event) {
       console.log(event)
         const dataRow = {
           id: event.target.dataset.title
         };
-        alert("User Selected")
         console.log(dataRow)
         setUser(dataRow)
       }
@@ -181,7 +182,6 @@ function RentBicycle() {
             <div className="wrapper">
                 <div className="residents-wrapper">
                     <h2 className="text-center">Rent a Bicycle</h2>
-                    
                     <div className="search-fbox">
                         <FilterRenters 
                         handleRowClick={handleRowClick}

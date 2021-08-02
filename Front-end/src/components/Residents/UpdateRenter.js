@@ -6,6 +6,8 @@ import Button from 'react-bootstrap/Button';
 import VolunteerPanel from '../VolunteerPanel';
 import ChangeStatus from './ChangeStatus';
 import DeleteRenter from './DeleteRenter';
+import { toast } from 'react-toastify';
+import Footer from '../Footer';
 
 const userFormReducer = (state, event) => {
     if (event.type === 'fetch') {
@@ -74,7 +76,7 @@ function UpdateRenter(props) {
                 body: formData,
             })
             setTimeout(() => {
-                alert("User Updated!");
+                toast.info("User Updated!");
                 setSubmitting(false);
             }, 500);
         }
@@ -100,14 +102,16 @@ function UpdateRenter(props) {
     };
 
     return (
-        <div>
+        <div >
             <VolunteerPanel />
-            <div className="wrapper">
-                <div className="return-form">
+            <div className="prelinks-wrapper">
+               
                     <Link to={'/residents'}>
                         <p>&#60; ALL RENTERS</p>
                     </Link>
-                </div>
+               
+            </div>
+            <div className="wrapper">
                 <div className="newrenter-form-wrapper">
                     <p><b>UPDATE RENTER</b></p>
                     <Form className="form-align" onSubmit={handleSubmit}>
@@ -253,7 +257,7 @@ function UpdateRenter(props) {
                         </div>
                     </Form>
                 </div>
-                <div className="buttons-resident">
+                <div className="buttons-resident prelinks-wrapper">
                     <DeleteRenter name={user.name} params={user.id}/>
                     <Link to={'/userhistory/'+ user.id}
                     user_name={user.name}

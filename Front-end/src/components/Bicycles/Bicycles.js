@@ -90,7 +90,7 @@ const AllBicycles = props => {
                             <tbody>
                             {filteredBikes?.length > 0 ? filteredBikes.map((item, index) => (
                                     <tr key={index}>
-                                        <td>{item.bike_number}</td>
+                                        <td className="id-number">{item.bike_number}</td>
                                         <td>{item.brand_name}</td>
                                         <td>{item.model_name}</td>
                                         <td>{item.station_name}</td>
@@ -109,7 +109,7 @@ const AllBicycles = props => {
                                 :
                                 bikes.map((item, index) => (
                                     <tr key={index}>
-                                        <td>{item.bike_number}</td>
+                                        <td className="id-number">{item.bike_number}</td>
                                         <td>{item.brand_name}</td>
                                         <td>{item.model_name}</td>
                                         <td>{item.station_name}</td>

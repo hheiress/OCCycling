@@ -29,14 +29,15 @@ const UserHistory = (props)=>{
         <>
         <VolunteerPanel />
         <div className="wrapper">
-        <h1 className="header-history">History</h1>
+        <h1 className="header-history"><hr width="20%"/></h1>
+        <h1 className="header-history"><span className="bike-word">User </span> History</h1>
             <div className="residents-history-wrapper">
                 <ul className="user-history">
                     {rentings?.length > 0 ? rentings.map((item, index) => (
                         <li className="user-li" key={index}>
-                          <span className="user-history-list">Bike:</span> {item.model_name}<br/>
+                          <span className="user-history-list" id="bike">Bike:</span> {item.model_name}<br/>
                           <span className="user-history-list"> Renting Time:</span>{item.renting_date.slice(0,19)}<br/>
-                          <span className="user-history-list">Finished Rent:</span> {item.finished_date.slice(0,19)}<br/>
+                          <span className="user-history-list">Finished Rent:</span> {item.finished_date}<br/>
                           <span className="user-history-list">Starting Station: </span>{item.station_name}<br/>
                         </li>
                         )

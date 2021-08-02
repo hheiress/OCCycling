@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import VolunteerPanel from '../VolunteerPanel';
 import Footer from "../Footer";
+import { toast } from 'react-toastify';
 
 const formReducer = (state, event) => {
     if (event.reset) {
@@ -86,7 +87,7 @@ function CreateNewRenter() {
                 })
 
             setTimeout(() => {
-                alert("New User Added");
+                toast.info("New User Added");
                 setSubmitting(false);
                 setDataForm({
                     reset: true
@@ -120,28 +121,21 @@ function CreateNewRenter() {
     return (
         <div>
             <VolunteerPanel/>
-
-            <div className="wrapper">
-                <div className="return-form">
+            <div className="prelinks-wrapper">
                     <Link to={'/residents'}>
                         <p>&#60; ALL RENTERS</p>
                     </Link>
                 </div>
-
-
+            <div className="wrapper">
                 <div className="newrenter-form-wrapper">
-
                     <p><b>ADD NEW RENTER</b></p>
-
                     <Form className="form-align" onSubmit={handleSubmit}>
-
                         <div className="margin-form">
-
                             <button
                                 type="button"
                                 onClick={imageUpload}
-                                className="photo-btn">{photoThumbnail}</button>
-
+                                className="photo-btn">{photoThumbnail}
+                            </button>
                             <Form.File
                                 id="userphoto"
                                 name="user_photo"
@@ -151,9 +145,7 @@ function CreateNewRenter() {
                                 style={{display: 'none'}}
                             />
                         </div>
-
                         <div className="wrap-names-renter">
-
                             <div className="margin-form-name">
                                 <Form.Control
                                     name="name"
@@ -164,7 +156,6 @@ function CreateNewRenter() {
                                     required
                                 />
                             </div>
-
                             <div className="margin-form-name">
                                 <Form.Control
                                     name="last_name"

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import VolunteerPanel from '../VolunteerPanel';
+import { toast } from 'react-toastify';
 
 const formReducer = (state, event) => {
   if (event.reset) {
@@ -74,7 +75,7 @@ function AddNewBicycle() {
 		})
 
     setTimeout(() => {
-      alert("New Bicycle Added!");
+      toast.info("New Bicycle Added!");
       setSubmitting(false);
       setDataForm({
         reset: true
@@ -106,14 +107,12 @@ function AddNewBicycle() {
   return (
     <div>
       <VolunteerPanel />
-
-      <div className="wrapper">
-        <div className="return-form">
+      <div className="prelinks-wrapper">
           <Link to={'/bicycles'}>
             <p> 	&#60; ALL BICYCLES</p>
           </Link>
-
         </div>
+      <div className="wrapper">
         <div className="form-wrapper">
           <p><b>ADD NEW BICYCLE</b></p>
           <Form onSubmit={handleSubmit} className="form-align" >
