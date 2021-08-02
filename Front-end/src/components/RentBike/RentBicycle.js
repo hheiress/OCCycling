@@ -158,27 +158,21 @@ function RentBicycle() {
            return item.id;
          }
         })
-
         console.log(dataForm.bike_id)
         console.log(getStationId)
       }, [dataForm])
       console.log(dataForm)
      
-    const [selectStatus, setSelectStatus] = useState(0);  
-    const handleRowClick = event => {
+    const [activeRow, setActiveRow] = useState("");
+
+    function handleRowClick (event) {
+      console.log(event)
         const dataRow = {
           id: event.target.dataset.title
         };
         alert("User Selected")
         console.log(dataRow)
         setUser(dataRow)
-        if (selectStatus === "") {
-          console.log("Highlight row");
-          setSelectStatus("table-row");
-        } else {
-          console.log("Remove highlight");
-          setSelectStatus("");
-        }
       }
     
     return (
@@ -189,7 +183,10 @@ function RentBicycle() {
                     <h2 className="text-center">Rent a Bicycle</h2>
                     
                     <div className="search-fbox">
-                        <FilterRenters handleRowClick={handleRowClick}/>
+                        <FilterRenters 
+                        handleRowClick={handleRowClick}
+                        activeRow={activeRow}
+                        setUser={setUser} />
                     </div>
                     <div>
                         <h4 className="bicycle-rent mt-3">Choose Bicycle</h4>

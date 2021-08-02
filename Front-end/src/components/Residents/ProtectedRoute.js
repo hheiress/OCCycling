@@ -16,7 +16,7 @@ const ProtectedRoute = () => {
     const handleSubmit = event => {
         event.preventDefault();
         console.log("Submited")
-        const isAuthenticated = "KARINA";
+        const isAuthenticated = "BikePoli17";
         if(isAuthenticated===searchInput){
             return history.push('/residents')
         }else {
