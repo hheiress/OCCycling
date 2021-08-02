@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Form from 'react-bootstrap/Form';
+import {toast} from "react-toastify";
 
 const PopUp = (props) => {
   const [station, setStation] = useState({stations: null, selectedStation_Id: null})
+  const [update, setUpdate] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:3000/station")
@@ -11,7 +13,7 @@ const PopUp = (props) => {
         ("First render");
         setStation({...station, stations: data});
       })
-  }, [])
+  }, [update])
 
 
 
@@ -29,7 +31,7 @@ const PopUp = (props) => {
         })
         .then(res => res.json())
         .then(data => (data))
-        alert("Station Updated")}
+        toast.info("Station Updated!")}
 
 
   return (

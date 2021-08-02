@@ -1,4 +1,5 @@
 import react, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 const ChangeStatus = (props) => {
     const [submitting, setSubmitting] = useState(false);
@@ -39,7 +40,7 @@ const ChangeStatus = (props) => {
         setChangedStatus(newStatus)
         event.preventDefault();
         setSubmitting(true);
-        alert("User Active! Update the page")
+        toast.info("User Active! Update the page")
     }
 
 return (

@@ -21,7 +21,7 @@ const CurrentFunctions = () =>{
             item => item.finished_date === null);
         setCurrentRentings(data);
       })
-   }, [])
+   }, [update])
 
  const sortedRentings = currentRentings.sort(
    (a,b)=>{
@@ -40,6 +40,7 @@ const CurrentFunctions = () =>{
     <>
         <div className="table">
             <h3> Current Rentings</h3>
+            <h5 className="more-info">The number of current rentings is: {currentRentings.length}</h5>
             <table className="table">
                 <thead>
                     <tr>

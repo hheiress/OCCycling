@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import Residents from './Residents';
 import VolunteerPanel from '../VolunteerPanel';
+import Footer from '../Footer';
 
 const ProtectedRoute = () => {
     const history = useHistory();
@@ -41,9 +42,9 @@ const ProtectedRoute = () => {
             />
            {isNotVerified ? <div> Not found, ask for the password to coordinator. </div> : ""}
             <button onSubmit={handleSubmit} className="btn btn-primary" >Verify</button>
-            </form>
-             
+            </form> 
         </div>
+        <Footer />
         </>
     )
 }

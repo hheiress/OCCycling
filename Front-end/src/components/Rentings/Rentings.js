@@ -26,7 +26,7 @@ const rentingForm = (state, event) => {
 
 const Rentings = props => {
     const [rentings, setRentings] = useState([]);
-    const [update, setUpdate] = useState(false)
+    const [update, setUpdate] = useState(false);
     const [filteredRentings, setFilteredRentings] = useState(null);
     const [filteredDay, setFilteredDay] = useState(null);
 
@@ -99,9 +99,9 @@ const Rentings = props => {
                                     <th>User name</th>
                                     <th>Renting date</th>
                                     <th>Station</th>
-                                    <th>Time left</th>
+                                    {/* <th>Time left</th> */}
                                     <th>Condition</th>
-                                    <th></th>
+                                    {/* <th></th> */}
                                     <th>Finished date</th>
                                     </tr>
                                 </thead>
@@ -113,11 +113,11 @@ const Rentings = props => {
                                     <td>{item.name} {item.last_name}</td>
                                     <td>{item.renting_date.slice(0,19)}</td>
                                     <td>{item.station_name}</td>
-                                    <td><SetTimer
+                                    {/* <td><SetTimer
                                     dueDate={magic(item)}
-                                    /></td>
+                                    /></td> */}
                                     <td>{item.conditions}</td>
-                                    <td><UpdateRenting
+                                    {/* <td><UpdateRenting
                                     setUpdate={setUpdate}
                                     update={update} 
                                     params={item.id}
@@ -126,7 +126,7 @@ const Rentings = props => {
                                     last_name={item.last_name}
                                     />
                                     <BannUser user_id={item.user_id}/>
-                                    </td>
+                                    </td> */}
                                     <td>{item.finished_date}</td>
                                   </tr>
                                 )
@@ -139,11 +139,11 @@ const Rentings = props => {
                                     <td>{item.name} {item.last_name}</td>
                                     <td>{item.renting_date.slice(0,19)}</td>
                                     <td>{item.station_name}</td>
-                                    <td><SetTimer
+                                    {/* <td><SetTimer
                                     dueDate={magic(item)}
-                                    /></td>
+                                    /></td> */}
                                     <td>{item.conditions}</td>
-                                    <td><UpdateRenting
+                                    {/* <td><UpdateRenting
                                     setUpdate={setUpdate}
                                     update={update} 
                                     params={item.id}
@@ -152,7 +152,7 @@ const Rentings = props => {
                                     last_name={item.last_name}
                                     />
                                     <BannUser user_id={item.user_id}/>
-                                    </td>
+                                    </td> */}
                                     <td>{item.finished_date}</td>
                                   </tr>
                                 )})

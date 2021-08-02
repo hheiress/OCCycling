@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import VolunteerPanel from '../VolunteerPanel';
 import ChangeBikeStatus from './ChangeBikeStatus'
 import DeleteBike from './DeleteBike.js';
+import { toast } from 'react-toastify';
 
 const bikeFormReducer = (state, event) => {
   if (event.type === 'fetch') {
@@ -71,7 +72,7 @@ function UpdateBicycle(props) {
         body: formData,
     })
       setTimeout(() => {
-        alert("Bicycle Updated!");
+        toast.info("Bicycle Updated!");
         setSubmitting(false);
       }, 500);
     }
@@ -102,11 +103,14 @@ function UpdateBicycle(props) {
   return (
     <div>
       <VolunteerPanel />
+      <div className="prelinks-wrapper">
+      <Link to={'/bicycles'}>
+            <p>&#60; ALL BICYCLES</p>
+      </Link>
+      </div>
       <div className="wrapper">
         <div className="return-form">
-          <Link to={'/bicycles'}>
-            <p>&#60; ALL BICYCLES</p>
-          </Link>
+          
         </div>
         <div className="form-wrapper">
           <p><b>UPDATE BICYCLE</b></p>
@@ -189,7 +193,8 @@ function UpdateBicycle(props) {
             </div>
           </Form>
         </div>
-        <div className="buttons-resident">
+      </div>
+      <div className="buttons-resident prelinks-wrapper">
             <DeleteBike name={bike.model_name} params={bike.id}/>
             <Link to={'/bikehistory/'+ bike.id}
                 bike_name={bike.model_name}
@@ -197,7 +202,6 @@ function UpdateBicycle(props) {
             <button className="history-button">History</button>
             </Link>
         </div>
-      </div>
     </div>
   )
 }

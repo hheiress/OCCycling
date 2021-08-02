@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useReducer} from 'react';
-
+import {toast} from "react-toastify";
 import PopUp from './PopUp'
 
 const rentingFormReducer = (state, event) => {
@@ -96,7 +96,7 @@ const getStationId = station.filter(
             })
             
         };
-        alert("Renting Updated!");
+        toast.info("Renting Updated!");
         props.setUpdate(!props.update)
         setSelectBike(bikes.filter(
           item => item.model_name === props.model_name

@@ -8,6 +8,7 @@ const FilterRenters = props => {
     const [activeRow, setActiveRow] = useState("");
     const [renters, setRenters] = useState([]);
     const [filteredUsers, setFilteredUsers] = useState(null);
+    const [show, setShow] = useState(true);
     
       useEffect(()=>{
         fetch("http://localhost:3000/users")
@@ -38,7 +39,7 @@ const FilterRenters = props => {
               <div className="search-box">
                       <Search search={search} />
                       <div className="table scrollingTable">
-                          <table className="table user-renting">
+                          <table className=" user-renting">
                               <thead>
                                   <tr>
                                       <th>User ID</th>

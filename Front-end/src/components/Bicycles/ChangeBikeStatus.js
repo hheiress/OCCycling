@@ -1,4 +1,5 @@
 import react, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 const ChangeBikeStatus = (props) => {
     const [submitting, setSubmitting] = useState(false);
@@ -38,7 +39,7 @@ const ChangeBikeStatus = (props) => {
         setChangedStatus(newStatus)
         event.preventDefault();
         setSubmitting(true);
-        alert("Bike status updated! Update the page")
+        toast.info("Bike status updated! Update the page")
     }
 
 return (
