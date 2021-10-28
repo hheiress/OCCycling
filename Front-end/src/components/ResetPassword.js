@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {toast} from "react-toastify";
+import {toast} from "react-toastify/dist";
 
 function ResetPassword () {
     return (

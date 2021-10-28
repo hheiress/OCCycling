@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import moment, {duration} from "moment";
-import UpdateRenting from './Rentings/UpdateRenting';
+
 
 class SetTimer extends Component{
     state = {

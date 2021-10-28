@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Search from "./Search";
 import NewTable from "./NewTable";
+import dynamicGetFetch from "./../DymanicRequests/dynamicGetFetch";
 const moment = require('moment');
 
 const FilterRenters = props => {
@@ -9,10 +10,10 @@ const FilterRenters = props => {
     const [renters, setRenters] = useState([]);
     const [filteredUsers, setFilteredUsers] = useState(null);
     const [show, setShow] = useState(true);
-    
+    const urlUsers = `/users`;
+
       useEffect(()=>{
-        fetch("http://localhost:3000/users")
-        .then((res) => res.json())
+        dynamicGetFetch(urlUsers)
         .then((data) => {
           ("First renter");
           data = data.filter(

@@ -1,0 +1,30 @@
+.login {
+  background-color: rgb(43, 42, 42);
+  padding:150px 0px;
+  display:flex;
+  flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+.homepage-block{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin:3px;
+    width :500px;
+  }
+  .homepage-name{
+    color:white;
+    margin:20px;
+  }
+  .homepage-text{
+    color:white;
+    margin:20px;
+    font-style: italic;
+  }
+  .homepage-block .btn-lg{
+    width:400px;
+    margin:3px;
+  }

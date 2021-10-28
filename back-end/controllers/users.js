@@ -1,7 +1,7 @@
 const {usersRepo} = require("../repositories");
 const ctrl = require("express").Router();
 const {formatDate} = require("../utils/formatUtils");
-const multer = require("multer")
+const multer = require("multer");
 
 ctrl.get("/", function (req, res, next) {
     usersRepo

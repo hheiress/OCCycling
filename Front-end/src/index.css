@@ -3,19 +3,17 @@ html.body {
   height: 100%;
   padding: 0px;
   margin: 0px;
-  font-family: 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden; 
 }
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 /* Homepage */
-.homepage-block{
+/* .homepage-block{
   display: block;
 
 }
@@ -27,7 +25,11 @@ code {
   color:white;
   margin:20px;
   font-style: italic;
+} */
+input[type=date]{
+  font-family: monospace;
 }
+
 .img{
   display: block;
   margin-left: auto;
@@ -75,6 +77,7 @@ code {
   font-size: 16px;
   background-color:rgb(43, 42, 42) ;
   width:100%;
+ 
 }
 .col{
   position: unset;
@@ -88,12 +91,19 @@ code {
   border:none;
   color:white;
   font-size: larger;
+  
+}
+
+.burger {
+  flex-direction: column;
+  display: flex;
+  align-content:center;
+  align-items: center;
 }
 .menu{
  display:none;
- justify-content: center;
  flex-direction: column;
- align-items: center;
+
 }
 .menu a{
   color:white;
@@ -183,13 +193,23 @@ textarea {
 	height: auto;
 	padding: 10px;
 }
-  
+.btn-success{
+  background-color:#15D4BE;
+  border-radius: 13px 0px 0px 13px;
+  border: 2px solid #15D4BE;
+} 
+.btn-warning{
+  border-radius: 0px 13px 13px 0px;
+  background-color: #D53E3E;
+  border: 2px solid #D53E3E;
+}
 .btn-primary{
   border-radius: 23px ;
   border:none;
   margin:10px 0px 10px 0px;
   background-color:#15D4BE;
 }
+
 .search-fbox{
   margin:0;
   padding:0;
@@ -198,11 +218,15 @@ input[type="password"] {
   margin-bottom: 20px;
 }
 
-.login {
+/* .login {
   background-color: rgb(43, 42, 42);
   padding:150px 0px;
-  
-}
+  display:flex;
+  flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+} */
 
 .forgot-password {
   background-color: #15D4BE;
@@ -286,6 +310,8 @@ input[type="password"] {
   color:#D53E3E ;
   border-radius:23px;
   outline:none;
+  overflow: auto;
+  width:20px;
 }
 .delete-button:hover{
   background-color: #D53E3E;
@@ -313,6 +339,7 @@ input[type="password"] {
   overflow: auto;
   border: 1px solid rgba(0,0,0,0.1);  
   padding:40px;
+  margin-top:50px;
 }
 
 .create-resident-btn{
@@ -320,14 +347,14 @@ input[type="password"] {
 }
 
 /*Rentings page*/
-.rentings-wrapper {
+/* .rentings-wrapper {
   padding: 15px 55px 45px;
   margin: 0px;
   background-color: #fff;
   overflow: auto;
   border: 1px solid rgba(0,0,0,0.1);  
   padding:40px;
-}
+} */
 
 .rentings-history {
   width: 430px;
@@ -392,6 +419,7 @@ th {
   background-color: #fff;
   overflow: auto;
   border: 1px solid rgba(0,0,0,0.1);
+ 
 }
 
 /* add forms */
@@ -529,10 +557,10 @@ textarea {
 }
 
 /*Rent-bicycle page*/
-.scrollingTable{
+/* .scrollingTable{
   overflow-x: auto;
   height:300px;
-}
+} */
 
 .modal {
   background-color: rgba(0, 0, 0, 0.25);
@@ -594,7 +622,7 @@ textarea {
 .buttons-resident button{
   margin: 5px;
   border-radius: 23px;
-  width:100px;
+  width:150px;
   height:40px;
   outline:none;
   border:2px solid #15D4BE;
@@ -614,37 +642,130 @@ textarea {
 }
 .history-button{
   width:80px;
-  height:30px;
   background-color: white;
+  color:#15D4BE;
   border:2px solid #15D4BE;
+  border-radius: 13px;
+  margin:2px;
 }
-
-.residents-history-wrapper{
+.bann-history-wrapper{
+  border:2px solid #15D4BE;
+  border-radius: 13px;
+  height:500px;
+  width:500px;
   display:flex;
   justify-content: center;
   align-items: center;
   align-content: center;
+  color:#15D4BE;
+}
+.residents-history-wrapper{
+  display:flex;
+  justify-content: center;
+  align-content: center;
   border:none;
   border-radius: 15px;
-  width:40%;
-  margin:40px;
-  background-color:#3c837b;
-  color:white
+  /* background-color:#3c837b; */
+  color:white;
+  overflow-x: auto;
+  height: 500px;
+  width:500px;
+}
+.accordion-header{
+  font-size: 20px;
+
+}
+.accordion-button{
+  width:100%;
+  border-radius: 15px;
+  border: none;
+  text-align: left;
+  padding:10px;
+}
+.MuiSvgIcon-root{
+  color:#15D4BE;
+  float: right;
 }
 .history-button:hover{
   background-color: #15D4BE;
   color:white;
 }
 .user-li{
-  margin:30px;
+  background-color:rgb(218, 216, 216);
+  width:100%;
 }
+.history-block{
+  background-color:rgb(230, 225, 225);
+  border-radius: 15px;
+  padding:10px;
+  margin:10px;
+  display:flex;
+  flex-direction: row;
+}
+
 .user-history-list{
   font-weight:700 ;
   color:black;
-  margin:20px;
+  border-radius: 15px;
+}
+.user-history-text{
+  color:grey;
+  font-weight:400 ;
+}
+.user-history{
+  font-weight:700 ;
+  color:black;
+  margin:30px;
+  padding:5px;
+  width:100%;
+  border-radius: 15px;
+}
+.text-date{
+  background-color: white;
+  border-radius: 6px;
+  padding:5px;
 }
 .header-history{
   text-align: center;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+.modal-main {
+  position: fixed;
+  background: white;
+  width: 50%;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding:30px;
+  text-align: center;
+  border-radius: 15px;;
+  display:flex;
+  flex-direction: column;
+  margin:10px;
+}
+.modal-main button{
+  border: 1px solid #15D4BE;
+  border-radius: 15px;
+  background-color: #15D4BE;
+  color:white;
+  padding:3px;
+  margin:5px;
+}
+.display-block {
+  display: block !important;
+}
+
+.display-none {
+  display: none;
 }
 
 .bike-word{
@@ -684,7 +805,6 @@ select{
   .form-signin{
     width:100%;
   }
-
 }
 .hidden-residents-table{
   -webkit-text-security: disc;
@@ -717,14 +837,17 @@ select{
     font-size: 16px;
     background-color:rgb(43, 42, 42) ;
     width:100%;
+   
   }
   .menu{
     display:flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: center;
    }
    .menu a{
      color:white;
+     display: flex;
      text-decoration: none;
      text-align: center;
      line-height: 30px;

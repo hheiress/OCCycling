@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast } from 'react-toastify/dist';
 import 'react-toastify/dist/ReactToastify.css';
 
 import {
@@ -8,27 +8,27 @@ import {
   Switch,
   Route,
   Redirect
-} from "react-router-dom";
+} from "../node_modules/react-router-dom";
 
 import ProtectedRoute from './components/ProtectedRoute';
-import HomePage from './components/HomePage';
+import HomePage from './components/HomePage/HomePage';
 import Login from './components/Login';
 import SignUp from "./components/SignUp"
-import Residents from './components/Residents/Residents';
+import Residents from './components/Residents/AllRenters/Residents';
 import RentBicycle from './components/RentBike/RentBicycle';
-import Rentings from './components/Rentings/Rentings';
-import UserHistory from './components/Residents/UserHistory';
-import BikeHistory from './components/Bicycles/BikeHistory';
-import AllBicycles from './components/Bicycles/Bicycles';
-import AddNewBicycle from './components/Bicycles/AddNewBicycle';
-import CreateNewRenter from './components/Residents/CreateNewRenter';
-import Dashboard from './components/Dashboard';
-import UpdateRenter from './components/Residents/UpdateRenter';
-import UpdateBicycle from './components/Bicycles/Update Bicycle';
+import Rentings from './components/Rentings/AllRentings/Rentings';
+import UserHistory from './components/Residents/RenterHistory/UserHistory';
+import BikeHistory from './components/Bicycles/BikeHistory/BikeHistory';
+import AllBicycles from './components/Bicycles/AllBikes/Bicycles';
+import AddNewBicycle from './components/Bicycles/AddNewBike/AddNewBicycle';
+import CreateNewRenter from './components/Residents/AddNewRenter/CreateNewRenter';
+import Dashboard from './components/Dashboard/Dashboard';
+import UpdateRenter from './components/Residents/UpdateRenter/UpdateRenter';
+import UpdateBicycle from './components/Bicycles/UpdateBike/UpdateBicycle';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
-import ProtectedResidents from './components/Residents/ProtectedRoute'
-
+import ProtectedResidents from './components/Residents/ProtectedRoute';
+import BannHistory from './components/Residents/RenterHistory/BannHistory';
 
 toast.configure()
 
@@ -101,6 +101,7 @@ function App() {
         <ProtectedRoute isAuthenticated={isAuthenticated} path="/rentbicycle" Component={RentBicycle} />
         <ProtectedRoute isAuthenticated={isAuthenticated} path="/bikehistory/:id" Component={BikeHistory} />
         <ProtectedRoute isAuthenticated={isAuthenticated} path="/userhistory/:id" Component={UserHistory} />
+        <ProtectedRoute isAuthenticated={isAuthenticated} path="/bannhistory/:id" Component={BannHistory} />
         <ProtectedRoute isAuthenticated={isAuthenticated} path="/rentings" Component={Rentings} />
         <ProtectedRoute isAuthenticated={isAuthenticated} path="/residents" Component={Residents} />
         <ProtectedRoute isAuthenticated={isAuthenticated} path="/protectresidents" Component={ProtectedResidents} />

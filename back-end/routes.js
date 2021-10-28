@@ -1,7 +1,8 @@
 const router = require("express").Router();
 
 const { 
-    userCtrl, 
+    userCtrl,
+    bannCtrl, 
     bikeCtrl, 
     rentingCtrl,
     stationCtrl,
@@ -17,6 +18,7 @@ const {
 
 router
     .use("/users", userCtrl)
+    .use("/bann_history", bannCtrl)
     .use("/bikes", bikeCtrl)
     .use("/rentings", rentingCtrl)
     .use("/station", stationCtrl)

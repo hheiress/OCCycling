@@ -1,0 +1,8 @@
+.bikes-wrapper {
+    padding: 15px 55px 5px;
+    margin: 50px 30px 0px;
+    background-color: #fff;
+    overflow: auto;
+    border: 1px solid rgba(0,0,0,0.1);  
+    padding:40px;
+  }

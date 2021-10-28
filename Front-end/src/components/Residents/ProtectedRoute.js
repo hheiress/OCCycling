@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { Link, Redirect, useHistory } from 'react-router-dom';
-import Residents from './Residents';
+import Residents from './AllRenters/Residents';
 import VolunteerPanel from '../VolunteerPanel';
 import Footer from '../Footer';
 
@@ -12,7 +12,6 @@ const ProtectedRoute = () => {
 
     const handleChange = (e) => {
         setSearchInput(e.target.value);
-        console.log("Password inserted", searchInput);
     }; 
     const handleSubmit = event => {
         event.preventDefault();

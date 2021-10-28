@@ -30,6 +30,14 @@ CREATE TABLE user_photos
     filedata bytea
 );
 
+CREATE TABLE bann_history
+(
+    id          SERIAL PRIMARY KEY,
+    user_id     INT REFERENCES users (id),
+    start_date  DATE NOT NULL,  
+    finish_date DATE 
+);
+
 CREATE TABLE station
 (
     id           SERIAL PRIMARY KEY,
@@ -59,15 +67,16 @@ CREATE TABLE bike_photos
 
 CREATE TABLE rentings
 (
-    id            SERIAL PRIMARY KEY,
-    bike_id       INT REFERENCES bikes (id),
-    user_id       INT REFERENCES users (id),
-    last_name     INT REFERENCES users (id),
-    status        TEXT      NOT NULL,
-    renting_date  TIMESTAMP NOT NULL,
-    station_id    INT REFERENCES station (id),
-    starting_time INTERVAL  NOT NULL,
-    finished_date TIMESTAMP
+    id               SERIAL PRIMARY KEY,
+    bike_id          INT REFERENCES bikes (id),
+    user_id          INT REFERENCES users (id),
+    last_name        INT REFERENCES users (id),
+    status           TEXT      NOT NULL,
+    renting_date     TIMESTAMP NOT NULL,
+    station_id_start INT REFERENCES station (id),
+    station_id_end   INT REFERENCES station (id),
+    starting_time    INTERVAL  NOT NULL,
+    finished_date    TIMESTAMP
 );
 
 CREATE TABLE ngo_users
@@ -94,6 +103,12 @@ VALUES ('Miray', 'Demir', 'TK239445J', 2, 'AV. Rome 56', 'Female', '1994-05-13',
 INSERT INTO users (name, last_name, passport, location_id, address, gender, date_birth, nationality, email, phone_number, status)
 VALUES ('Ahmed', 'Rashid', 'V228946K', 3, 'C33', 'Male', '1989-02-23', 'Afghanistan', 'ahmed10@gmail.com', 32568901,
         'Banned');
+
+INSERT INTO bann_history (user_id, start_date, finish_date)
+VALUES (2, '2021-07-11', '2021-07-31');
+
+INSERT INTO bann_history (user_id, start_date, finish_date)
+VALUES (1, '2021-07-31', '2021-08-21');
 
 
 INSERT INTO station (station_name)
