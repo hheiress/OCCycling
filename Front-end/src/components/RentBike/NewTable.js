@@ -1,6 +1,6 @@
 import react, {useState} from "react";
-import Alert from 'react-bootstrap/Alert';
-import {toast} from "react-toastify";
+import Alert from 'react-bootstrap/esm/Alert';
+import {toast} from "react-toastify/dist";
 const moment = require('moment');
 
 

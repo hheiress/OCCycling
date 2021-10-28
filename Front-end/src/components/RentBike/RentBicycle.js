@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useReducer } from "react";
-import Form from 'react-bootstrap/Form';
+import './RentBike.css';
+import Form from 'react-bootstrap/esm/Form';
 import FilterRenters from "./FilterRenters"
 import VolunteerPanel from '../VolunteerPanel';
 import Footer from "../Footer";
-import {toast} from "react-toastify";
+import {toast} from "react-toastify/dist";
+import dynamicGetFetch from "./../DymanicRequests/dynamicGetFetch";
+import dynamicPostFetch from "./../DymanicRequests/dynamicPostFetch";
 
 const options = [
     {
@@ -32,7 +35,7 @@ const rentingForm = (state, event) => {
         last_name: '',
         status: '',
         renting_date: '',
-        station_id: '',
+        station_id_start: '',
         starting_time: '',
         conditions_id: '',
       }
@@ -51,26 +54,25 @@ function RentBicycle() {
     const [station, setStation] = useState([]);
     const [users, setUser] = useState([]);
     
-
+  const urlBikes = `/bikes`;
+  const urlStation =`/station`
   //get bikes with the status null
   useEffect(() => {
-  fetch("http://localhost:3000/bikes")
-      .then((res) => res.json())
-      .then((data) => {
-          ("Second render");
-          setBikes(data);
-      })
+    dynamicGetFetch(urlBikes)
+    .then((data) => {
+      ("Second render");
+      setBikes(data);
+    })
   }, []);
 
      //get station 
     useEffect(() => {
-        fetch("http://localhost:3000/station")
-          .then((res) => res.json())
-          .then((data) => {
-            ("First render for station");
-            setStation(data);
-          })
-      }, []);
+      dynamicGetFetch(urlStation)
+      .then((data) => {
+        ("First render for station");
+        setStation(data);
+      })
+    }, []);
 
     const filteredBicycles = bikes.filter(
         item => item.status === null ||  item.status === "Available"
@@ -87,7 +89,7 @@ function RentBicycle() {
           "last_name": users.id,
           "status": "In Rent" , 
           "renting_date": today,
-          "station_id": dataForm.station_id,
+          "station_id_start": dataForm.station_id_start,
           "starting_time": dataForm.starting_time + ":00:00",
           "conditions_id": dataForm.bike_id,
       }
@@ -97,6 +99,8 @@ function RentBicycle() {
 
       event.preventDefault();
       setSubmitting(true);
+      // const urlRentings = `/rentings`;
+      // dynamicPostFetch(urlRentings, object)
       fetch("http://localhost:3000/rentings", {
         method: 'POST',
         headers: {
@@ -107,14 +111,14 @@ function RentBicycle() {
       .then(() => {
         const body = {
           "status": "Unavailable",
-          "station_id": dataForm.station_id
+          "station_id": dataForm.station_id_start
         } 
+        console.log(body);
         return fetch(`http://localhost:3000/bikes/update/${dataForm.bike_id}`, {
          method: 'PUT',
          headers: {
            'Content-Type': 'application/json',
          },
-        
          body:JSON.stringify(body)
       })
       .then((response) => response.json())
@@ -152,20 +156,23 @@ function RentBicycle() {
         const bikeObject = bikes.find(
           item => item.id == dataForm.bike_id
         );
+        // const getStationId = bikes.find(
+        //   item => item.station_id = dataForm.station_id_start
+        // );
        const getStationId = station.find((item)=>{
-         if(item?.station_name === bikeObject?.station_name){
+         if(item?.id === bikeObject?.station_id){
           console.log(item.id)
-           dataForm.station_id = item.id
+           dataForm.station_id_start = item.id
            return item.id;
          }
         })
         console.log(dataForm.bike_id)
+        console.log(dataForm.station_id_start)
         console.log(getStationId)
       }, [dataForm])
       console.log(dataForm)
      
     const [activeRow, setActiveRow] = useState("");
-    const [show, setShow] = useState(false);
 
     function handleRowClick (event) {
       console.log(event)

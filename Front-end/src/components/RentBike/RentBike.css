@@ -1,0 +1,4 @@
+.scrollingTable{
+    overflow-x: auto;
+    height:300px;
+  }

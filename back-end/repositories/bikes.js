@@ -3,7 +3,7 @@ const sharp = require('sharp');
 
 
 function find() {
-    const selectBike = `SELECT b.id, b.bike_number, b.model_name, b.brand_name, b.status, b.entry_date, b.conditions, s.station_name
+    const selectBike = `SELECT b.id, b.bike_number, b.model_name, b.brand_name, b.status, b.entry_date, b.conditions, b.station_id, s.station_name
                         FROM bikes b
                                  JOIN station s ON b.station_id = s.id
                         ORDER BY b.bike_number`

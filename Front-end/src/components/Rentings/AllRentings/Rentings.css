@@ -1,0 +1,37 @@
+.rentings-wrapper {
+    padding: 15px 55px 45px;
+    margin: 0px;
+    background-color: #fff;
+    overflow: auto;
+    border: 1px solid rgba(0,0,0,0.1);  
+    padding:40px;
+  }
+  .pagination{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+  }
+  .pagination button{
+    border:none;
+    margin:1px;
+    background-color:  #def7f3;
+    border-radius: 20px;
+    padding:5px;
+  }
+  .pagination button:hover{
+    background-color: #15D4BE;
+    color:white;
+    border: solid 3px #15D4BE;
+  }
+  .pagination input{
+    border-radius: 20px;
+    text-align: center;
+    outline:none;
+    border: solid 3px #def7f3;
+  }
+  .pagination select{
+    border:solid 3px #def7f3;
+    border-radius: 20px;
+    padding:5px;
+    outline:none;
+  }

@@ -35,7 +35,9 @@ function VolunteerPanel() {
                         <Link to={'/bicycles'} className="page">
                             <button className="btn-nav"  type="submit">Bicycles</button>
                         </Link>
-                        <Link to = "/dashboard"> Dashboard</Link>                 
+                        <Link to = {'/dashboard'} className="page"> 
+                            <button className="btn-nav"  type="submit">Dashboard </button>
+                        </Link>                 
                     </div>
                 </div>
             </div>
