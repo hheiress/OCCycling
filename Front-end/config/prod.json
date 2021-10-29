@@ -1,3 +1,5 @@
 {
-    
+  "back-end": {
+    "base-url": "http://vincentv14.sg-host.com:3306"
+  }
 }
