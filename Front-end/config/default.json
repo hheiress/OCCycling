@@ -1,5 +1,5 @@
 {
-    "back-end": {
-      "base-url": "http://localhost:3000/"
-    }
+  "back-end": {
+    "base-url": "http://localhost:3000/"
+  }
 }
