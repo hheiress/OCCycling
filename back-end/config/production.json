@@ -5,5 +5,9 @@
     "password": "w3ozljfuof2k",
     "dbname": "dbiygumhk6qggh",
     "port": 5432
+  },
+  "server": {
+    "port": 3306
   }
+
 }
