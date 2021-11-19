@@ -3,6 +3,8 @@ import VolunteerPanel from "../../VolunteerPanel";
 import Accordion from 'react-bootstrap/esm/Accordion';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import dynamicGetFetch from "./../../DymanicRequests/dynamicGetFetch";
+import icon from "../../../images/icon.svg";
+
 
 const UserHistory = (props)=>{
     const [rentings, setRentings] = useState([]);
@@ -33,7 +35,7 @@ const UserHistory = (props)=>{
                           </Accordion.Header>
                           <Accordion.Body>
                             <div className="history-block"  key={index}>
-                            <img class="logo-img" src="/images/icon.svg" alt="logo"/> 
+                            <img class="logo-img" src={icon} alt="logo"/> 
                             <div className="user-history-list">
                                 <h3 className="user-history-list">{item.name} {item.last_name}</h3>
                                 <p className="user-history-text">Start: <span className="text-date">{item.renting_date.slice(0,10)} Time-{item.renting_date.slice(11,19)}</span></p>

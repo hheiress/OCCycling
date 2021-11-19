@@ -1,5 +1,8 @@
 import {React, useState} from 'react';
 import { Link } from "react-router-dom";
+import icon from "../images/icon.svg";
+import occlogo from "../images/OCC Logo White Transparant.png";
+
 
 // rent a bike
 // see list of actual rentings
@@ -16,9 +19,9 @@ function VolunteerPanel() {
         <nav className="headercontainer">
             <div className="navbar">
                 <div className="logo">
-                <img src="/images/OCC Logo White Transparant.png" className="occ-img"/>
+                <img src={occlogo} className="occ-img"/>
                 <h1 className="header-name">OCCycling</h1>
-                <img src="/images/icon.svg" className="logo-img" />
+                <img src={icon} className="logo-img" />
                 </div>
                 <div className="burger">
                     <button className="burgerbtn" onClick={handleToggle}>&#x2630;</button>

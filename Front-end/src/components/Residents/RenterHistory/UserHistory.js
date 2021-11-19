@@ -3,6 +3,8 @@ import VolunteerPanel from "../../VolunteerPanel";
 import HistoryButtons from "./HistoryButtons";
 import Accordion from 'react-bootstrap/esm/Accordion';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import icon from "../../../images/icon.svg";
 
 const UserHistory = (props) =>{
     const [rentings, setRentings] = useState([]);
@@ -39,13 +41,15 @@ const UserHistory = (props) =>{
                 <div className="user-history">
                     {sortedRentings?.length > 0 ? sortedRentings.map((item, index) => (
                        <Accordion>
-                       <Accordion.Item eventKey="0">
-                         <Accordion.Header>{item.model_name}
-                         <KeyboardArrowDownIcon/>
+                       <Accordion.Item eventKey={index}>
+                         <Accordion.Header>
+                            <KeyboardArrowDownIcon/>
+                            <KeyboardArrowUpIcon/>
+                        {item.model_name}
                          </Accordion.Header>
                          <Accordion.Body>
                        <div className="history-block" key={index}>
-                            <img class="logo-img" src="/images/icon.svg" alt="logo"/> 
+                            <img class="logo-img" src={icon} alt="logo"/> 
                                 <div className="user-history-list"> 
                                     <h3 className="user-history-list" >{item.model_name}</h3>
                                     <p className="user-history-text">Start: <span className="text-date">{item.renting_date.slice(0,10)} Time-{item.renting_date.slice(11,19)}</span></p>
@@ -60,7 +64,6 @@ const UserHistory = (props) =>{
                         )
                     )
                     : <p className="text-center">History to update!</p> 
-                        
                 }
                 </div>
             </div>

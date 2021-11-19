@@ -48,29 +48,6 @@ function App() {
 
   }, [isAuthenticated])
 
-  // async function isAuth () {
-  //   try {
-
-  //     const response = await fetch("http://localhost:3001/auth/verify", {
-  //       method: "GET",
-  //       headers: { token: localStorage.token }
-  //     });
-
-  //     const parseRes = await response.json()
-  //     (parseRes)
-
-  //     parseRes === true ? setIsAuthenticated(true) :
-  //     setIsAuthenticated(false);
-
-  //   } catch (err) {
-  //     console.error(err.message);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   isAuth()
-  // })
-
   return (
     <Router>
       <Switch>
@@ -92,9 +69,6 @@ function App() {
            ( <Redirect to = "/login" /> )
        }
       />
-
-        {/* Volunteers */}
-        {/* Volunteers */}
 
         <Route exact path = "/forgot-password" render={props => <ForgotPassword {...props} setAuth = {setAuth}/> } /> {/* investigar sobre setAuth, borrar?*/}
         <ProtectedRoute isAuthenticated={isAuthenticated} path ="/reset-password" Component={ResetPassword}/>
