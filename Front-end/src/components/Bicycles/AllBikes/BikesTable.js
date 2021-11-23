@@ -9,7 +9,7 @@ function BikesTable (props) {
     const columns = React.useMemo( 
         () => [
         {
-            Header:'bikes',
+            Header:'Bicycles',
             columns: [
               {
                   Header: 'BikeId',

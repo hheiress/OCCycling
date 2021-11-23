@@ -75,7 +75,7 @@ function CreateNewRenter() {
 
             //fetch - post
             const urlUsers = `/users`;
-            dynamicPostFetch(urlUsers, formData)
+            dynamicPostFetch(urlUsers, formData, {})
             //
             setTimeout(() => {
                 toast.info("New User Added");

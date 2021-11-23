@@ -20,7 +20,14 @@ async function getBikePhoto(req) {
 
 async function create(req, res) {
     // TODO Move all this validations to controller
-    const {model_name, brand_name, status, entry_date, conditions, station_id, bike_number} = req.body;
+    const {
+        model_name,
+        brand_name, 
+        status, 
+        entry_date, 
+        conditions, 
+        station_id, 
+        bike_number} = req.body;
     if (!model_name || !brand_name || !status || !entry_date || !conditions || !station_id || !bike_number) {
         return res.status(400).send("Please insert a model name, brand name, status, entry date, conditions, station, bike_number");
     }

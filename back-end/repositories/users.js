@@ -27,7 +27,6 @@ async function create(req, res) {
         phone_number,
         status
     } = req.body;
-    const buffer = await sharp(req.file.buffer).resize({width: 250, height: 250}).png().toBuffer()
     if (!name || !last_name || !passport || !location_id || !address || !gender || !date_birth || !nationality || !email || !phone_number || !status) {
         return res
             .status(400)
@@ -36,9 +35,18 @@ async function create(req, res) {
     return pool
         .query('INSERT INTO users (name, last_name, passport, location_id, address, gender, date_birth, nationality, email, phone_number, status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id',
             [name, last_name, passport, location_id, address, gender, date_birth, nationality, email, phone_number, status])
-        .then((data) => pool.query('INSERT INTO user_photos (user_id, filename, mimetype, filedata) VALUES ($1, $2, $3, $4)',
-            [data.rows[0].id, req.file.originalname, req.file.mimetype, buffer]))
-        .then(() => res.send(`User created`))
+        .then(async (data) =>{ 
+            if (req.file){
+                console.log("inside")
+             const buffer = await sharp(req.file.buffer).resize({width: 250, height: 250}).png().toBuffer();
+             pool.query('INSERT INTO user_photos (user_id, filename, mimetype, filedata) VALUES ($1, $2, $3, $4)',
+            [data.rows[0].id, req.file.originalname, req.file.mimetype, buffer])
+            .then(() => res.send(`User created`))
+            } else {
+                res.send('User created without an image')
+            }
+        })
+        
 }
 
 
