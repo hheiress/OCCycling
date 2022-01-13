@@ -52,7 +52,7 @@ function AddNewBicycle() {
     const today = new Date().toISOString().slice(0, 10)
 
     const formData = new FormData();
-    formData.append( "user_photo", selectedFile);
+    formData.append( "user_photo", selectedFile || null);
     formData.append( "model_name", dataForm.model_name);
     formData.append( "brand_name", dataForm.brand_name);
     formData.append( "status", 'Available');
@@ -64,7 +64,7 @@ function AddNewBicycle() {
     setSubmitting(true);
 
     const urlBikes = `/bikes`;
-    dynamicPostFetch(urlBikes, formData)
+    dynamicPostFetch(urlBikes, formData, {})
 
     setTimeout(() => {
       toast.info("New Bicycle Added!");

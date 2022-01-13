@@ -7,7 +7,7 @@ import ChangeBikeStatus from './ChangeBikeStatus'
 import DeleteBike from './DeleteBike.js';
 import { toast } from 'react-toastify/dist';
 import dynamicGetFetch from "./../../DymanicRequests/dynamicGetFetch";
-
+import icon from "../../../images/icon.svg";
 
 const bikeFormReducer = (state, event) => {
   if (event.type === 'fetch') {
@@ -48,7 +48,9 @@ function UpdateBicycle(props) {
           type: 'fetch',
           bike: data,
         })
-        setPhotoThumbnail(<img className="photo-btn" src={`http://localhost:3000/bikes/${props.match.params.id}/photo`} />);  
+        fetch(`http://localhost:3000/bikes/${props.match.params.id}/photo`).then(data => {
+          data.status === 500 ? setPhotoThumbnail(<img className="photo-btn" src={icon}/>) : setPhotoThumbnail(<img className="photo-btn" src={`http://localhost:3000/bikes/${props.match.params.id}/photo`} />)
+        })
       })
     }, [setBike, props.match.params.id]);
 

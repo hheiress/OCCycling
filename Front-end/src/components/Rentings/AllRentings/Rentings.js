@@ -11,7 +11,14 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import dynamicGetFetch from "./../../DymanicRequests/dynamicGetFetch";
 import RentingTable from "./RentingTable";
 
+const applyFilters = (data, filters) => {
+  const filteredByEndLocation =  data.filter((renting) => renting.location_end_name.toLowerCase().includes(filters.endLocation.toLowerCase()));
+    const filterByDay = filteredByEndLocation.filter((renting)=> renting.renting_date.toLowerCase().includes(filters.finishRent.toLowerCase()));
+      return filterByDay;
+}
+
 const rentingForm = (state, event) => {
+  
   if (event.reset) {
     return {
       starting_time:null,
@@ -27,11 +34,21 @@ const rentingForm = (state, event) => {
 
 const Rentings = props => {
     const [rentings, setRentings] = useState([]);
+    const [rentingsFilter, setRentingsFilter] = useState({
+      endLocation: "", 
+      finishRent: "",
+    });
     const [update, setUpdate] = useState(false);
-    const [filteredRentings, setFilteredRentings] = useState(null);
+    const [filteredRentings, setFilteredRentings] = useState([]);
     const [filteredDay, setFilteredDay] = useState(null);
+    const [isFiltered, setIsFiltered] = useState(false);
 
     const url = `/rentings`;
+
+    useEffect(() => {
+      setFilteredRentings(applyFilters(rentings, rentingsFilter));
+    }, [rentingsFilter])
+
     useEffect(()=>{
       dynamicGetFetch(url) 
       .then((data) => {
@@ -39,6 +56,7 @@ const Rentings = props => {
           item => item.finished_date !== null
       );
         setRentings(data);
+        setFilteredRentings(applyFilters(data, rentingsFilter));
       })
     }, [update]);
 
@@ -48,21 +66,20 @@ const Rentings = props => {
    )
 
    const search = searchVal => {
-    const filteredStation = sortedRentings.filter((item)=>{
-      return item.location_end_name === searchVal
-    });
-    console.log(filteredStation)
-     setFilteredRentings(filteredStation);
-    };
+    setRentingsFilter((prev) => {
+      return {
+        ...prev,
+        endLocation: searchVal}
+    })
+  };
+    const searchDay = searchVal => {
+      setRentingsFilter((prev)=> {
+        return { ...prev, 
+          finishRent:searchVal
+        }
+      })
 
-    const filterByDay = searchDay => {
-      const filteredDay = sortedRentings.filter(
-        item => item.renting_date.slice(0,10) === searchDay
-      );
-       console.log("searchDay:"+ searchDay, "FILTEREDdAY:" + filteredDay)
-        console.log(filteredDay)
-        setFilteredRentings(filteredDay);
-      };
+    }
 
     function magic(item){
       if(item.finished_date===null){
@@ -72,6 +89,7 @@ const Rentings = props => {
      return resultOfDuration;
     }
   }
+
     return (
         <>
          <VolunteerPanel />
@@ -82,15 +100,18 @@ const Rentings = props => {
                     <ExportRentings />
                   </div>
                   <div className="filters-rentings"> 
-                      <FilterRentings search={search}/>
-                      <FilterByDate searchDay={filterByDay}/>
+                      <FilterRentings 
+                        search={search}
+                        setIsFiltered={setIsFiltered}/>
+                      <FilterByDate searchDay={searchDay}/>
                   </div>
                   <CurrentRentings/>
                     <div className="table">
                       <h3>All Rentings</h3>
                       <RentingTable
                         filteredRentings={filteredRentings} 
-                        sortedRentings={sortedRentings}/> 
+                        sortedRentings={sortedRentings}
+                        isFiltered={isFiltered}/> 
                         {/* <table className="table" pagination={pagination}>
                             <thead>
                                 <tr>

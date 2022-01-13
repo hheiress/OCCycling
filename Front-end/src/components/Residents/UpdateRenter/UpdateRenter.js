@@ -7,6 +7,8 @@ import ChangeStatus from './ChangeStatus';
 import DeleteRenter from './DeleteRenter';
 import { toast } from 'react-toastify/dist';
 import Footer from '../../Footer';
+import dynamicGetFetch from "./../../DymanicRequests/dynamicGetFetch";
+import personicon from "../../../images/personicon.svg";
 
 const userFormReducer = (state, event) => {
     if (event.type === 'fetch') {
@@ -27,16 +29,21 @@ function UpdateRenter(props) {
     const [photoThumbnail, setPhotoThumbnail] = useState("Photo")
     
     const [user, setUser] = useReducer(userFormReducer, {});
+
+    const urlUserId =`/users/${props.match.params.id}`;
     useEffect(() => {
-        fetch(`http://localhost:3000/users/${props.match.params.id}`)
-            .then((res) => res.json())
-            .then((data) => {
-                setUser({
-                    type: 'fetch',
-                    user: data,
-                  })
-                setPhotoThumbnail(<img className="photo-btn" src={`http://localhost:3000/users/${props.match.params.id}/photo`} />);  
-            })
+      dynamicGetFetch(urlUserId)
+      .then((data) => {
+        console.log("First render");
+        console.log(data)
+        setUser({
+          type: 'fetch',
+          user: data,
+        })
+        fetch(`http://localhost:3000/users/${props.match.params.id}/photo`).then(data => {
+          data.status === 500 ? setPhotoThumbnail(<img className="photo-btn" src={personicon}/>) : setPhotoThumbnail(<img className="photo-btn" src={`http://localhost:3000/bikes/${props.match.params.id}/photo`} />)
+        })
+      })
     }, [setUser, props.match.params.id]);
 
     useEffect(() => {

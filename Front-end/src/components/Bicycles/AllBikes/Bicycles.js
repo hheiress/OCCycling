@@ -10,13 +10,25 @@ import ExportBikes from "./ExportBikes";
 import dynamicGetFetch from "./../../DymanicRequests/dynamicGetFetch";
 import BikesTable from "./BikesTable";
 
+const applyFilters = (data, filters) =>{
+    const filterByStation = data.filter((bike)=>bike.station_name.toLowerCase().includes(filters.station.toLowerCase()));
+       const filterByName = filterByStation.filter((bike)=> bike.model_name.toLowerCase().includes(filters.bikeName.toLowerCase()));
+       return filterByName;
+}
 
 const AllBicycles = props => {
     const [bikes, setBikes] = useState([]);
-    const [filteredBikes, setFilteredBikes] = useState(null);
-    const [update, setUpdate] = useState(false);
+    const [filteredBikes, setFilteredBikes] = useState([]);
+    const [bikeFilters, setBikeFilters] = useState({
+        bikeName:"",
+        station:""
+    });
 
     const url = `/bikes`;
+
+    useEffect(()=>{
+        setFilteredBikes(applyFilters(bikes, bikeFilters))
+    },[bikeFilters]);
 
     useEffect(() => {
         dynamicGetFetch(url) 
@@ -25,30 +37,23 @@ const AllBicycles = props => {
                 item => item.status !== "Damaged and not in use"
             );
          setBikes(data);
+         setFilteredBikes(applyFilters(data, bikeFilters))
         })
-    }, [update]);
+    }, []);
 
     const search = searchVal => {
-        const filteredBicycles = bikes.filter(
-            item => {
-                let nameMatches = item.model_name.includes(searchVal) || item.brand_name.includes(searchVal);
-                let numberMatches = false;
-                if (!isNaN(searchVal)) {
-                    let bikeNumber = parseInt(searchVal);
-                    numberMatches = bikeNumber === item.bike_number;
-                }
-                return nameMatches || numberMatches;
-            }
-        );
-        setFilteredBikes(filteredBicycles);
+        setBikeFilters((prev)=>{
+            return {...prev,
+            bikeName:searchVal}
+        })
     };
 
 
     const searchBike = searchVal => {
-        const filteredStation = bikes.filter((item) => {
-            return item.station_name === searchVal
-        });
-        setFilteredBikes(filteredStation);
+        setBikeFilters((prev)=>{
+            return {...prev,
+            station:searchVal}
+        })
     };
 
     return (
@@ -68,34 +73,8 @@ const AllBicycles = props => {
                         <FilterBikes searchBike={searchBike}/>
                     </div>
                     <div className="table">
-                        <table className="table">
-                            <thead>
-                            <tr>
-                                <th>Bike Number</th>
-                                <th>Brand</th>
-                                <th>Model</th>
-                                <th>Station</th>
-                                <th>Entry Date</th>
-                                <th>Conditions</th>
-                                <th>Current Status</th>
-                                <th>Edit</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {filteredBikes?.length > 0 ? filteredBikes.map((item, index) => (
-                                    <BikesTable 
-                                    item={item}
-                                    index={index}/>
-                                ))
-                                :
-                                bikes.map((item, index) => (
-                                    <BikesTable 
-                                    item={item}
-                                    index={index}/>
-                                ))
-                            }
-                            </tbody>
-                        </table>
+                        <BikesTable 
+                        filteredBikes={filteredBikes}/>
                     </div>
                 </div>
             </div>

@@ -58,59 +58,13 @@ function RentingTable (props) {
     ],
     []
     )
-    // const pagination = paginationFactory({
-    //     page: 2,
-    //     sizePerPage: 10,
-    //     lastPageText: '>>',
-    //     firstPageText: '<<',
-    //     nextPageText: '>',
-    //     prePageText: '<',
-    //     showTotal: true,
-    //     alwaysShowAllBtns: true,
-    //     onPageChange: function (page, sizePerPage) {
-    //       console.log('page', page);
-    //       console.log('sizePerPage', sizePerPage);
-    //     },
-    //     onSizePerPageChange: function (page, sizePerPage) {
-    //       console.log('page', page);
-    //       console.log('sizePerPage', sizePerPage);
-    //     }
-    //   });
-  
-  
-    const data = React.useMemo(
-        () => props.sortedRentings,[props.sortedRentings]
-    )
-    const dataFiltered = React.useMemo(
-        () => props.filteredRentings,[props.filteredRentings]
-    )
-    console.log(filtereddata);
-    // (dataFiltered);
-  
-// const data1 = data.map(item=>(item));
-// console.log(data1)
 
-  //   const search = (filteredVal, sortedVal) => {
-  //     console.log(filteredVal, sortedVal)
-  //     const result = (filteredVal, sortedVal) =>{
-  //       if(filteredVal) {
-  //                 return filteredVal;
-  //             }
-  //             else{
-  //               return sortedVal;
-  //             }
-  //           }
-  //     setDataUsed(result);
-  // };
-
-    //  const result = dataFiltered?.length >=0
-    //   ? dataFiltered.map((item)=>{return item })
-    //   : dataSorted.map((item)=>{ return item })
-    //   console.log(result)
-    //  const result = {name: "2. 3. 4", number:"dfs"};
-    // setDataUsed(result)
-    
-  // search(dataFiltered, dataSorted);
+  const data = React.useMemo(
+      () => props.filteredRentings,[props.filteredRentings]
+  )
+  // useMemo to not rerender the data,
+  console.log(data);
+  console.log(props.isFiltered);
  
     const {
         getTableProps,
@@ -150,7 +104,7 @@ function RentingTable (props) {
                 ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-                    {page?.length > 0 ?page.map((item, i) => {
+                    {page.map((item, i) => {
                       console.log(page)
                     prepareRow(item)
                     return (
@@ -161,17 +115,6 @@ function RentingTable (props) {
                         </tr>
                     )
                 })
-            :
-             page.map((row, i) => {
-                prepareRow(row)
-                return (
-                    <tr {...row.getRowProps()} key={i}>
-                        {row.cells.map(cell => {
-                            return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                        })}
-                    </tr>
-                )
-            })
         } 
             </tbody>
         </table>

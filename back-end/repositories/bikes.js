@@ -20,8 +20,14 @@ async function getBikePhoto(req) {
 
 async function create(req, res) {
     // TODO Move all this validations to controller
-    const {model_name, brand_name, status, entry_date, conditions, station_id, bike_number} = req.body;
-    const buffer = await sharp(req.file.buffer).resize({width: 250, height: 250}).png().toBuffer()
+    const {
+        model_name,
+        brand_name, 
+        status, 
+        entry_date, 
+        conditions, 
+        station_id, 
+        bike_number} = req.body;
     if (!model_name || !brand_name || !status || !entry_date || !conditions || !station_id || !bike_number) {
         return res.status(400).send("Please insert a model name, brand name, status, entry date, conditions, station, bike_number");
     }
@@ -36,8 +42,17 @@ async function create(req, res) {
             }
             return pool
                 .query('INSERT INTO bikes (model_name, brand_name, status, entry_date, conditions, station_id, bike_number) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id', [model_name, brand_name, status, entry_date, conditions, station_id, bike_number])
-                .then((data) => pool.query('INSERT INTO bike_photos (bike_id, filename, mimetype, filedata) VALUES ($1, $2, $3, $4)', [data.rows[0].id, req.file.originalname, req.file.mimetype, buffer]))
+                .then(async (data) => {
+                if (req.file){
+                    console.log("inside")
+                    const buffer = await sharp(req.file.buffer).resize({width: 250, height: 250}).png().toBuffer();
+                pool.query('INSERT INTO bike_photos (bike_id, filename, mimetype, filedata) VALUES ($1, $2, $3, $4)', [data.rows[0].id, req.file.originalname, req.file.mimetype, buffer])
                 .then(() => res.send('Bike created'))
+                } else {
+                    res.send('Bike created without an image')
+                }
+        
+            })
         })
 }
 
@@ -64,6 +79,7 @@ async function update(req, res) {
 }
 
 async function updateBikeStatus(req, res) {
+    console.log(req.body)
     const {status, station_id} = req.body;
     const {id} = req.params;
     if (!status || !station_id) {

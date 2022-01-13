@@ -99,8 +99,13 @@ function RentBicycle() {
 
       event.preventDefault();
       setSubmitting(true);
+
       // const urlRentings = `/rentings`;
-      // dynamicPostFetch(urlRentings, object)
+      // dynamicPostFetch(urlRentings, body, {})
+      const body = {
+        "status": "Unavailable",
+        "station_id": dataForm.station_id_start
+      } 
       fetch("http://localhost:3000/rentings", {
         method: 'POST',
         headers: {

@@ -18,6 +18,10 @@ const FilterRentings = (props) => {
    const [searchInput, setSearchInput] = useState("");
    const handleSearchInput = event => {
     setSearchInput(event.target.value);
+    props.setIsFiltered(()=>{
+      return event.target.value.length > 0
+    })
+  
   };
   useEffect(()=>{
   console.log("Form submitted ", searchInput);

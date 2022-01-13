@@ -10,17 +10,19 @@ const moment = require("moment");
 
 const CurrentFunctions = () =>{
     const [currentRentings, setCurrentRentings] = useState([]);
-    const [update, setUpdate] = useState(false);
+    const [update, setUpdate] = useState(true);
 
     const urlRentings = `/rentings`;
     
     useEffect (()=>{
-      dynamicGetFetch(urlRentings)
-      .then((data) => {
-         data=data.filter(
-            item => item.finished_date === null );
-        setCurrentRentings(data);
-      })
+      if(update){
+        dynamicGetFetch(urlRentings)
+        .then((data) => {
+           data=data.filter(
+              item => item.finished_date === null);
+          setCurrentRentings(data);
+        })
+      }
    }, [update])
 
  const sortedRentings = currentRentings.sort(
