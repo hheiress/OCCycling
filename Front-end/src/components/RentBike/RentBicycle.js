@@ -102,11 +102,11 @@ function RentBicycle() {
 
       // const urlRentings = `/rentings`;
       // dynamicPostFetch(urlRentings, body, {})
-      const body = {
-        "status": "Unavailable",
-        "station_id": dataForm.station_id_start
-      } 
-      fetch("http://localhost:3000/rentings", {
+      // const body = {
+      //   "status": "Unavailable",
+      //   "station_id": dataForm.station_id_start
+      // } 
+     fetch("http://localhost:3000/rentings", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -114,6 +114,8 @@ function RentBicycle() {
         body: JSON.stringify(object), 
       })
       .then(() => {
+        console.log(users.id)
+        if(users.id !== undefined){
         const body = {
           "status": "Unavailable",
           "station_id": dataForm.station_id_start
@@ -124,22 +126,26 @@ function RentBicycle() {
          headers: {
            'Content-Type': 'application/json',
          },
-         body:JSON.stringify(body)
+         body: JSON.stringify(body)
       })
+      
       .then((response) => response.json())
       .then((result) => {
         console.log('Success:', result);
+        toast.info("New Renting Added");
       })
       .catch((error) => {
         console.error('Error:', error);
       })
+      } else {
+        toast.error("User not selected, renting is not possible")
       }
+    }
       )
       .catch((error) => {
         console.error('Error:', error);
       })  
       setTimeout(() => {
-        toast.info("New Renting Added");
         setSubmitting(false);
         setDataForm({
           reset: true
@@ -198,7 +204,8 @@ function RentBicycle() {
                         <FilterRenters 
                         handleRowClick={handleRowClick}
                         activeRow={activeRow}
-                        setUser={setUser} />
+                        setUser={setUser}
+                        required />
                     </div>
                     <div>
                         <h4 className="bicycle-rent mt-3">Choose Bicycle</h4>
@@ -225,10 +232,6 @@ function RentBicycle() {
                              <option value={option.value}>{option.label}</option>
                         ))}
                         </Form.Control> 
-                        {/* <AddTime 
-                        name="starting_time" 
-                        onChange={handleChange}
-                        value={dataForm.starting_time}/> */}
                     </div>
                     <button className="mt-5 btn btn-primary w-100" type="submit" onClick={handleSubmit}>Submit</button>
                 </div>

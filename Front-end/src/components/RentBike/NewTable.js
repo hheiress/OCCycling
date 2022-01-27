@@ -29,6 +29,7 @@ const NewTable = (props) => {
             variant="outline-success"
             id={activeRow}
             key={props.index} 
+            
         > 
         <td data-title={props.item.id} className="id-number"> {props.item.id} </td>
         <td data-title={props.item.id}> {props.item.name} </td>
