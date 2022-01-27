@@ -134,6 +134,7 @@ a.page{
   background-color: transparent;
   border:none;
   color:white;
+  border-radius: 15px;
 }
 
 .btn-nav:active{
@@ -366,7 +367,8 @@ table {
   width: 100%;
   font-size: small;
   margin:30px 30px 30px 0px;
-  border-collapse: collapse;
+  border-radius: 15px;
+  border-radius: 15px;
 }
 
 table tr:hover {
@@ -380,6 +382,7 @@ table td, th {
   color:black;
   text-align: center;
   border-bottom: 2px solid white; 
+ 
 }
 
 th {
@@ -401,6 +404,15 @@ th {
 .id-number{
   color:grey;
 }
+.btn-nav:hover{
+  background-color: grey;
+  
+}
+.accordion-header:hover{
+  transform: scale(0.8);
+ 
+}
+
 .select{
   width:100%;
   border-radius: 23px;
@@ -801,6 +813,7 @@ select{
   }
   .table{
     width:370px;
+    
   }
   .form-signin{
     width:100%;
